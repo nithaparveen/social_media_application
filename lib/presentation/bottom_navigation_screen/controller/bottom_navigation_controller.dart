@@ -3,17 +3,11 @@ import 'package:socialmedia/presentation/home_screen/view/home_screen.dart';
 
 
 class BottomNavController with ChangeNotifier {
-  int selectedIndex = 0;
+  int _selectedIndex = 0;
+  int get selectedIndex => _selectedIndex;
 
-  void onItemTap(index) {
-    selectedIndex = index;
+  set selectedIndex(int index) {
+    _selectedIndex = index;
     notifyListeners();
   }
-
-  List<Widget> screens = [
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    HomeScreen()
-  ];
 }

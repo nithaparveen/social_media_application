@@ -15,9 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
         leading: Icon(Icons.camera_alt_outlined),
         actions: [
           Icon(Icons.add_photo_alternate_outlined),
-          SizedBox(
-            width: 10,
-          )
+          SizedBox(width: 10)
         ],
       ),
     );

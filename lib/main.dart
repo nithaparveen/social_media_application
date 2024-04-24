@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
+import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const BottomNavBar(),
+      home: const StorySlider(),
     );
   }
 }

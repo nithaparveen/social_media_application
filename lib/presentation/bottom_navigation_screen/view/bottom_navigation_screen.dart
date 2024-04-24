@@ -65,9 +65,9 @@ class BottomNavBar extends StatelessWidget {
               ]),
         );
       }),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(splashColor: Colors.transparent,
         backgroundColor: ColorTheme.color4,
-          child: Icon(Icons.add_photo_alternate,color: ColorTheme.color1,),
+          child: Icon(Icons.add_photo_alternate,color: ColorTheme.color1,size: 26,),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => MessageScreen()));

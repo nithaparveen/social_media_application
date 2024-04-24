@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
-import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

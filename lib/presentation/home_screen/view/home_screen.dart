@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
-import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
 
-import '../../../core/constants/textstyles.dart';
+import '../../../core/constants/text_styles.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,7 +16,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("inThink",style: GLTextStyles.title24c3,),
+        title: Text(
+          "inThink",
+          style: GLTextStyles.leagueSpartan(
+              size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
+        ),
         // leading: Icon(Icons.camera_alt_outlined),
         centerTitle: true,
         actions: [
@@ -31,10 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
         padding: const EdgeInsets.all(15.0),
         child: Column(
           children: [
-            Text("Feed",style: GLTextStyles.titleBlk23bold,),
-            SizedBox(height: 20,),
             StorySlider()
-            // StorySlider()
           ],
         ),
       ),

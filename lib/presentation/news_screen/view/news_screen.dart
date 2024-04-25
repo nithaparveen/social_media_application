@@ -39,7 +39,7 @@ class _NewsScreenState extends State<NewsScreen> {
               elevation: 0,
               titleTextStyle: const TextStyle(
                   color: Colors.red, fontSize: 25, fontWeight: FontWeight.w600),
-              title: const Text("Categories"),
+              title: const Text("News"),
               centerTitle: true,
               bottom: TabBar(
                 labelStyle: const TextStyle(

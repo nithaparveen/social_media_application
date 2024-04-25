@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
 import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
-import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [

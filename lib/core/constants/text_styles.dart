@@ -35,4 +35,11 @@ class GLTextStyles {
       color: color ?? ColorTheme.black,
     );
   }
+  static leagueSpartan({double? size, FontWeight? weight, Color? color}) {
+    return GoogleFonts.leagueSpartan(
+      fontSize: size ?? 16,
+      fontWeight: weight ?? FontWeight.bold,
+      color: color ?? ColorTheme.black,
+    );
+  }
 }

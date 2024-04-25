@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:socialmedia/core/constants/colors.dart';
 
 import '../../../core/constants/text_styles.dart';
@@ -17,7 +16,7 @@ class _StorySliderState extends State<StorySlider> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.width*.45,
+      height: size.width * .30,
       child: Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -38,19 +37,29 @@ class _StorySliderState extends State<StorySlider> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: ColorTheme.grey,
+                          color: Colors.grey[300],
                         ),
-                        height: size.width * .30,
-                        width: size.width * .15,
+                        height: size.width * .22,
+                        width: size.width * .12,
+                        child: Center(
+                          child: Icon(
+                            Icons.add_a_photo,
+                            size: size.width * .07,
+                          ),
+                        ),
                       ),
-                      Positioned(
-                                  left: 5,
-                                  top: 12,
-                                  child: Icon(Icons.add_a_photo,size: size.width * .07,)
-                                )
+                      // Positioned(
+                      //     left: 8,
+                      //     top: 12,
+                      //     child: Icon(
+                      //       Icons.add_a_photo,
+                      //       size: size.width * .07,
+                      //     ))
                     ],
                   ),
-                  SizedBox(width: size.width*.01,),
+                  SizedBox(
+                    width: size.width * .01,
+                  ),
                   Expanded(
                     child: ListView.builder(
                         shrinkWrap: true,
@@ -69,15 +78,15 @@ class _StorySliderState extends State<StorySlider> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.red,
                                   ),
-                                  height: size.width * .30,
-                                  width: size.width * .29,
+                                  height: size.width * .22,
+                                  width: size.width * .16,
                                 ),
                                 Positioned(
-                                  left: 12,
-                                  top: 12,
+                                  left: 8,
+                                  top: 10,
                                   child: CircleAvatar(
                                     backgroundColor: Colors.white,
-                                    radius: size.width * .04,
+                                    radius: size.width * .035,
                                   ),
                                 )
                               ]),

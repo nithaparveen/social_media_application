@@ -26,7 +26,7 @@ class _StorySliderState extends State<StorySlider> {
             Text(
               "Feed",
               style: GLTextStyles.ralewayStyl(
-                  size: 25, weight: FontWeight.w600, color: ColorTheme.color4),
+                  size: 25, weight: FontWeight.w700, color: ColorTheme.color4),
             ),
             Expanded(
               child: Row(
@@ -40,7 +40,7 @@ class _StorySliderState extends State<StorySlider> {
                           borderRadius: BorderRadius.circular(10),
                           color: ColorTheme.grey,
                         ),
-                        height: size.width * .31,
+                        height: size.width * .30,
                         width: size.width * .15,
                       ),
                       Positioned(
@@ -61,7 +61,7 @@ class _StorySliderState extends State<StorySlider> {
                           return Row(
                             children: [
                               SizedBox(
-                                width: 15,
+                                width: 10,
                               ),
                               Stack(children: [
                                 Container(
@@ -69,7 +69,7 @@ class _StorySliderState extends State<StorySlider> {
                                     borderRadius: BorderRadius.circular(10),
                                     color: Colors.red,
                                   ),
-                                  height: size.width * .31,
+                                  height: size.width * .30,
                                   width: size.width * .29,
                                 ),
                                 Positioned(

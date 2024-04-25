@@ -51,9 +51,9 @@ class BottomNavBar extends StatelessWidget {
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.message_outlined),
-                    activeIcon: Icon(Icons.message),
-                    label: "Messages"),
+                    icon: Icon(Icons.add_box_outlined),
+                    activeIcon: Icon(Icons.add_box_rounded),
+                    label: "Create Post"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.newspaper_outlined),
                     activeIcon:Icon(Icons.newspaper) ,
@@ -67,7 +67,7 @@ class BottomNavBar extends StatelessWidget {
       }),
       floatingActionButton: FloatingActionButton(splashColor: Colors.transparent,
         backgroundColor: ColorTheme.color4,
-          child: Icon(Icons.add_photo_alternate,color: ColorTheme.color1,size: 26,),
+          child: Icon(Icons.message,color: ColorTheme.color1,size: 26,),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => MessageScreen()));

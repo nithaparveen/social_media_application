@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         // leading: Icon(Icons.camera_alt_outlined),
         centerTitle: true,
         actions: [
-          Icon(Icons.notifications),
+          Icon(Icons.notifications_none),
           SizedBox(width: 15),
           // Icon(Icons.search),
           // SizedBox(width: 10)

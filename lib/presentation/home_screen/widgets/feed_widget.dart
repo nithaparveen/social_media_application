@@ -170,25 +170,6 @@ class _FeedWidgetState extends State<FeedWidget> {
                 width: 4,
               ),
               displayText(label: "Bookmarks"),
-
-              // ProfilePics(
-              //   displayImage: profPic,
-              //   displayStatus: false,
-              //   profHeight: 25,
-              //   profWidth: 25,
-              // ),
-              // const SizedBox(
-              //   width: 3,
-              // ),
-              // IconButton(
-              //   onPressed: () {
-              //     // print("Drop down pressed");
-              //   },
-              //   icon: Icon(
-              //     Icons.arrow_drop_down,
-              //     color: Colors.grey[700],
-              //   ),
-              // ),
             ],
           )
         ],

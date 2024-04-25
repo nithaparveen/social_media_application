@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
-import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
 import 'package:socialmedia/presentation/news_screen/view/news_screen.dart';
+import 'package:socialmedia/presentation/post_screen/view/post_screen.dart';
 import 'package:socialmedia/presentation/profile_screen/view/profile_screen.dart';
 
 import '../../home_screen/view/home_screen.dart';
@@ -20,7 +20,7 @@ class BottomNavBar extends StatelessWidget {
             index: provider.selectedIndex,
             children: const [
               HomeScreen(),
-              MessageScreen(),
+              PostDataScreen(),
               NewsScreen(),
               ProfileScreen()
             ],
@@ -30,9 +30,7 @@ class BottomNavBar extends StatelessWidget {
       bottomNavigationBar:
           Consumer<BottomNavController>(builder: (context, controller, _) {
         return Theme(
-          data: ThemeData(
-            splashColor: Colors.transparent
-          ),
+          data: ThemeData(splashColor: Colors.transparent),
           child: BottomNavigationBar(
               currentIndex: controller.selectedIndex,
               onTap: (index) {
@@ -56,22 +54,15 @@ class BottomNavBar extends StatelessWidget {
                     label: "Create Post"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.newspaper_outlined),
-                    activeIcon:Icon(Icons.newspaper) ,
+                    activeIcon: Icon(Icons.newspaper),
                     label: "News"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.person_outlined),
-                    activeIcon:Icon(Icons.person) ,
+                    activeIcon: Icon(Icons.person),
                     label: "Profile")
               ]),
         );
       }),
-      floatingActionButton: FloatingActionButton(splashColor: Colors.transparent,
-        backgroundColor: ColorTheme.color4,
-          child: Icon(Icons.message,color: ColorTheme.color1,size: 26,),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => MessageScreen()));
-          }),
     );
   }
 }

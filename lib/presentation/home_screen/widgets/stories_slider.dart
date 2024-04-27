@@ -22,11 +22,15 @@ class _StorySliderState extends State<StorySlider> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Feed",
-              style: GLTextStyles.ralewayStyl(
-                  size: 25, weight: FontWeight.w700, color: ColorTheme.color4),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                "Feed",
+                style: GLTextStyles.ralewayStyl(
+                    size: 25, weight: FontWeight.w700, color: ColorTheme.color4),
+              ),
             ),
+            SizedBox(height: 5,),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,7 +80,7 @@ class _StorySliderState extends State<StorySlider> {
                                 Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red,
+                                    color: ColorTheme.color2,
                                   ),
                                   height: size.width * .22,
                                   width: size.width * .16,

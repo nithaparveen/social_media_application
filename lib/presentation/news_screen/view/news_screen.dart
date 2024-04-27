@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
+import 'package:socialmedia/core/constants/colors.dart';
+import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/news_screen/view/widget/news_view_screen.dart';
 
 import '../controller/news_controller.dart';
@@ -37,26 +39,25 @@ class _NewsScreenState extends State<NewsScreen> {
           child: Scaffold(
             appBar: AppBar(
               elevation: 0,
-              titleTextStyle: const TextStyle(
-                  color: Colors.red, fontSize: 25, fontWeight: FontWeight.w600),
+              titleTextStyle: GLTextStyles.ralewayStyl(color: ColorTheme.color4,size: 25,weight: FontWeight.w700 ),
               title: const Text("News"),
               centerTitle: true,
               bottom: TabBar(
-                labelStyle: const TextStyle(
+                labelStyle:  TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
-                    color: Colors.red),
+                    color:ColorTheme.color4 ),
                 labelColor: Colors.white,
                 unselectedLabelColor: Colors.black54,
                 indicatorPadding: const EdgeInsets.symmetric(horizontal: 5),
                 unselectedLabelStyle: const TextStyle(
                     color: Colors.grey,
                     fontSize: 15,
-                    fontWeight: FontWeight.w500),
+                    fontWeight: FontWeight.w400),
                 overlayColor: const MaterialStatePropertyAll(Colors.grey),
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
-                    color: Colors.red, borderRadius: BorderRadius.circular(10)),
+                    color: ColorTheme.color4, borderRadius: BorderRadius.circular(10)),
                 isScrollable: true,
                 tabs: List.generate(
                   provider.categoryList.length,
@@ -72,7 +73,7 @@ class _NewsScreenState extends State<NewsScreen> {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(25),
                       bottomRight: Radius.circular(25))),
-              toolbarHeight: height * .06,
+              toolbarHeight: height * .05,
             ),
             body: provider.isLoading == true
                 ? const Center(child: CircularProgressIndicator())

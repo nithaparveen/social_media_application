@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               StorySlider(),
+              SizedBox(height: 10,),
               ListView.separated(
                   separatorBuilder: (context, index) {
                     return SizedBox(
@@ -73,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   maplaunchURL(surl);
                                 },
                                 child: Text(
-                                  "Luminr TechnoHub",
+                                  "Luminar TechnoHub",
                                   style: GLTextStyles.kanitStyl(
                                       size: size.width * .035,
                                       weight: FontWeight.w300),
@@ -81,13 +82,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               trailing: Container(
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
+                                  horizontal: 16,
+                                  vertical: 8,
                                 ),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all()),
-                                child: Text("Follow"),
+                                decoration: BoxDecoration(color:ColorTheme.color4,
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Text("Follow",style: TextStyle(color: ColorTheme.white,fontSize: 11),),
                               )),
                           Container(
                             height: size.width * .75,

@@ -44,7 +44,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
               child: FlashyTabBar(
-                iconSize: 24,
+                height: 55,
+                iconSize: 22,
                 selectedIndex: controller.selectedIndex,
                 showElevation: true,
                 onItemSelected: (index) => setState(() {
@@ -58,7 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     ),
                     title: Text('Home',
                         style: GLTextStyles.leagueSpartan(
-                            size: 18,
+                            size: 16,
                             color: ColorTheme.color3,
                             weight: FontWeight.w500)),
                   ),
@@ -69,7 +70,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     ),
                     title: Text('Post',
                         style: GLTextStyles.leagueSpartan(
-                            size: 18,
+                            size: 16,
                             color: ColorTheme.color3,
                             weight: FontWeight.w500)),
                   ),
@@ -80,7 +81,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     ),
                     title: Text('News',
                         style: GLTextStyles.leagueSpartan(
-                            size: 18,
+                            size: 16,
                             color: ColorTheme.color3,
                             weight: FontWeight.w500)),
                   ),
@@ -91,7 +92,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     ),
                     title: Text('Profile',
                         style: GLTextStyles.leagueSpartan(
-                            size: 18,
+                            size: 16,
                             color: ColorTheme.color3,
                             weight: FontWeight.w500)),
                   ),

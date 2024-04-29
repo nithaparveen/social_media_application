@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class FeedWidget extends StatefulWidget {
   //const PostCard({super.key});
 
@@ -28,7 +29,9 @@ class FeedWidget extends StatefulWidget {
     required this.commentCount,
     required this.shareCount,
     this.itemId,
-    required this.likePressed, required this.unlike, required this.comment,
+    required this.likePressed,
+    required this.unlike,
+    required this.comment,
   });
 
   @override
@@ -107,7 +110,8 @@ class _FeedWidgetState extends State<FeedWidget> {
                     ),
                     label: Text(
                       "Like",
-                      style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400),
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.w400),
                     )),
                 headerButton(
                     buttonText: "Comment",
@@ -146,8 +150,10 @@ class _FeedWidgetState extends State<FeedWidget> {
               Container(
                 width: 20,
                 height: 20,
-                decoration: const BoxDecoration(color: Colors.orange, shape: BoxShape.circle),
-                child: const Icon(Icons.thumb_up, color: Colors.white, size: 14),
+                decoration: const BoxDecoration(
+                    color: Colors.orange, shape: BoxShape.circle),
+                child:
+                    const Icon(Icons.thumb_up, color: Colors.white, size: 14),
               ),
               const SizedBox(
                 width: 4,
@@ -181,10 +187,13 @@ class _FeedWidgetState extends State<FeedWidget> {
   Widget titleSection() {
     return widget.descriptionPosted != null && widget.descriptionPosted != ""
         ? Container(
-      padding: const EdgeInsets.only(bottom: 5),
-      child: Text(widget.descriptionPosted == null ? "" : widget.descriptionPosted,
-          style: const TextStyle(color: Colors.black, fontSize: 16)),
-    )
+            padding: const EdgeInsets.only(bottom: 5),
+            child: Text(
+                widget.descriptionPosted == null
+                    ? ""
+                    : widget.descriptionPosted,
+                style: const TextStyle(color: Colors.black, fontSize: 16)),
+          )
         : const SizedBox();
   }
 }
@@ -195,7 +204,10 @@ class HeaderButtonSection extends StatelessWidget {
   final Widget buttonThree;
 
   const HeaderButtonSection(
-      {super.key, required this.buttonOne, required this.buttonTwo, required this.buttonThree});
+      {super.key,
+      required this.buttonOne,
+      required this.buttonTwo,
+      required this.buttonThree});
 
   @override
   Widget build(BuildContext context) {
@@ -219,9 +231,9 @@ class HeaderButtonSection extends StatelessWidget {
 
 Widget headerButton(
     {required String buttonText,
-      required IconData buttonIcon,
-      required void Function() buttonAction,
-      required Color buttonColor}) {
+    required IconData buttonIcon,
+    required void Function() buttonAction,
+    required Color buttonColor}) {
   return TextButton.icon(
       onPressed: buttonAction,
       icon: Icon(

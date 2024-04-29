@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(
                 Icons.message,
                 color: ColorTheme.color3,
-                size: 26,
+                size: 24,
               )),
           SizedBox(width: 15),
           // Icon(Icons.search),

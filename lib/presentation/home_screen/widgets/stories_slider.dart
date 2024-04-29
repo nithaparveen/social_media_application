@@ -27,10 +27,14 @@ class _StorySliderState extends State<StorySlider> {
               child: Text(
                 "Feed",
                 style: GLTextStyles.ralewayStyl(
-                    size: 25, weight: FontWeight.w700, color: ColorTheme.color4),
+                    size: 25,
+                    weight: FontWeight.w700,
+                    color: ColorTheme.color4),
               ),
             ),
-            SizedBox(height: 5,),
+            SizedBox(
+              height: 5,
+            ),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -48,7 +48,7 @@ class _StorySliderState extends State<StorySlider> {
                         child: Center(
                           child: Icon(
                             Icons.add_a_photo,
-                            size: size.width * .07,
+                            size: size.width * .065,
                           ),
                         ),
                       ),

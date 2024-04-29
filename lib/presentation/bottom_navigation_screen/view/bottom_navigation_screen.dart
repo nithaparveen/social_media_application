@@ -7,7 +7,6 @@ import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bot
 import 'package:socialmedia/presentation/news_screen/view/news_screen.dart';
 import 'package:socialmedia/presentation/post_screen/view/post_screen.dart';
 import 'package:socialmedia/presentation/profile_screen/view/profile_screen.dart';
-import 'package:socialmedia/presentation/search_screen/view/search_screen.dart';
 
 import '../../home_screen/view/home_screen.dart';
 

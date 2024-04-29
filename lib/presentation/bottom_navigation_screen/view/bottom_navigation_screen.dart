@@ -9,12 +9,18 @@ import 'package:socialmedia/presentation/profile_screen/view/profile_screen.dart
 
 import '../../home_screen/view/home_screen.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
   @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: Consumer<BottomNavController>(
         builder: (context, provider, child) {
           return IndexedStack(
@@ -32,36 +38,34 @@ class BottomNavBar extends StatelessWidget {
           Consumer<BottomNavController>(builder: (context, controller, _) {
         return Theme(
           data: ThemeData(splashColor: Colors.transparent),
-          child: BottomNavigationBar(
-              currentIndex: controller.selectedIndex,
-              onTap: (index) {
+          child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+            child: FlashyTabBar(
+              selectedIndex: controller.selectedIndex,
+              showElevation: true,
+              onItemSelected: (index) => setState(() {
                 controller.selectedIndex = index;
-              },
-              elevation: 0,
-              type: BottomNavigationBarType.fixed,
-              unselectedItemColor: ColorTheme.grey,
-              selectedItemColor: ColorTheme.color4,
-              showSelectedLabels: true,
-              showUnselectedLabels: false,
+              }),
               items: [
-                BottomNavigationBarItem(
+                FlashyTabBarItem(
                   icon: Icon(Icons.home_outlined),
-                  activeIcon: Icon(Icons.home),
-                  label: "Home",
+                  title: Text('Home'),
                 ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add_box_outlined),
-                    activeIcon: Icon(Icons.add_box_rounded),
-                    label: "Create Post"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.newspaper_outlined),
-                    activeIcon: Icon(Icons.newspaper),
-                    label: "News"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outlined),
-                    activeIcon: Icon(Icons.person),
-                    label: "Profile")
-              ]),
+                FlashyTabBarItem(
+                  icon: Icon(Icons.add_box_outlined),
+                  title: Text('Post'),
+                ),
+                FlashyTabBarItem(
+                  icon: Icon(Icons.newspaper_outlined),
+                  title: Text('News'),
+                ),
+                FlashyTabBarItem(
+                  icon: Icon(Icons.person_outlined),
+                  title: Text('Profile'),
+                ),
+              ],
+            ),
+          ),
         );
       }),
     );

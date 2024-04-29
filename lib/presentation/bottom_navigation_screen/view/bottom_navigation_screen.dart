@@ -37,32 +37,35 @@ class _BottomNavBarState extends State<BottomNavBar> {
           Consumer<BottomNavController>(builder: (context, controller, _) {
         return Theme(
           data: ThemeData(splashColor: Colors.transparent),
-          child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-            child: FlashyTabBar(
-              selectedIndex: controller.selectedIndex,
-              showElevation: true,
-              onItemSelected: (index) => setState(() {
-                controller.selectedIndex = index;
-              }),
-              items: [
-                FlashyTabBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  title: Text('Home'),
-                ),
-                FlashyTabBarItem(
-                  icon: Icon(Icons.add_box_outlined),
-                  title: Text('Post'),
-                ),
-                FlashyTabBarItem(
-                  icon: Icon(Icons.newspaper_outlined),
-                  title: Text('News'),
-                ),
-                FlashyTabBarItem(
-                  icon: Icon(Icons.person_outlined),
-                  title: Text('Profile'),
-                ),
-              ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 8),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+              child: FlashyTabBar(
+                selectedIndex: controller.selectedIndex,
+                showElevation: true,
+                onItemSelected: (index) => setState(() {
+                  controller.selectedIndex = index;
+                }),
+                items: [
+                  FlashyTabBarItem(
+                    icon: Icon(Icons.home_outlined),
+                    title: Text('Home'),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(Icons.add_box_outlined),
+                    title: Text('Post'),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(Icons.newspaper_outlined),
+                    title: Text('News'),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(Icons.person_outlined),
+                    title: Text('Profile'),
+                  ),
+                ],
+              ),
             ),
           ),
         );

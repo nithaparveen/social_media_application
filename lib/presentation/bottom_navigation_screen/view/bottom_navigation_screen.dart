@@ -7,6 +7,7 @@ import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bot
 import 'package:socialmedia/presentation/news_screen/view/news_screen.dart';
 import 'package:socialmedia/presentation/post_screen/view/post_screen.dart';
 import 'package:socialmedia/presentation/profile_screen/view/profile_screen.dart';
+import 'package:socialmedia/presentation/search_screen/view/search_screen.dart';
 
 import '../../home_screen/view/home_screen.dart';
 
@@ -28,6 +29,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             index: provider.selectedIndex,
             children: const [
               HomeScreen(),
+              SearchScreen(),
               PostDataScreen(),
               NewsScreen(),
               ProfileScreen()
@@ -58,6 +60,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       color: ColorTheme.color3,
                     ),
                     title: Text('Home',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 16,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(
+                      Icons.search,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Search',
                         style: GLTextStyles.leagueSpartan(
                             size: 16,
                             color: ColorTheme.color3,

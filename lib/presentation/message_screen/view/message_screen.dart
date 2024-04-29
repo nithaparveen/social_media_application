@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
-import 'package:socialmedia/presentation/chat_screen/chat_screen.dart';
+import 'package:socialmedia/presentation/chat_screen/view/chat_screen.dart';
 
 import '../../../core/constants/text_styles.dart';
 

@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
           style: GLTextStyles.leagueSpartan(
               size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
         ),
-        // leading: Icon(Icons.camera_alt_outlined),
         centerTitle: true,
         actions: [
           IconButton(

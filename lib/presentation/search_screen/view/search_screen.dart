@@ -25,14 +25,14 @@ class SearchScreen extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             MaterialButton(
-              color: ColorTheme.color4,
+              color: ColorTheme.blue,
               minWidth: size.width * .5,
               height: size.height * .07,
               onPressed: () {},
               child: Text(
                 "Search",
                 style: GLTextStyles.leagueSpartan(
-                    size: 18, color: ColorTheme.color1),
+                    size: 18, color: ColorTheme.yellow),
               ),
             )
           ],

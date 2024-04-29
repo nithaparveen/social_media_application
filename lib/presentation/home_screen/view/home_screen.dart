@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           "ThinkShare",
           style: GLTextStyles.leagueSpartan(
-              size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
+              size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
         ),
         centerTitle: true,
         actions: [
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               icon: Icon(
                 Icons.search,
-                color: ColorTheme.color3,
+                color: ColorTheme.brown,
                 size: 24,
               )),
           IconButton(
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               icon: Icon(
                 Icons.message,
-                color: ColorTheme.color3,
+                color: ColorTheme.brown,
                 size: 22,
               )),
           SizedBox(width: 10),
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   vertical: 8,
                                 ),
                                 decoration: BoxDecoration(
-                                    color: ColorTheme.color4,
+                                    color: ColorTheme.blue,
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Text(
                                   "Follow",
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       width: size.width * .05,
                                       height: size.width * .05,
                                       decoration: BoxDecoration(
-                                          color: ColorTheme.color1,
+                                          color: ColorTheme.yellow,
                                           shape: BoxShape.circle),
                                       child: const Icon(Icons.thumb_up,
                                           color: Colors.white, size: 14),
@@ -165,17 +165,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   buttonText: "Like",
                                   buttonIcon: Icons.thumb_up_alt_outlined,
                                   buttonAction: () {},
-                                  buttonColor: ColorTheme.color1),
+                                  buttonColor: ColorTheme.yellow),
                               headerButton(
                                   buttonText: "Comment",
                                   buttonIcon: Icons.message_outlined,
                                   buttonAction: () {},
-                                  buttonColor: ColorTheme.color1),
+                                  buttonColor: ColorTheme.yellow),
                               headerButton(
                                   buttonText: "Share",
                                   buttonIcon: Icons.share_outlined,
                                   buttonAction: () {},
-                                  buttonColor: ColorTheme.color1),
+                                  buttonColor: ColorTheme.yellow),
                             ],
                           )
                         ],

@@ -28,7 +28,7 @@ class _StorySliderState extends State<StorySlider> {
               style: GLTextStyles.ralewayStyl(
                   size: 25,
                   weight: FontWeight.w700,
-                  color: ColorTheme.color4),
+                  color: ColorTheme.blue),
             ),
           ),
           SizedBox(
@@ -83,7 +83,7 @@ class _StorySliderState extends State<StorySlider> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: ColorTheme.color2,
+                                  color: ColorTheme.lightBrown,
                                 ),
                                 height: size.width * .22,
                                 width: size.width * .16,

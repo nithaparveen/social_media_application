@@ -39,7 +39,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar:
           Consumer<BottomNavController>(builder: (context, controller, _) {
         return Theme(
-          data: ThemeData(splashColor: ColorTheme.color3),
+          data: ThemeData(splashColor: ColorTheme.brown),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: ClipRRect(
@@ -56,45 +56,45 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   FlashyTabBarItem(
                     icon: Icon(
                       Icons.home,
-                      color: ColorTheme.color3,
+                      color: ColorTheme.brown,
                     ),
                     title: Text('Home',
                         style: GLTextStyles.leagueSpartan(
                             size: 16,
-                            color: ColorTheme.color3,
+                            color: ColorTheme.brown,
                             weight: FontWeight.w500)),
                   ),
                   FlashyTabBarItem(
                     icon: Icon(
                       Icons.add_box_outlined,
-                      color: ColorTheme.color3,
+                      color: ColorTheme.brown,
                     ),
                     title: Text('Post',
                         style: GLTextStyles.leagueSpartan(
                             size: 16,
-                            color: ColorTheme.color3,
+                            color: ColorTheme.brown,
                             weight: FontWeight.w500)),
                   ),
                   FlashyTabBarItem(
                     icon: Icon(
                       Icons.newspaper_outlined,
-                      color: ColorTheme.color3,
+                      color: ColorTheme.brown,
                     ),
                     title: Text('News',
                         style: GLTextStyles.leagueSpartan(
                             size: 16,
-                            color: ColorTheme.color3,
+                            color: ColorTheme.brown,
                             weight: FontWeight.w500)),
                   ),
                   FlashyTabBarItem(
                     icon: Icon(
                       Icons.person_outlined,
-                      color: ColorTheme.color3,
+                      color: ColorTheme.brown,
                     ),
                     title: Text('Profile',
                         style: GLTextStyles.leagueSpartan(
                             size: 16,
-                            color: ColorTheme.color3,
+                            color: ColorTheme.brown,
                             weight: FontWeight.w500)),
                   ),
                 ],

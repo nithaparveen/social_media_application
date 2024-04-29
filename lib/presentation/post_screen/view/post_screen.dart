@@ -13,7 +13,7 @@ class PostDataScreen extends StatelessWidget {
         title: Text("Create Post"),
         centerTitle: true,
         titleTextStyle: GLTextStyles.ralewayStyl(
-            weight: FontWeight.w700, size: 22, color: ColorTheme.color4),
+            weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -31,12 +31,12 @@ class PostDataScreen extends StatelessWidget {
                         onPressed: () {},
                         icon: Icon(
                           Icons.camera_alt_outlined,
-                          color: ColorTheme.color4,
+                          color: ColorTheme.blue,
                         ),
                         label: Text(
                           "Camera",
                           style: GLTextStyles.leagueSpartan(
-                              size: 16, color: ColorTheme.color1),
+                              size: 16, color: ColorTheme.yellow),
                         ),
                       )),
                   MaterialButton(
@@ -47,12 +47,12 @@ class PostDataScreen extends StatelessWidget {
                         onPressed: () {},
                         icon: Icon(
                           Icons.photo_library_outlined,
-                          color: ColorTheme.color4,
+                          color: ColorTheme.blue,
                         ),
                         label: Text(
                           "Gallery",
                           style: GLTextStyles.leagueSpartan(
-                              size: 16, color: ColorTheme.color1),
+                              size: 16, color: ColorTheme.yellow),
                         ),
                       ))
                 ],
@@ -64,7 +64,7 @@ class PostDataScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 280),
                 child: Text(
                   "Caption",
-                  style: GLTextStyles.ralewayStyl(color: ColorTheme.color3),
+                  style: GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                 ),
               ),
               TextField(
@@ -78,7 +78,7 @@ class PostDataScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 270),
                 child: Text(
                   "Location",
-                  style: GLTextStyles.ralewayStyl(color: ColorTheme.color3),
+                  style: GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                 ),
               ),
               TextField(
@@ -88,14 +88,14 @@ class PostDataScreen extends StatelessWidget {
               ),
               SizedBox(height: 60),
               MaterialButton(
-                  color: ColorTheme.color4,
+                  color: ColorTheme.blue,
                   minWidth: size.width * .5,
                   height: size.height * .07,
                   onPressed: () {},
                   child: Text(
                     "Upload",
                     style: GLTextStyles.leagueSpartan(
-                        size: 18, color: ColorTheme.color1),
+                        size: 18, color: ColorTheme.yellow),
                   ))
             ],
           ),

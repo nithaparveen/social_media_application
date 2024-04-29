@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: ColorTheme.color3),
+        colorScheme: ColorScheme.fromSeed(seedColor: ColorTheme.brown),
         useMaterial3: true,
       ),
       home: BottomNavBar(),

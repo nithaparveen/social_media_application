@@ -98,7 +98,7 @@ class MessageScreen extends StatelessWidget {
         title: Text(
           "ThinkShare",
           style: GLTextStyles.leagueSpartan(
-              size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
+              size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
         ),
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
@@ -142,7 +142,7 @@ class MessageScreen extends StatelessWidget {
                     ),
                     CircleAvatar(
                       radius: 10,
-                      backgroundColor: ColorTheme.color2,
+                      backgroundColor: ColorTheme.lightBrown,
                       child: Text(
                         '$index',
                         style: TextStyle(color: Colors.white, fontSize: 12),

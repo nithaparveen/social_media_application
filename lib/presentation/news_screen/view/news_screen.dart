@@ -43,7 +43,7 @@ class _NewsScreenState extends State<NewsScreen> {
             appBar: AppBar(
               elevation: 0,
               titleTextStyle: GLTextStyles.ralewayStyl(
-                  color: ColorTheme.color4, size: 25, weight: FontWeight.w700),
+                  color: ColorTheme.blue, size: 25, weight: FontWeight.w700),
               title: const Text("News"),
               centerTitle: true,
               bottom: TabBar(
@@ -51,8 +51,8 @@ class _NewsScreenState extends State<NewsScreen> {
                 labelStyle: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
-                    color: ColorTheme.color4),
-                labelColor: ColorTheme.color1,
+                    color: ColorTheme.blue),
+                labelColor: ColorTheme.yellow,
                 unselectedLabelColor: Colors.black54,
                 unselectedLabelStyle: const TextStyle(
                     color: Colors.grey,
@@ -61,7 +61,7 @@ class _NewsScreenState extends State<NewsScreen> {
                 overlayColor: const MaterialStatePropertyAll(Colors.grey),
                 indicatorSize: TabBarIndicatorSize.tab,
                 indicator: BoxDecoration(
-                    color: ColorTheme.color4,
+                    color: ColorTheme.blue,
                     borderRadius: BorderRadius.circular(10)),
                 isScrollable: true,
                 tabs: List.generate(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
+import 'package:socialmedia/core/constants/colors.dart';
+import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
 import 'package:socialmedia/presentation/news_screen/view/news_screen.dart';
 import 'package:socialmedia/presentation/post_screen/view/post_screen.dart';
@@ -36,12 +38,13 @@ class _BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar:
           Consumer<BottomNavController>(builder: (context, controller, _) {
         return Theme(
-          data: ThemeData(splashColor: Colors.transparent),
+          data: ThemeData(splashColor: ColorTheme.color3),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(25),
               child: FlashyTabBar(
+                iconSize: 24,
                 selectedIndex: controller.selectedIndex,
                 showElevation: true,
                 onItemSelected: (index) => setState(() {
@@ -49,20 +52,48 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 }),
                 items: [
                   FlashyTabBarItem(
-                    icon: Icon(Icons.home_outlined),
-                    title: Text('Home'),
+                    icon: Icon(
+                      Icons.home,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Home',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
                   ),
                   FlashyTabBarItem(
-                    icon: Icon(Icons.add_box_outlined),
-                    title: Text('Post'),
+                    icon: Icon(
+                      Icons.add_box_outlined,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Post',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
                   ),
                   FlashyTabBarItem(
-                    icon: Icon(Icons.newspaper_outlined),
-                    title: Text('News'),
+                    icon: Icon(
+                      Icons.newspaper_outlined,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('News',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
                   ),
                   FlashyTabBarItem(
-                    icon: Icon(Icons.person_outlined),
-                    title: Text('Profile'),
+                    icon: Icon(
+                      Icons.person_outlined,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Profile',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
                   ),
                 ],
               ),

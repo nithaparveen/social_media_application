@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
           style: GLTextStyles.leagueSpartan(
               size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
         ),
-        // leading: Icon(Icons.camera_alt_outlined),
         centerTitle: true,
         actions: [
           IconButton(
@@ -41,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
           SizedBox(width: 15),
           // Icon(Icons.search),
-          // SizedBox(width: 10)
         ],
       ),
       body: Padding(
@@ -172,17 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //     splashColor: Colors.transparent,
-      //     backgroundColor: ColorTheme.color4,
-      //     child: Icon(
-      //       Icons.message,
-      //       color: ColorTheme.color1,
-      //       size: 26,
-      //     ),
-      //     onPressed: () {
-
-      //     }),
     );
   }
 

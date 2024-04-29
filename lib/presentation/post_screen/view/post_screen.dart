@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 
-import '../../home_screen/widgets/feed_widget.dart';
 
 class PostDataScreen extends StatelessWidget {
   const PostDataScreen({super.key});

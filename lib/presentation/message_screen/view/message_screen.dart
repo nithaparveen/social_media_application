@@ -96,7 +96,7 @@ class MessageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "inThink",
+          "ThinkShare",
           style: GLTextStyles.leagueSpartan(
               size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
         ),

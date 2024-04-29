@@ -29,7 +29,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             index: provider.selectedIndex,
             children: const [
               HomeScreen(),
-              SearchScreen(),
               PostDataScreen(),
               NewsScreen(),
               ProfileScreen()
@@ -60,17 +59,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       color: ColorTheme.color3,
                     ),
                     title: Text('Home',
-                        style: GLTextStyles.leagueSpartan(
-                            size: 16,
-                            color: ColorTheme.color3,
-                            weight: FontWeight.w500)),
-                  ),
-                  FlashyTabBarItem(
-                    icon: Icon(
-                      Icons.search,
-                      color: ColorTheme.color3,
-                    ),
-                    title: Text('Search',
                         style: GLTextStyles.leagueSpartan(
                             size: 16,
                             color: ColorTheme.color3,

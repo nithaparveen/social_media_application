@@ -19,23 +19,36 @@ class ProfileScreen extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),
             ),
-            IconButton(
-              onPressed: () {
-                // Navigator.pushReplacement(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) => ));
-              },
-              icon: Icon(
-                Icons.logout_outlined,
-                size: 25,
-                color: Colors.black,
-              ),
-            )
           ],
         ),
+        actions: [IconButton(
+          onPressed: () {
+            // Navigator.pushReplacement(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => ));
+          },
+          icon: Icon(
+            Icons.edit,
+            size: 22,
+            color: Colors.black,
+          ),
+        ),
+          IconButton(
+            onPressed: () {
+              // Navigator.pushReplacement(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => ));
+            },
+            icon: Icon(
+              Icons.logout_outlined,
+              size: 25,
+              color: Colors.black,
+            ),
+          ),],
+        // bottom: ,
       ),
-      ///// body
       body: Column(
         children: [
           SizedBox(

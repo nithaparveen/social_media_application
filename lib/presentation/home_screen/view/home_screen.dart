@@ -3,6 +3,7 @@ import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/feed_widget.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
 import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
+import 'package:socialmedia/presentation/search_screen/view/search_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/text_styles.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "inThink",
+          "ThinkShare",
           style: GLTextStyles.leagueSpartan(
               size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
         ),
@@ -31,14 +32,24 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               onPressed: () {
                 Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()));
+              },
+              icon: Icon(
+                Icons.search,
+                color: ColorTheme.color3,
+                size: 24,
+              )),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
                     MaterialPageRoute(builder: (context) => MessageScreen()));
               },
               icon: Icon(
                 Icons.message,
                 color: ColorTheme.color3,
-                size: 24,
+                size: 22,
               )),
-          SizedBox(width: 15),
+          SizedBox(width: 10),
           // Icon(Icons.search),
         ],
       ),
@@ -158,6 +169,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               headerButton(
                                   buttonText: "Comment",
                                   buttonIcon: Icons.message_outlined,
+                                  buttonAction: () {},
+                                  buttonColor: ColorTheme.color1),
+                              headerButton(
+                                  buttonText: "Share",
+                                  buttonIcon: Icons.share_outlined,
                                   buttonAction: () {},
                                   buttonColor: ColorTheme.color1),
                             ],

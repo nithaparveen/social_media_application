@@ -33,8 +33,6 @@ class PostDataScreen extends StatelessWidget {
                         icon: Icon(Icons.camera_alt_outlined),
                         label: Text("Camera",style: GLTextStyles.leagueSpartan(
                                size: 16, color: ColorTheme.color1),),
-                        // style: GLTextStyles.leagueSpartan(
-                        //     size: 16, color: ColorTheme.color1),
                       )),
                   MaterialButton(
                       minWidth: size.width * .3,

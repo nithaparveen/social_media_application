@@ -10,4 +10,5 @@ class ColorTheme {
   static Color color2 = const Color(0xffC08B5C);
   static Color color3 = const Color(0xff795458);
   static Color color4 = const Color(0xff453F78);
+  static Color color5 = const Color(0xff919498);
 }

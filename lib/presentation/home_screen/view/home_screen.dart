@@ -40,7 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
           SizedBox(width: 15),
           // Icon(Icons.search),
-          // SizedBox(width: 10)
         ],
       ),
       body: Padding(

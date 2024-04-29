@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:socialmedia/core/constants/colors.dart';
+import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
 import 'package:socialmedia/presentation/news_screen/view/news_screen.dart';
 import 'package:socialmedia/presentation/post_screen/view/post_screen.dart';
@@ -8,12 +10,18 @@ import 'package:socialmedia/presentation/profile_screen/view/profile_screen.dart
 
 import '../../home_screen/view/home_screen.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
 
   @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       body: Consumer<BottomNavController>(
         builder: (context, provider, child) {
           return IndexedStack(
@@ -30,37 +38,67 @@ class BottomNavBar extends StatelessWidget {
       bottomNavigationBar:
           Consumer<BottomNavController>(builder: (context, controller, _) {
         return Theme(
-          data: ThemeData(splashColor: Colors.transparent),
-          child: BottomNavigationBar(
-              currentIndex: controller.selectedIndex,
-              onTap: (index) {
-                controller.selectedIndex = index;
-              },
-              elevation: 0,
-              type: BottomNavigationBarType.fixed,
-              unselectedItemColor: ColorTheme.grey,
-              selectedItemColor: ColorTheme.color4,
-              showSelectedLabels: true,
-              showUnselectedLabels: false,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home_outlined),
-                  activeIcon: Icon(Icons.home),
-                  label: "Home",
-                ),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add_box_outlined),
-                    activeIcon: Icon(Icons.add_box_rounded),
-                    label: "Create Post"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.newspaper_outlined),
-                    activeIcon: Icon(Icons.newspaper),
-                    label: "News"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person_outlined),
-                    activeIcon: Icon(Icons.person),
-                    label: "Profile")
-              ]),
+          data: ThemeData(splashColor: ColorTheme.color3),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: FlashyTabBar(
+                iconSize: 24,
+                selectedIndex: controller.selectedIndex,
+                showElevation: true,
+                onItemSelected: (index) => setState(() {
+                  controller.selectedIndex = index;
+                }),
+                items: [
+                  FlashyTabBarItem(
+                    icon: Icon(
+                      Icons.home,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Home',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(
+                      Icons.add_box_outlined,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Post',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(
+                      Icons.newspaper_outlined,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('News',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
+                  ),
+                  FlashyTabBarItem(
+                    icon: Icon(
+                      Icons.person_outlined,
+                      color: ColorTheme.color3,
+                    ),
+                    title: Text('Profile',
+                        style: GLTextStyles.leagueSpartan(
+                            size: 18,
+                            color: ColorTheme.color3,
+                            weight: FontWeight.w500)),
+                  ),
+                ],
+              ),
+            ),
+          ),
         );
       }),
     );

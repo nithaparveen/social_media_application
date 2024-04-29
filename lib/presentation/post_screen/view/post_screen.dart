@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 
-import '../../home_screen/widgets/feed_widget.dart';
 
 class PostDataScreen extends StatelessWidget {
   const PostDataScreen({super.key});
@@ -34,8 +33,6 @@ class PostDataScreen extends StatelessWidget {
                         icon: Icon(Icons.camera_alt_outlined),
                         label: Text("Camera",style: GLTextStyles.leagueSpartan(
                                size: 16, color: ColorTheme.color1),),
-                        // style: GLTextStyles.leagueSpartan(
-                        //     size: 16, color: ColorTheme.color1),
                       )),
                   MaterialButton(
                       minWidth: size.width * .3,
@@ -46,27 +43,10 @@ class PostDataScreen extends StatelessWidget {
                         icon: Icon(Icons.photo_library_outlined),
                         label: Text("Gallery",style: GLTextStyles.leagueSpartan(
                                size: 16, color: ColorTheme.color1),),
-                        // style: GLTextStyles.leagueSpartan(
-                        //     size: 16, color: ColorTheme.color1),
+                        
                       ))
                 ],
               ),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     headerButton(
-              //         buttonText: "Camera",
-              //         buttonIcon: Icons.camera,
-              //         buttonAction: () {},
-              //         buttonColor: ColorTheme.color1),
-              //     headerButton(
-              //         buttonText: "Gallery",
-              //         buttonIcon: Icons.image,
-              //         buttonAction: () {},
-              //         buttonColor: ColorTheme.color1),
-              //   ],
-              // ),
               SizedBox(
                 height: 10,
               ),

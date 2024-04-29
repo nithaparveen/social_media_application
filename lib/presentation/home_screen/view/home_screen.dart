@@ -26,13 +26,20 @@ class _HomeScreenState extends State<HomeScreen> {
           style: GLTextStyles.leagueSpartan(
               size: 25, weight: FontWeight.w500, color: ColorTheme.color3),
         ),
-        // leading: Icon(Icons.camera_alt_outlined),
         centerTitle: true,
         actions: [
-          Icon(Icons.notifications_none),
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MessageScreen()));
+              },
+              icon: Icon(
+                Icons.message,
+                color: ColorTheme.color3,
+                size: 26,
+              )),
           SizedBox(width: 15),
           // Icon(Icons.search),
-          // SizedBox(width: 10)
         ],
       ),
       body: Padding(
@@ -43,7 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               StorySlider(),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               ListView.separated(
                   separatorBuilder: (context, index) {
                     return SizedBox(
@@ -85,9 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                   horizontal: 16,
                                   vertical: 8,
                                 ),
-                                decoration: BoxDecoration(color:ColorTheme.color4,
+                                decoration: BoxDecoration(
+                                    color: ColorTheme.color4,
                                     borderRadius: BorderRadius.circular(8)),
-                                child: Text("Follow",style: TextStyle(color: ColorTheme.white,fontSize: 11),),
+                                child: Text(
+                                  "Follow",
+                                  style: TextStyle(
+                                      color: ColorTheme.white, fontSize: 11),
+                                ),
                               )),
                           Container(
                             height: size.width * .75,
@@ -156,18 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          splashColor: Colors.transparent,
-          backgroundColor: ColorTheme.color4,
-          child: Icon(
-            Icons.message,
-            color: ColorTheme.color1,
-            size: 26,
-          ),
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => MessageScreen()));
-          }),
     );
   }
 

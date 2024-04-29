@@ -170,17 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //     splashColor: Colors.transparent,
-      //     backgroundColor: ColorTheme.color4,
-      //     child: Icon(
-      //       Icons.message,
-      //       color: ColorTheme.color1,
-      //       size: 26,
-      //     ),
-      //     onPressed: () {
-
-      //     }),
     );
   }
 

@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "nitha",
+                        "Nitha",
                         style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.w600,
@@ -27,8 +27,8 @@ class ProfileScreen extends StatelessWidget {
                           //         builder: (context) => ));
                         },
                         icon: Icon(
-                          Icons.logout_rounded,
-                          size: 30,
+                          Icons.logout_outlined,
+                          size: 25,
                           color: Colors.black,
                         ),
                       )

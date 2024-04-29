@@ -47,22 +47,6 @@ class PostDataScreen extends StatelessWidget {
                       ))
                 ],
               ),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.center,
-              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //   children: [
-              //     headerButton(
-              //         buttonText: "Camera",
-              //         buttonIcon: Icons.camera,
-              //         buttonAction: () {},
-              //         buttonColor: ColorTheme.color1),
-              //     headerButton(
-              //         buttonText: "Gallery",
-              //         buttonIcon: Icons.image,
-              //         buttonAction: () {},
-              //         buttonColor: ColorTheme.color1),
-              //   ],
-              // ),
               SizedBox(
                 height: 10,
               ),

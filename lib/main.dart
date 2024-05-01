@@ -1,9 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
 import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
+import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -24,7 +26,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: ColorTheme.brown),
         useMaterial3: true,
       ),
-      home: BottomNavBar(),
+      home: RegistrationScreen(
+      ),
     );
   }
 }

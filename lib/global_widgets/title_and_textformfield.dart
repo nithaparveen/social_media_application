@@ -23,7 +23,7 @@ class TitleAndTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return SizedBox(
-      height: size.height * 0.15,
+      height: size.height * 0.14,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

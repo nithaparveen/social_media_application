@@ -10,8 +10,9 @@ class PostDataScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        leading: SizedBox(),
         title: Text("Create Post"),
-        centerTitle: true,
+       // centerTitle: true,
         titleTextStyle: GLTextStyles.ralewayStyl(
             weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
       ),

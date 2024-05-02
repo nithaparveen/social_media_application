@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socialmedia/presentation/edit_profile_screen/view/edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -23,10 +24,10 @@ class ProfileScreen extends StatelessWidget {
         ),
         actions: [IconButton(
           onPressed: () {
-            // Navigator.pushReplacement(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => ));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => EditProfileScreen()));
           },
           icon: Icon(
             Icons.edit,

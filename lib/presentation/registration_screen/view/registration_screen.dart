@@ -70,13 +70,13 @@ class RegistrationScreen extends StatelessWidget {
                   ),TitleAndTextFormField(
                     text: 'Password',
                   ),
-                  SizedBox(height: size.height*.022,),
+                  SizedBox(height: size.height*.023,),
                   MaterialButton(
                       color: ColorTheme.blue,
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
                       },
                       child: Text(
                         "SignUp",

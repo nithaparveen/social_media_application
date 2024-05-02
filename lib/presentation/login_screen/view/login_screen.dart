@@ -43,7 +43,7 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 48),
                     child: Text(
-                      "Please SignIn to continue",
+                      "Please LogIn to continue",
                       textAlign: TextAlign.start,
                       style: GLTextStyles.poppinsStyl(
                         color: ColorTheme.yellow,
@@ -71,11 +71,11 @@ class LoginScreen extends StatelessWidget {
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
 
                       },
                       child: Text(
-                        "SignIn",
+                        "LogIn",
                         style: GLTextStyles.leagueSpartan(
                             size: 18, color: ColorTheme.yellow),
                       )),

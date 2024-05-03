@@ -17,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var surl = "https://maps.app.goo.gl/yQdJptcDhhyT1naFA";
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;

@@ -70,6 +70,44 @@ class RegistrationScreen extends StatelessWidget {
                   ),TitleAndTextFormField(
                     text: 'Password',
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MaterialButton(
+                          minWidth: size.width * .3,
+                          height: size.height * .07,
+                          onPressed: () {},
+                          child: TextButton.icon(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.camera_alt_outlined,
+                              color: ColorTheme.blue,
+                            ),
+                            label: Text(
+                              "Camera",
+                              style: GLTextStyles.leagueSpartan(
+                                  size: 16, color: ColorTheme.yellow),
+                            ),
+                          )),
+                      MaterialButton(
+                          minWidth: size.width * .3,
+                          height: size.height * .07,
+                          onPressed: () {},
+                          child: TextButton.icon(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.photo_library_outlined,
+                              color: ColorTheme.blue,
+                            ),
+                            label: Text(
+                              "Gallery",
+                              style: GLTextStyles.leagueSpartan(
+                                  size: 16, color: ColorTheme.yellow),
+                            ),
+                          ))
+                    ],
+                  ),
+
                   SizedBox(height: size.height*.023,),
                   MaterialButton(
                       color: ColorTheme.blue,

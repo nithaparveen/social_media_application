@@ -42,6 +42,7 @@ dependencies:
   http: ^1.2.1
   flashy_tab_bar2: ^0.0.10
   shared_preferences: ^2.2.3
+  image_picker: ^1.1.1
 
 
 dev_dependencies:

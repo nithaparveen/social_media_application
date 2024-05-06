@@ -1,9 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
+import 'package:socialmedia/presentation/registration_screen/controller/registration_controller.dart';
 import '../../../global_widgets/title_and_textformfield.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -14,9 +16,20 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  File? image;
   var usernameController = TextEditingController();
   var passwordController = TextEditingController();
   var emailController = TextEditingController();
+
+  Future<void> _getImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
@@ -68,9 +81,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TitleAndTextFormField(
-                    text: 'Name',
-                  ),
-                  TitleAndTextFormField(
                     textEditingController: usernameController,
                     text: 'Username',
                   ),
@@ -82,6 +92,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     textEditingController: passwordController,
                     text: 'Password',
                   ),
+                  Text("Profile Photo"),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -90,7 +101,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: size.height * .07,
                           onPressed: () {},
                           child: TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () => _getImage(ImageSource.camera),
                             icon: Icon(
                               Icons.camera_alt_outlined,
                               color: ColorTheme.blue,
@@ -106,7 +117,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           height: size.height * .07,
                           onPressed: () {},
                           child: TextButton.icon(
-                            onPressed: () {},
+                            onPressed: () => _getImage(ImageSource.gallery),
                             icon: Icon(
                               Icons.photo_library_outlined,
                               color: ColorTheme.blue,
@@ -119,6 +130,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           ))
                     ],
                   ),
+                  if (image != null)
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 20),
+                      height: 200,
+                      width: 200,
+                      child: Image.file(
+                        image!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   SizedBox(
                     height: size.height * .023,
                   ),
@@ -127,11 +148,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
-                            ));
+                       Provider.of<RegistrationController>(context,listen: false).onRegister(
+                           context, image, usernameController.text.trim(), emailController.text.trim(), passwordController.text.trim());
+                       // usernameController.clear();
+                       // emailController.clear();
+                       // passwordController.clear();
                       },
                       child: Text(
                         "SignUp",

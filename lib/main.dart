@@ -7,6 +7,7 @@ import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_na
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
 import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
+import 'package:socialmedia/presentation/registration_screen/controller/registration_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
 
 void main() {
@@ -14,6 +15,8 @@ void main() {
     ChangeNotifierProvider(create: (context) => BottomNavController()),
     ChangeNotifierProvider(create: (context) => NewsController()),
     ChangeNotifierProvider(create: (context) => loginController()),
+    ChangeNotifierProvider(create: (context) => RegistrationController()),
+
   ], child: const MyApp()));
 }
 
@@ -29,7 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: ColorTheme.brown),
         useMaterial3: true,
       ),
-      home: LoginScreen(
+      home: RegistrationScreen(
       ),
     );
   }

@@ -6,9 +6,17 @@ import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 import '../../../global_widgets/title_and_textformfield.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
 
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  var usernameController = TextEditingController();
+  var passwordController = TextEditingController();
+  var emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
@@ -55,7 +63,7 @@ class RegistrationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -63,11 +71,15 @@ class RegistrationScreen extends StatelessWidget {
                     text: 'Name',
                   ),
                   TitleAndTextFormField(
+                    textEditingController: usernameController,
                     text: 'Username',
                   ),
                   TitleAndTextFormField(
+                    textEditingController: emailController,
                     text: 'Email',
-                  ),TitleAndTextFormField(
+                  ),
+                  TitleAndTextFormField(
+                    textEditingController: passwordController,
                     text: 'Password',
                   ),
                   Row(
@@ -107,14 +119,19 @@ class RegistrationScreen extends StatelessWidget {
                           ))
                     ],
                   ),
-
-                  SizedBox(height: size.height*.023,),
+                  SizedBox(
+                    height: size.height * .023,
+                  ),
                   MaterialButton(
                       color: ColorTheme.blue,
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen(),));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => LoginScreen(),
+                            ));
                       },
                       child: Text(
                         "SignUp",

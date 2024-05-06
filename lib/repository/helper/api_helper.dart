@@ -28,30 +28,48 @@ class ApiHelper {
     }
   }
 
+
   //for post
   static postData({
     required String endPoint,
-    Map<String, String>? header,
-    required Map<String, dynamic> body,
+     Map <String , String>? header,
+    required Map <String , dynamic> body,
   }) async {
-    log("Api helper > postData");
-    log("$body");
-    final url = Uri.parse(AppConfig.baseurl + endPoint);
-    try {
-      var response = await http.post(url, body: body);
-      log("Api Called => status code=${response.statusCode}");
-      if (response.statusCode == 200) {
+    log("input $body");
+    final url = Uri.parse(AppConfig.baseurl+endPoint);
+    try{
+      var response = await http.post(url,body: body,headers: header);
+      log("Api PostMethod Called -> statusCode = ${response.statusCode}");
+      if(response.statusCode == 200 || response.statusCode == 201){
         var data = response.body;
         var decodedData = jsonDecode(data);
         return decodedData;
-      } else {
-        log("Else Condition -> Api failed");
-        var data = response.body;
+      }else{
+        log("Api Failed");
+        var data =response.body;
         var decodedData = jsonDecode(data);
         return decodedData;
       }
-    } catch (e) {
+    }catch(e){
       log("$e");
+    }
+  }
+
+  static Map<String, String> getApiHeader({String? access, String? dbName}) {
+    if (access != null) {
+      return {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token $access'
+      };
+    } else if (dbName != null) {
+      return {
+        'Content-Type': 'application/json',
+        'dbName': dbName
+      };
+    } else {
+      return {
+        'Content-Type': 'application/json',
+      };
     }
   }
 }

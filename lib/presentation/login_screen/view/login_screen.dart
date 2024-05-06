@@ -1,13 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
+import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
 import '../../../global_widgets/title_and_textformfield.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  var usernameController = TextEditingController();
+  var passwordController = TextEditingController();
+  bool visibility = false;
 
   @override
   Widget build(BuildContext context) {
@@ -60,19 +71,40 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TitleAndTextFormField(
+                    textEditingController: usernameController,
                     text: 'Username',
                   ),
-                 TitleAndTextFormField(
-                    text: 'Password',
-                  ),
+                 Consumer<loginController>(
+                   builder: (context,controller,_) {
+                     return TextFormField(
+                       obscureText: controller.visibility,
+                       obscuringCharacter: '*',
+                       controller: passwordController,
+                       decoration: InputDecoration(
+                           prefixIcon: IconButton(
+                               onPressed: () {
+                                 controller.onPressed();
+                               },
+                               icon: Icon(controller.visibility == true
+                                   ? Icons.visibility_off
+                                   : Icons.visibility)),
+                           border: OutlineInputBorder(
+                               borderSide: BorderSide(width: .1, color: Colors.white54)),
+                           hintText: 'Password',
+                           labelText: 'password'),
+                     );
+                   }
+                 ),
                   SizedBox(height: size.height*.022,),
                   MaterialButton(
                       color: ColorTheme.blue,
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-
+                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+                        Provider.of<loginController>(context,listen: false).onLogin(usernameController.text.trim(), passwordController.text.trim(), context);
+                        usernameController.clear();
+                        passwordController.clear();
                       },
                       child: Text(
                         "LogIn",

@@ -9,7 +9,8 @@ class TitleAndTextFormField extends StatelessWidget {
         this.textColor,
         this.textEditingController,
         this.hintText,
-        this.keyboardType});
+        this.keyboardType,
+        this.obscureText = false, this.obscuringCharacter});
 
   final String text;
   final double? textSize;
@@ -18,6 +19,9 @@ class TitleAndTextFormField extends StatelessWidget {
   final TextEditingController? textEditingController;
   final String? hintText;
   final TextInputType? keyboardType;
+  final bool obscureText ;
+  final String? obscuringCharacter;
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +37,8 @@ class TitleAndTextFormField extends StatelessWidget {
                   fontWeight: textFontWeight,
                   color: textColor)),
           TextFormField(
+            obscureText: obscureText,
+            obscuringCharacter: "*",
             controller: textEditingController,
             keyboardType: keyboardType,
             decoration: const InputDecoration(

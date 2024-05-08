@@ -72,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   TitleAndTextFormField(
                     textEditingController: usernameController,
-                    text: 'Username',
+                    text: 'Email',
                   ),
                  Consumer<loginController>(
                    builder: (context,controller,_) {

@@ -14,15 +14,15 @@ class RegistrationController extends ChangeNotifier {
       var imageUrl = "${AppConfig.baseurl}register/";
       onUploadImage(imageUrl, image, username, email, password).then((value) {
         log("${value.statusCode}");
-        if(value.statusCode== 200 || value.statusCode == 201){
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context)=> LoginScreen()));
-        }else{
+        if (value.statusCode == 200 || value.statusCode == 201) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        } else {
           var message = jsonDecode(value.body)["msg"];
           AppUtils.oneTimeSnackBar(message, context: context);
         }
       });
-    }catch(e){
+    } catch (e) {
       log("$e");
     }
   }
@@ -43,13 +43,13 @@ class RegistrationController extends ChangeNotifier {
         ),
       );
     }
-    request.fields['username']= username;
+    request.fields['username'] = username;
     request.fields['email'] = email;
-  request.fields['password'] = password;
+    request.fields['password'] = password;
 
-  request.headers.addAll(headers);
-  log("request : "+ request.toString());
-  var res = await request.send();
-  return await http.Response.fromStream(res);
+    request.headers.addAll(headers);
+    log("request : " + request.toString());
+    var res = await request.send();
+    return await http.Response.fromStream(res);
   }
 }

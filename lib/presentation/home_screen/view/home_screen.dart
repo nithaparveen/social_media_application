@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
+import 'package:socialmedia/global_widgets/search_field.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/feed_widget.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
 import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var surl = "https://maps.app.goo.gl/yQdJptcDhhyT1naFA";
+  bool _isSearchBarVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SearchScreen()));
-              },
+              onPressed: _searchClicked
+              // buildSearchbar();
+              ,
               icon: Icon(
                 Icons.search,
                 color: ColorTheme.brown,
@@ -61,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              _isSearchBarVisible ?  SearchField() : const SizedBox(),
               StorySlider(),
               SizedBox(
                 height: 10,
@@ -201,6 +203,38 @@ class _HomeScreenState extends State<HomeScreen> {
     } catch (e) {
       print('Error launching URL: $e');
     }
+  }
+
+  // void buildSearchbar() {
+  //   if ()
+  //   Column(
+  //     mainAxisAlignment: MainAxisAlignment.start,
+  //     children: [
+  //       TextField(
+  //         decoration: InputDecoration(
+  //           hintText: 'Search',
+  //           border: OutlineInputBorder(),
+  //         ),
+  //       ),
+  //       SizedBox(height: 20.0),
+  //       MaterialButton(
+  //         color: ColorTheme.blue,
+  //         minWidth: size.width * .5,
+  //         height: size.height * .07,
+  //         onPressed: () {},
+  //         child: Text(
+  //           "Search",
+  //           style: GLTextStyles.leagueSpartan(
+  //               size: 18, color: ColorTheme.yellow),
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
+  void _searchClicked() {
+    setState(() {
+      _isSearchBarVisible = !_isSearchBarVisible;
+    });
   }
 }
 

@@ -16,14 +16,14 @@ class SearchScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
-        child: Row(
+        child:
+        Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start ,
           children: [
-            IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back)),
             SizedBox(
-              height: 40,
-              width: MediaQuery.sizeOf(context).width * .6,
+              height: size.height * .05,
+              width: MediaQuery.sizeOf(context).width * .65,
               child: TextField(maxLines: 6,
                 // controller: textController,
                 decoration: InputDecoration(
@@ -41,7 +41,8 @@ class SearchScreen extends StatelessWidget {
                 width: 8
             ),
             Expanded(
-              child: SizedBox(height: 40,width: 60,
+              child: SizedBox(width: size.width * .4,
+                height: size.height * .05,
                 child: ElevatedButton(
                   onPressed: () {
                     // provider.searchData(
@@ -51,40 +52,15 @@ class SearchScreen extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "Search",
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: ColorTheme.yellow),
                     ),
                   ),
-                  style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStatePropertyAll(Color(0xff8c2f35),)),
+                  style: ElevatedButton.styleFrom(backgroundColor: ColorTheme.blue)
                 ),
               ),
             )
           ],
         ),
-        // Column(
-        //   mainAxisAlignment: MainAxisAlignment.start,
-        //   children: [
-        //     TextField(
-        //       decoration: InputDecoration(
-        //         hintText: 'Search',
-        //         border: OutlineInputBorder(),
-        //         suffixIcon: IconButton(onPressed: (){}, icon: Icon(Icons.search))
-        //       ),
-        //     ),
-        //     // MaterialButton(
-        //     //   color: ColorTheme.blue,
-        //     //   minWidth: size.width * .5,
-        //     //   height: size.height * .07,
-        //     //   onPressed: () {},
-        //     //   child: Text(
-        //     //     "Search",
-        //     //     style: GLTextStyles.leagueSpartan(
-        //     //         size: 18, color: ColorTheme.yellow),
-        //     //   ),
-        //     // )
-        //   ],
-        // ),
       ),
     );
   }

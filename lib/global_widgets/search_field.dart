@@ -7,27 +7,53 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Column(
       children: [
-        TextField(
-          decoration: InputDecoration(
-            hintText: 'Search',
-            border: OutlineInputBorder(),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: size.height * .05,
+              width: MediaQuery.sizeOf(context).width * .65,
+              child: TextField(
+                maxLines: 6,
+                // controller: textController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Color(0xff8c2f35), width: 1)),
+                ),
+              ),
+            ),
+            SizedBox(width: 8),
+            Expanded(
+              child: SizedBox(
+                width: size.width * .4,
+                height: size.height * .05,
+                child: ElevatedButton(
+                    onPressed: () {
+                      // provider.searchData(
+                      //     searchText: textController.text.toLowerCase());
+                      // FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                    child: Center(
+                      child:
+                      Text(
+                        "Search",
+                        style: TextStyle(color: ColorTheme.yellow),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(backgroundColor: ColorTheme.blue)),
+              ),
+            )
+          ],
         ),
-        SizedBox(width: 10.0),
-        MaterialButton(
-          color: ColorTheme.blue,
-          minWidth: size.width * .3,
-          height: size.height * .07,
-          onPressed: () {},
-          child: Text(
-            "Search",
-            style:
-                GLTextStyles.leagueSpartan(size: 18, color: ColorTheme.yellow),
-          ),
-        )
+        SizedBox(height: 5,)
       ],
     );
   }

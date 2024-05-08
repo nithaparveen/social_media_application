@@ -28,29 +28,28 @@ class ApiHelper {
     }
   }
 
-
   //for post
   static postData({
     required String endPoint,
-     Map <String , String>? header,
-    required Map <String , dynamic> body,
+    Map<String, String>? header,
+    required Map<String, dynamic> body,
   }) async {
     log("input $body");
-    final url = Uri.parse(AppConfig.baseurl+endPoint);
-    try{
-      var response = await http.post(url,body: body,headers: header);
+    final url = Uri.parse(AppConfig.baseurl + endPoint);
+    try {
+      var response = await http.post(url, body: body, headers: header);
       log("Api PostMethod Called -> statusCode = ${response.statusCode}");
-      if(response.statusCode == 200 || response.statusCode == 201){
+      if (response.statusCode == 200 || response.statusCode == 201) {
         var data = response.body;
         var decodedData = jsonDecode(data);
         return decodedData;
-      }else{
+      } else {
         log("Api Failed");
-        var data =response.body;
+        var data = response.body;
         var decodedData = jsonDecode(data);
         return decodedData;
       }
-    }catch(e){
+    } catch (e) {
       log("$e");
     }
   }
@@ -62,10 +61,7 @@ class ApiHelper {
         'Authorization': 'Token $access'
       };
     } else if (dbName != null) {
-      return {
-        'Content-Type': 'application/json',
-        'dbName': dbName
-      };
+      return {'Content-Type': 'application/json', 'dbName': dbName};
     } else {
       return {
         'Content-Type': 'application/json',

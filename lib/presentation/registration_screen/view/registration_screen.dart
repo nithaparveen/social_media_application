@@ -92,7 +92,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     textEditingController: passwordController,
                     text: 'Password',
                   ),
-                  Text("Profile Photo"),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Profile Photo"),
+                    ],
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -148,11 +153,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
-                       Provider.of<RegistrationController>(context,listen: false).onRegister(
-                           context, image, usernameController.text.trim(), emailController.text.trim(), passwordController.text.trim());
-                       // usernameController.clear();
-                       // emailController.clear();
-                       // passwordController.clear();
+                        Provider.of<RegistrationController>(context,
+                                listen: false)
+                            .onRegister(
+                                context,
+                                image,
+                                usernameController.text.trim(),
+                                emailController.text.trim(),
+                                passwordController.text.trim());
+                        // usernameController.clear();
+                        // emailController.clear();
+                        // passwordController.clear();
                       },
                       child: Text(
                         "SignUp",
@@ -162,6 +173,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ],
               ),
             ),
+            TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder:(context) => LoginScreen(),
+            ));}, child: Text("Already a User ? Login here"))
           ],
         ),
       ),

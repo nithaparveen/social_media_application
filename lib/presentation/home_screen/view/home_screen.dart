@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
-import 'package:socialmedia/global_widgets/search_field.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/feed_widget.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
 import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
@@ -18,7 +17,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var surl = "https://maps.app.goo.gl/yQdJptcDhhyT1naFA";
-  bool _isSearchBarVisible = false;
+  // bool _isSearchBarVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-              onPressed: _searchClicked
-              // buildSearchbar();
-              ,
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()));
+              },
+              // _searchClicked,
               icon: Icon(
                 Icons.search,
                 color: ColorTheme.brown,
@@ -62,16 +63,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _isSearchBarVisible ?  SearchField() : const SizedBox(),
+              // _isSearchBarVisible ? SearchField() :  SizedBox(),
               StorySlider(),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               ListView.separated(
                   separatorBuilder: (context, index) {
-                    return SizedBox(
-                      height: 10,
-                    );
+                    return SizedBox(height: 10);
                   },
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -121,7 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: size.width * .75,
                             child: Image.network(
                               // "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
                               "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                               fit: BoxFit.cover,
                             ),
@@ -143,18 +139,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: const Icon(Icons.thumb_up,
                                           color: Colors.white, size: 14),
                                     ),
-                                    SizedBox(
-                                      width: size.width * .02,
-                                    ),
+                                    SizedBox(width: size.width * .02),
                                     displayText(label: "202"),
                                   ],
                                 ),
                                 Wrap(
                                   children: [
                                     displayText(label: "80"),
-                                    SizedBox(
-                                      width: size.width * .02,
-                                    ),
+                                    SizedBox(width: size.width * .02),
                                     displayText(label: "Comments"),
                                   ],
                                 )
@@ -205,37 +197,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  // void buildSearchbar() {
-  //   if ()
-  //   Column(
-  //     mainAxisAlignment: MainAxisAlignment.start,
-  //     children: [
-  //       TextField(
-  //         decoration: InputDecoration(
-  //           hintText: 'Search',
-  //           border: OutlineInputBorder(),
-  //         ),
-  //       ),
-  //       SizedBox(height: 20.0),
-  //       MaterialButton(
-  //         color: ColorTheme.blue,
-  //         minWidth: size.width * .5,
-  //         height: size.height * .07,
-  //         onPressed: () {},
-  //         child: Text(
-  //           "Search",
-  //           style: GLTextStyles.leagueSpartan(
-  //               size: 18, color: ColorTheme.yellow),
-  //         ),
-  //       )
-  //     ],
-  //   );
+  // void _searchClicked() {
+  //   setState(() {
+  //     _isSearchBarVisible = !_isSearchBarVisible;
+  //     log("message");
+  //   });
   // }
-  void _searchClicked() {
-    setState(() {
-      _isSearchBarVisible = !_isSearchBarVisible;
-    });
-  }
 }
 
 Widget displayText({required String label}) {

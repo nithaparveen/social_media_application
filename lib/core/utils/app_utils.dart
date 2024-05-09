@@ -1,25 +1,27 @@
-
+import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 
+import '../../app_config/app_config.dart';
 
 class AppUtils {
-  // static Future<String?> getAccessKey() async {
-  //   log("getAccessKey");
-  //   final sharedPreferences = await SharedPreferences.getInstance();
-  //   if (sharedPreferences.get(AppConfig.token) != null) {
-  //     final access =
-  //         jsonDecode(sharedPreferences.get(AppConfig.token) as String);
-  //     log("access key =================  $access");
-  //     return access;
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  static Future<String?> getAccessKey() async {
+    log("AppUtils -> getAccessKey()");
+    final sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.get(AppConfig.token) != null) {
+      final access =
+          jsonDecode(sharedPreferences.get(AppConfig.token) as String);
+      log("Access key -> $access");
+      return access;
+    } else {
+      return null;
+    }
+  }
 
-  
   static oneTimeSnackBar(
     String? message, {
     int time = 2,
@@ -43,7 +45,9 @@ class AppUtils {
 
         behavior: showOnTop ? SnackBarBehavior.floating : null,
         backgroundColor: bgColor ?? Colors.white60,
-        content: Text(message!, style: textStyle ?? GLTextStyles.ralewayStyl(color: ColorTheme.white)),
+        content: Text(message!,
+            style:
+                textStyle ?? GLTextStyles.ralewayStyl(color: ColorTheme.white)),
         duration: Duration(seconds: time),
         margin: showOnTop
             ? EdgeInsets.only(

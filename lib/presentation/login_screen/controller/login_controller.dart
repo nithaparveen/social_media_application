@@ -15,19 +15,19 @@ class loginController extends ChangeNotifier {
   Future onLogin(String email, String password, BuildContext context) async {
     log("loginController -> onLogin() started");
     var data = {"email": email, "password": password};
-    loginService.postLoginData(data).then((value) {
+    LoginService.postLoginData(data).then((value) {
       log("postLoginData() -> ${value["status"]}");
       if (value["status"] == 1) {
-        log("token -> ${value["token"]}");
+        log("token -> ${value["data"]["access"]}");
         storeLoginData(value);
-        storeUserToken(value["token"]);
+        storeUserToken(value["data"]["access"]);
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => BottomNavBar()),
             (route) => false);
       } else {
-        var message = value["non_field_errors"].toString();
-        AppUtils.oneTimeSnackBar(message, context: context);
+        var message = value["errors"].toString();
+        AppUtils.oneTimeSnackBar(message, context: context,bgColor: Colors.red);
       }
     });
   }

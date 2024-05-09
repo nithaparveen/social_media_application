@@ -1,14 +1,5 @@
-// import 'package:flutter/material.dart';
-//
-// class ChatScreen extends StatelessWidget {
-//   const ChatScreen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold();
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:socialmedia/core/constants/colors.dart';
 
 void main() {
   runApp(ChatScreen());
@@ -33,13 +24,13 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
-  final List<String> _messages = [];
+  final List<String> _messages = ["hi",'You:daa',"You:poda patti","hello"];
   final TextEditingController _textController = TextEditingController();
 
   void _handleSubmitted(String text) {
     _textController.clear();
     setState(() {
-      _messages.insert(0, text);
+      _messages.insert(0, 'You: $text');
     });
   }
 
@@ -67,8 +58,26 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   Widget _buildMessage(String message) {
-    return ListTile(
-      title: Text(message),
+    final bool isUserMessage = message.startsWith('You: ');
+
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        mainAxisAlignment: isUserMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              color: isUserMessage ? ColorTheme.blue :ColorTheme.brown,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Text(
+              message,
+              style: TextStyle(color: isUserMessage ? Colors.white : Colors.black),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

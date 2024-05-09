@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var usernameController = TextEditingController();
+  var emailController = TextEditingController();
   var passwordController = TextEditingController();
   bool visibility = false;
 
@@ -71,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TitleAndTextFormField(
-                    textEditingController: usernameController,
+                    textEditingController: emailController,
                     text: 'Email',
                   ),
                  Consumer<loginController>(
@@ -102,9 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: size.height * .07,
                       onPressed: () {
                         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-                        Provider.of<loginController>(context,listen: false).onLogin(usernameController.text.trim(), passwordController.text.trim(), context);
-                        usernameController.clear();
-                        passwordController.clear();
+                        Provider.of<loginController>(context,listen: false).onLogin(emailController.text.trim(), passwordController.text.trim(), context);
+                        // emailController.clear();
+                        // passwordController.clear();
                       },
                       child: Text(
                         "LogIn",

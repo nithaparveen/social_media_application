@@ -7,26 +7,16 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Wrap(
       children: [
-        TextField(
-          decoration: InputDecoration(
-            hintText: 'Search',
-            border: OutlineInputBorder(),
-          ),
+        SearchBar(
+          onSubmitted: (value) {},
+          hintText: "Search",
+          shape: MaterialStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
         ),
-        SizedBox(width: 10.0),
-        MaterialButton(
-          color: ColorTheme.blue,
-          minWidth: size.width * .3,
-          height: size.height * .07,
-          onPressed: () {},
-          child: Text(
-            "Search",
-            style:
-                GLTextStyles.leagueSpartan(size: 18, color: ColorTheme.yellow),
-          ),
+        SizedBox(
+          height: 10,
         )
       ],
     );

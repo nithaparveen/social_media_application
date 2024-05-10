@@ -26,7 +26,7 @@ class _StorySliderState extends State<StorySlider> {
             child: Text(
               "Feed",
               style: GLTextStyles.ralewayStyl(
-                  size: 25,
+                  size: 24,
                   weight: FontWeight.w700,
                   color: ColorTheme.blue),
             ),

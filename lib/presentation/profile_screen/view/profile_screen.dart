@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
-import 'package:socialmedia/core/constants/colors.dart';
-import 'package:socialmedia/presentation/edit_profile_screen/view/edit_profile_screen.dart';
+import 'package:socialmedia/global_widgets/drawer_refactored.dart';
 import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 
-import '../../widgets/privacypolicy.dart';
-import '../../widgets/support.dart';
-import '../../widgets/termsandconditions.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -27,7 +23,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.sizeOf(context);
+    // var size = MediaQuery.sizeOf(context);
     return Consumer<ProfileController>(builder: (context, controller, _) {
       return Scaffold(
         key: _scaffoldKey,
@@ -57,105 +53,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 color: Colors.black,
               ),
             ),
-            //   IconButton(
-            //     onPressed: () {
-            //       // Navigator.pushReplacement(
-            //       //     context,
-            //       //     MaterialPageRoute(
-            //       //         builder: (context) => ));
-            //     },
-            //     icon: Icon(
-            //       Icons.logout_outlined,
-            //       size: 25,
-            //       color: Colors.black,
-            //     ),
-            //   ),
           ],
-          // bottom: ,
         ),
-        endDrawer: Drawer(
-          width: size.width * 0.7,
-          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: ColorTheme.blue,
-              ),
-              child: Text(
-                "hi ${controller.profileModel.data?.username ?? ""}",
-                style: TextStyle(
-                  color: ColorTheme.yellow,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.info_outline,
-                    color: Colors.black,
-                    size: 22,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text('Terms and Conditions'),
-                ],
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TermsAndConditionScreen(),
-                    ));
-              },
-            ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.mail_outline_outlined,
-                    color: Colors.black,
-                    size: 22,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text('Support'),
-                ],
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SupportScreen(),
-                    ));
-              },
-            ),
-            ListTile(
-              title: Row(
-                children: [
-                  Icon(
-                    Icons.privacy_tip_outlined,
-                    color: Colors.black,
-                    size: 22,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text('Privacy Policy'),
-                ],
-              ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PrivacyPolicyScreen(),
-                    ));
-              },
-            ),
-          ]),
-        ),
+        endDrawer:DrawerRefactored(),
         body: Column(
           children: [
             SizedBox(
@@ -234,7 +134,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ],
                         ),
 
-                        // posts
+                        /// Posts
 
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,

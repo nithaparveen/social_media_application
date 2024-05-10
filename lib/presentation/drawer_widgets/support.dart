@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/constants/colors.dart';
-
+import '../../core/constants/text_styles.dart';
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -13,9 +13,12 @@ class SupportScreen extends StatefulWidget {
 
 class _SupportScreenState extends State<SupportScreen> {
   final descriptionstyle =
-  GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold);
-  final titlestyle =
-  GoogleFonts.poppins(color: ColorTheme.blue, fontWeight: FontWeight.bold,);
+      GoogleFonts.poppins(color: Colors.grey[500], fontWeight: FontWeight.bold);
+  final titlestyle = GoogleFonts.poppins(
+    color: ColorTheme.blue,
+    fontWeight: FontWeight.bold,
+  );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,23 +35,25 @@ class _SupportScreenState extends State<SupportScreen> {
         title: Text(
           'Support',
         ),
+        titleTextStyle: GLTextStyles.ralewayStyl(
+            weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(color: ColorTheme.lightBrown,
-                  borderRadius: BorderRadius.circular(20),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    width: 3,
+                    width: 1.5,
                   )),
               width: MediaQuery.of(context).size.width * 0.95,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    Text("Contact Information",style: titlestyle),
+                    Text("Contact Information", style: titlestyle),
                     SizedBox(
                       height: 20,
                     ),
@@ -62,7 +67,8 @@ class _SupportScreenState extends State<SupportScreen> {
                           width: 20,
                         ),
                         Text(
-                          'contact@luminartecnolab.com',style: descriptionstyle,
+                          'contact@luminartecnolab.com',
+                          style: descriptionstyle,
                         ),
                       ],
                     )

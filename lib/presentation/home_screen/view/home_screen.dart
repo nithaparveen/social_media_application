@@ -25,11 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "ThinkShare",
+          "ThingShare",
           style: GLTextStyles.leagueSpartan(
               size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
         ),
-        centerTitle: true,
         actions: [
           IconButton(
               onPressed: () {

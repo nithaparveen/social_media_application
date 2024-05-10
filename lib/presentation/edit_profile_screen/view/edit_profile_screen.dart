@@ -22,11 +22,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new),
           onPressed: () {
-            // Navigator.pushReplacement(
-                // context,
-                // MaterialPageRoute(
-                //   builder: (context) => BottomNavBar(),
-          //       ));
+            Navigator.pop(context);
            },
         ),
         // centerTitle: true,
@@ -114,11 +110,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           minWidth: size.width * .4,
                           height: size.height * .07,
                           onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfileScreen(),
-                                ));
+                            Navigator.pop(context);
                           },
                           child: Text(
                             "Cancel",

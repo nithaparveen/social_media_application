@@ -15,6 +15,14 @@ class SearchScreen extends StatelessWidget {
     var size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+            )),
         title: Text('Search'),
         titleTextStyle: GLTextStyles.ralewayStyl(
             weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
@@ -42,7 +50,9 @@ class SearchScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(width: size.width*.009,),
+            SizedBox(
+              width: size.width * .009,
+            ),
             Expanded(
               child: SizedBox(
                 height: size.height * .08,
@@ -53,7 +63,10 @@ class SearchScreen extends StatelessWidget {
                     // FocusManager.instance.primaryFocus?.unfocus();
                   },
                   child: Center(
-                    child: Icon(Icons.search,color: ColorTheme.yellow,),
+                    child: Icon(
+                      Icons.search,
+                      color: ColorTheme.yellow,
+                    ),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: ColorTheme.blue,

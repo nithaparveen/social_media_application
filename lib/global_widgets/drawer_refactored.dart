@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 
+import '../app_config/app_config.dart';
 import '../core/constants/colors.dart';
 import '../core/constants/text_styles.dart';
 import '../presentation/drawer_widgets/privacypolicy.dart';
@@ -7,8 +10,14 @@ import '../presentation/drawer_widgets/support.dart';
 import '../presentation/drawer_widgets/termsandconditions.dart';
 import '../presentation/edit_profile_screen/view/edit_profile_screen.dart';
 
+class DrawerRefactored extends StatefulWidget {
+  @override
+  State<DrawerRefactored> createState() => _DrawerRefactoredState();
+}
 
-class DrawerRefactored extends StatelessWidget {
+class _DrawerRefactoredState extends State<DrawerRefactored> {
+  late SharedPreferences sharedPreferences;
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -16,13 +25,13 @@ class DrawerRefactored extends StatelessWidget {
     return Drawer(
       width: size.width * 0.7,
       child: ListView(padding: EdgeInsets.zero, children: [
-        Container(height: size.height*.15,
+        Container(
+          height: size.height * .15,
           child: DrawerHeader(
             child: Center(
-              child: Text(
-                "Settings",
-                 style: GLTextStyles.ralewayStyl(color: ColorTheme.blue,size: 22)
-              ),
+              child: Text("Settings",
+                  style: GLTextStyles.ralewayStyl(
+                      color: ColorTheme.blue, size: 22)),
             ),
           ),
         ),
@@ -129,9 +138,23 @@ class DrawerRefactored extends StatelessWidget {
                   style: GLTextStyles.ralewayStyl(color: ColorTheme.brown)),
             ],
           ),
-          onTap: () {},
+          onTap: () {
+            logout();
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LoginScreen(),
+                ),
+                (route) => false);
+          },
         ),
       ]),
     );
   }
+}
+
+logout() async {
+  var sharedPreferences = await SharedPreferences.getInstance();
+  sharedPreferences.setBool(AppConfig.loggedIn, false);
+  sharedPreferences.clear();
 }

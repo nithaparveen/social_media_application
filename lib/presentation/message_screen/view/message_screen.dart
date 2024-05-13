@@ -38,8 +38,8 @@ class MessageScreen extends StatelessWidget {
       },
       {
         'dp':
-            'https://th.bing.com/th/id/OIP.09ZXONJoes16jawQzz2SLgHaJQ?pid=ImgDet&rs=1',
-        'title': 'Resmika',
+            'https://www.bollywoodhungama.com/wp-content/uploads/2024/04/Rashmika-Mandanna-3-3.jpg',
+        'title': 'Reshmika',
         'sub': 'Evidaanu',
         'time': '11:10',
       },
@@ -142,7 +142,7 @@ class MessageScreen extends StatelessWidget {
                     ),
                     CircleAvatar(
                       radius: 10,
-                      backgroundColor: ColorTheme.lightBrown,
+                      backgroundColor: ColorTheme.brown,
                       child: Text(
                         '$index',
                         style: TextStyle(color: Colors.white, fontSize: 12),

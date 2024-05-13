@@ -173,8 +173,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ],
               ),
             ),
-            TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder:(context) => LoginScreen(),
-            ));}, child: Text("Already a User ? Login here"))
+            TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ));
+                },
+                child: Text("Already a User ? Login here"))
           ],
         ),
       ),

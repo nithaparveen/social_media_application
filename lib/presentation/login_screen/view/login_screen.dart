@@ -6,6 +6,7 @@ import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
+import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
 import '../../../global_widgets/title_and_textformfield.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -66,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15,right: 15,top: 10),
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -74,35 +75,38 @@ class _LoginScreenState extends State<LoginScreen> {
                     textEditingController: emailController,
                     text: 'Email',
                   ),
-                 Consumer<loginController>(
-                   builder: (context,controller,_) {
-                     return TextFormField(
-                       obscureText: controller.visibility,
-                       obscuringCharacter: '*',
-                       controller: passwordController,
-                       decoration: InputDecoration(
-                           prefixIcon: IconButton(
-                               onPressed: () {
-                                 controller.onPressed();
-                               },
-                               icon: Icon(controller.visibility == true
-                                   ? Icons.visibility_off
-                                   : Icons.visibility)),
-                           border: OutlineInputBorder(
-                               borderSide: BorderSide(width: .1, color: Colors.white54)),
-                           hintText: 'Password',
-                           labelText: 'password'),
-                     );
-                   }
-                 ),
-                  SizedBox(height: size.height*.022,),
+                  Consumer<loginController>(builder: (context, controller, _) {
+                    return TextFormField(
+                      obscureText: controller.visibility,
+                      obscuringCharacter: '*',
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                          prefixIcon: IconButton(
+                              onPressed: () {
+                                controller.onPressed();
+                              },
+                              icon: Icon(controller.visibility == true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility)),
+                          border: OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(width: .1, color: Colors.white54)),
+                          hintText: 'Password',
+                          labelText: 'password'),
+                    );
+                  }),
+                  SizedBox(
+                    height: size.height * .022,
+                  ),
                   MaterialButton(
                       color: ColorTheme.blue,
                       minWidth: size.width * .5,
                       height: size.height * .07,
                       onPressed: () {
                         // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-                        Provider.of<loginController>(context,listen: false).onLogin(emailController.text.trim(), passwordController.text.trim(), context);
+                        Provider.of<loginController>(context, listen: false)
+                            .onLogin(emailController.text.trim(),
+                                passwordController.text.trim(), context);
                         // emailController.clear();
                         // passwordController.clear();
                       },
@@ -111,6 +115,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: GLTextStyles.leagueSpartan(
                             size: 18, color: ColorTheme.yellow),
                       )),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => RegistrationScreen(),
+                            ));
+                      },
+                      child: Text("New User ? Register here"))
                 ],
               ),
             ),

@@ -10,9 +10,7 @@ class PostDataScreen extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        leading: SizedBox(),
         title: Text("Create Post"),
-       // centerTitle: true,
         titleTextStyle: GLTextStyles.ralewayStyl(
             weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
       ),
@@ -62,7 +60,7 @@ class PostDataScreen extends StatelessWidget {
                 height: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 280),
+                padding:  EdgeInsets.only(right: size.width*.78),
                 child: Text(
                   "Caption",
                   style: GLTextStyles.ralewayStyl(color: ColorTheme.brown),
@@ -76,7 +74,7 @@ class PostDataScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.only(right: 270),
+                padding:  EdgeInsets.only(right: size.width*.75),
                 child: Text(
                   "Location",
                   style: GLTextStyles.ralewayStyl(color: ColorTheme.brown),

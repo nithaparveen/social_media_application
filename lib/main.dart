@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
@@ -10,6 +9,7 @@ import 'package:socialmedia/presentation/news_screen/controller/news_controller.
 import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/controller/registration_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
+import 'package:socialmedia/presentation/splash_screen/view/splash_screen.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
@@ -24,7 +24,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,8 +32,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: ColorTheme.brown),
         useMaterial3: true,
       ),
-      home: RegistrationScreen(
-      ),
+      home: SplashScreen(),
     );
   }
 }

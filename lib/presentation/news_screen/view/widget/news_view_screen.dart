@@ -27,6 +27,14 @@ class NewsViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+            )),
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: ColorTheme.black, size: 30),
@@ -86,7 +94,7 @@ class NewsViewScreen extends StatelessWidget {
                       .launchURL(url);
                 },
                 child: const Text(
-                  "Click heare to Read more",
+                  "Click here to read more",
                   style: TextStyle(
                       fontSize: 15,
                       fontStyle: FontStyle.italic,

@@ -19,6 +19,12 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   @override
+  void initState() {
+    Provider.of<BottomNavController>(context, listen: false).selectedIndex = 0;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
@@ -44,6 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(25),
               child: FlashyTabBar(
+                // backgroundColor: ColorTheme.cream,
                 height: 55,
                 iconSize: 22,
                 selectedIndex: controller.selectedIndex,

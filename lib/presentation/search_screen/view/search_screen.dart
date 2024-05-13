@@ -2,29 +2,42 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
-void main (){
-  runApp(MaterialApp(home: SearchScreen(),));
+
+void main() {
+  runApp(MaterialApp(
+    home: SearchScreen(),
+  ));
 }
+
 class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-     var size = MediaQuery.sizeOf(context);
+    var size = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: AppBar(
-        // title: Text('Search'),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+            )),
+        title: Text('Search'),
+        titleTextStyle: GLTextStyles.ralewayStyl(
+            weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child:
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start ,
+        padding: EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             SizedBox(
-              height: size.height * .05,
-              width: MediaQuery.sizeOf(context).width * .65,
-              child: TextField(maxLines: 6,
+              height: size.height * .08,
+              width: size.width * .75,
+              child: TextField(
+                // maxLines: 6,
                 // controller: textController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -32,17 +45,17 @@ class SearchScreen extends StatelessWidget {
                   ),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(
-                          color: Color(0xff8c2f35), width: 1)),
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: .5)),
                 ),
               ),
             ),
             SizedBox(
-                width: 8
+              width: size.width * .009,
             ),
             Expanded(
-              child: SizedBox(width: size.width * .4,
-                height: size.height * .05,
+              child: SizedBox(
+                height: size.height * .08,
                 child: ElevatedButton(
                   onPressed: () {
                     // provider.searchData(
@@ -50,12 +63,14 @@ class SearchScreen extends StatelessWidget {
                     // FocusManager.instance.primaryFocus?.unfocus();
                   },
                   child: Center(
-                    child: Text(
-                      "Search",
-                      style: TextStyle(color: ColorTheme.yellow),
+                    child: Icon(
+                      Icons.search,
+                      color: ColorTheme.yellow,
                     ),
                   ),
-                  style: ElevatedButton.styleFrom(backgroundColor: ColorTheme.blue)
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorTheme.blue,
+                  ),
                 ),
               ),
             )

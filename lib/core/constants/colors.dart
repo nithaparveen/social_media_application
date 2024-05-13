@@ -10,5 +10,7 @@ class ColorTheme {
   static Color lightBrown = const Color(0xffC08B5C);
   static Color brown = const Color(0xff795458);
   static Color blue = const Color(0xff453F78);
-  static Color lightBlue = const Color(0xff686380);
+  static Color lightBlue = const Color(0xff205454);
+  static Color cream = const Color(0xffFAEED1);
+
 }

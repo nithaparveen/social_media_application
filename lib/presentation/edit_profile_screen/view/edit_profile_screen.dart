@@ -20,13 +20,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       appBar: AppBar(
         title: Text("Edit Profile"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new),
+          icon: Icon(Icons.arrow_back_ios_new,size: 20,),
           onPressed: () {
-            // Navigator.pushReplacement(
-                // context,
-                // MaterialPageRoute(
-                //   builder: (context) => BottomNavBar(),
-          //       ));
+            Navigator.pop(context);
            },
         ),
         // centerTitle: true,
@@ -56,7 +52,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 280),
+                      padding:  EdgeInsets.only(right: size.width*.79),
                       child: Text(
                         "Name",
                         style:
@@ -69,7 +65,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderSide: BorderSide(width: .1))),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 250),
+                      padding:  EdgeInsets.only(right: size.width*.7),
                       child: Text(
                         "Username",
                         style:
@@ -82,7 +78,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               borderSide: BorderSide(width: .1))),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 250),
+                      padding:  EdgeInsets.only(right: size.width*.7),
                       child: Text(
                         "Password",
                         style:
@@ -90,6 +86,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     TextField(
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide(width: .1))),
+                    ),
+                    Padding(
+                      padding:  EdgeInsets.only(right: size.width*.82),
+                      child: Text(
+                        "Bio",
+                        style:
+                        GLTextStyles.ralewayStyl(color: ColorTheme.brown),
+                      ),
+                    ),
+                    TextField(maxLines: 2,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(width: .1))),
@@ -114,11 +123,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           minWidth: size.width * .4,
                           height: size.height * .07,
                           onPressed: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfileScreen(),
-                                ));
+                            Navigator.pop(context);
                           },
                           child: Text(
                             "Cancel",

@@ -1,97 +1,130 @@
 import 'package:flutter/material.dart';
-import 'package:socialmedia/presentation/edit_profile_screen/view/edit_profile_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:socialmedia/app_config/app_config.dart';
+import 'package:socialmedia/global_widgets/drawer_refactored.dart';
+import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 
-class ProfileScreen extends StatelessWidget {
+
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
   @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    Provider.of<ProfileController>(context, listen: false).fetchData(context);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Nitha",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.italic,
+    // var size = MediaQuery.sizeOf(context);
+    return Consumer<ProfileController>(builder: (context, controller, _) {
+      return Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${controller.profileModel.data?.username ?? ""}",
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                _scaffoldKey.currentState?.openEndDrawer();
+              },
+              icon: Icon(
+                Icons.settings,
+                size: 22,
+                color: Colors.black,
               ),
             ),
           ],
         ),
-        actions: [IconButton(
-          onPressed: () {
-            Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => EditProfileScreen()));
-          },
-          icon: Icon(
-            Icons.edit,
-            size: 22,
-            color: Colors.black,
-          ),
-        ),
-          IconButton(
-            onPressed: () {
-              // Navigator.pushReplacement(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => ));
-            },
-            icon: Icon(
-              Icons.logout_outlined,
-              size: 25,
-              color: Colors.black,
-            ),
-          ),],
-        // bottom: ,
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  // profile photo
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: InkWell(
-                      onLongPress: () {
-                        //getProfilePic(ImageSource.gallery);
-                        print("long pressed profile");
-                      },
-                      child: CircleAvatar(
-                        radius: 45,
-                        backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
+        endDrawer:DrawerRefactored(),
+        body: Column(
+          children: [
+            SizedBox(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    // profile photo
+                    Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onLongPress: () {
+                          //getProfilePic(ImageSource.gallery);
+                          print("long pressed profile");
+                        },
+                        child: CircleAvatar(
+                          radius: 45,
+                          backgroundImage: controller
+                                      .profileModel.data?.image ==
+                                  null
+                              ? NetworkImage("${AppConfig.noImage}")
+                              : NetworkImage(
+                                  "${AppConfig.mediaUrl}${controller.profileModel.data?.image}"),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      //  following
-                      InkWell(
-                        onTap: () {},
-                        child: Column(
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        //  following
+                        InkWell(
+                          onTap: () {},
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Followers",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                "${controller.profileModel.data?.followerCount ?? ""}",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+
+                        // followers
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Followers",
+                              "Following",
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                             Text(
-                              "0",
+                              "${controller.profileModel.data?.followingCount ?? ""}",
                               style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontWeight: FontWeight.w600,
@@ -100,82 +133,60 @@ class ProfileScreen extends StatelessWidget {
                             )
                           ],
                         ),
-                      ),
 
-                      // followers
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Following",
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            "200",
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
-                            ),
-                          )
-                        ],
-                      ),
+                        /// Posts
 
-                      // posts
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Posts",
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w400,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Posts",
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "10",
-                            style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 20,
+                            Text(
+                              "10",
+                              style: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(height: 30),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: GridView.count(
-                shrinkWrap: true,
-                crossAxisCount: 3,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-                children: List.generate(
-                  10,
-                  (index) => InkWell(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"))),
-                      child: Center(
-                        child: Text(
-                          "hai",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+            SizedBox(height: 30),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: GridView.count(
+                  shrinkWrap: true,
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  children: List.generate(
+                    10,
+                    (index) => InkWell(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg"))),
+                        child: Center(
+                          child: Text(
+                            "hai",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
@@ -184,9 +195,9 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

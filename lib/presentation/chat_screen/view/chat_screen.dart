@@ -1,95 +1,115 @@
-// import 'package:flutter/material.dart';
-//
-// class ChatScreen extends StatelessWidget {
-//   const ChatScreen({super.key});
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold();
-//   }
-// }
 import 'package:flutter/material.dart';
+import 'package:socialmedia/core/constants/colors.dart';
 
-void main() {
-  runApp(ChatScreen());
-}
+class ChatScreen extends StatefulWidget {
 
-class ChatScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Chat Screen',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ChatPage(),
-    );
-  }
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class ChatPage extends StatefulWidget {
-  @override
-  _ChatPageState createState() => _ChatPageState();
-}
+class _ChatScreenState extends State<ChatScreen> {
+  final List<String> _messages = [
+    "Hey there!",
+    "You: Hi! How are you?",
+    "I'm doing good, thanks. How about you?",
+    "You: I'm great, thanks for asking.",
+    "That's good to hear.",
+    "Did you watch the game last night?",
+    "You: Yeah, it was amazing!",
+    "Totally! I couldn't believe that last-minute goal.",
+    "You: Yeah, it was unbelievable.",
+    "Anyway, gotta go now. Talk to you later!",
+    "You: Sure, bye for now!"
+  ];
 
-class _ChatPageState extends State<ChatPage> {
-  final List<String> _messages = [];
   final TextEditingController _textController = TextEditingController();
 
-  void _handleSubmitted(String text) {
-    _textController.clear();
-    setState(() {
-      _messages.insert(0, text);
-    });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 20,
+          ),
+        ),
+        title: Text('Chat'),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.all(8.0),
+              itemBuilder: (_, int index) => buildMessage(_messages[index]),
+              itemCount: _messages.length,
+            ),
+          ),
+          Divider(height: 1.0),
+          buildTextComposer(),
+        ],
+      ),
+    );
   }
 
-  Widget _buildTextComposer() {
+  void handleSubmitted(String text) {
+    if (text.isNotEmpty) {
+      _textController.clear();
+      setState(() {
+        _messages.add('You: $text');
+      });
+    }
+  }
+
+   buildTextComposer() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
-        children: <Widget>[
+        children: [
           Flexible(
             child: TextField(
               controller: _textController,
-              onSubmitted: _handleSubmitted,
+              onSubmitted: handleSubmitted,
               decoration: InputDecoration.collapsed(
                 hintText: 'Type a message',
               ),
             ),
           ),
           IconButton(
-            icon: Icon(Icons.send),
-            onPressed: () => _handleSubmitted(_textController.text),
+            icon: Icon(
+              Icons.send,
+              size: 20,
+            ),
+            onPressed: () => handleSubmitted(_textController.text),
           ),
         ],
       ),
     );
   }
 
-  Widget _buildMessage(String message) {
-    return ListTile(
-      title: Text(message),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat'),
-      ),
-      body: Column(
-        children: <Widget>[
-          Flexible(
-            child: ListView.builder(
-              padding: EdgeInsets.all(8.0),
-              reverse: true,
-              itemBuilder: (_, int index) => _buildMessage(_messages[index]),
-              itemCount: _messages.length,
+   buildMessage(String message) {
+    final bool isUserMessage = message.startsWith('You: ');
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        mainAxisAlignment:
+        isUserMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          Container(
+            padding: EdgeInsets.all(10.0),
+            decoration: BoxDecoration(
+              color: isUserMessage ? ColorTheme.brown : Colors.grey[300],
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Text(
+              message,
+              style:
+              TextStyle(color: isUserMessage ? Colors.white : Colors.black),
             ),
           ),
-          Divider(height: 1.0),
-          _buildTextComposer(),
         ],
       ),
     );

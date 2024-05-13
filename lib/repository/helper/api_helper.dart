@@ -11,11 +11,12 @@ class ApiHelper {
     required String endPoint,
     Map<String, String>? header,
   }) async {
-    log("ApiHelper>getData");
+    log("ApiHelper -> getData");
     final url = Uri.parse(AppConfig.baseurl + endPoint);
+    log("url -> $url");
     try {
-      var response = await http.get(url);
-      log("Api Called => status code=${response.statusCode}");
+      var response = await http.get(url,headers: header);
+      log("Status code -> ${response.statusCode}");
       if (response.statusCode == 200) {
         var decodedData = jsonDecode(response.body);
         log("$decodedData");
@@ -38,7 +39,7 @@ class ApiHelper {
     final url = Uri.parse(AppConfig.baseurl + endPoint);
     try {
       var response = await http.post(url, body: body, headers: header);
-      log("Api PostMethod Called -> statusCode = ${response.statusCode}");
+      log("StatusCode -> ${response.statusCode}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         var data = response.body;
         var decodedData = jsonDecode(data);
@@ -58,7 +59,7 @@ class ApiHelper {
     if (access != null) {
       return {
         'Content-Type': 'application/json',
-        'Authorization': 'Token $access'
+        'Authorization': 'Bearer $access'
       };
     } else if (dbName != null) {
       return {'Content-Type': 'application/json', 'dbName': dbName};

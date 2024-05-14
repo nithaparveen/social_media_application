@@ -16,4 +16,16 @@ class ProfileService {
       log("$e");
     }
   }
+
+  static Future<dynamic> fetchPost() async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "list_posts_of_authenticatedUser/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

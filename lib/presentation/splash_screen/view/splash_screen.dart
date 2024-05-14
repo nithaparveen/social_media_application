@@ -26,6 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    checkLoggedIn();
     Timer(Duration(seconds: 3), () {
       if (_logged == true) {
         Navigator.pushAndRemoveUntil(

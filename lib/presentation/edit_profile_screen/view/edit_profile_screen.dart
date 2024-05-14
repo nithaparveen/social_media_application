@@ -103,7 +103,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           border: OutlineInputBorder(
                               borderSide: BorderSide(width: .1))),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [

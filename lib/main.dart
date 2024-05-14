@@ -6,6 +6,7 @@ import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_na
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
 import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
+import 'package:socialmedia/presentation/post_screen/controller/post_controller.dart';
 import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/controller/registration_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
@@ -18,6 +19,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => loginController()),
     ChangeNotifierProvider(create: (context) => RegistrationController()),
     ChangeNotifierProvider(create: (context) => ProfileController()),
+    ChangeNotifierProvider(create: (context) => PostController()),
   ], child: const MyApp()));
 }
 

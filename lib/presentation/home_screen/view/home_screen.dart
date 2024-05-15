@@ -7,7 +7,13 @@ import 'package:socialmedia/presentation/search_screen/view/search_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/text_styles.dart';
+import '../widgets/comment_screen.dart';
 
+void main() {
+  runApp(MaterialApp(
+    home: HomeScreen(),
+  ));
+}
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -163,7 +169,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               headerButton(
                                   buttonText: "Comment",
                                   buttonIcon: Icons.message_outlined,
-                                  buttonAction: () {},
+                                  buttonAction: () {Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) => CommentScreen()));},
                                   buttonColor: ColorTheme.yellow),
                               headerButton(
                                   buttonText: "Share",

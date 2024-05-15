@@ -35,6 +35,10 @@ class Data {
   String? image;
   int? followerCount;
   int? followingCount;
+  String? name;
+  DateTime? dob;
+  String? location;
+  String? phoneNumber;
 
   Data({
     this.id,
@@ -43,6 +47,10 @@ class Data {
     this.image,
     this.followerCount,
     this.followingCount,
+    this.name,
+    this.dob,
+    this.location,
+    this.phoneNumber,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -52,6 +60,10 @@ class Data {
     image: json["image"],
     followerCount: json["follower_count"],
     followingCount: json["following_count"],
+    name: json["name"],
+    dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
+    location: json["location"],
+    phoneNumber: json["phone_number"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,5 +73,9 @@ class Data {
     "image": image,
     "follower_count": followerCount,
     "following_count": followingCount,
+    "name": name,
+    "dob": "${dob!.year.toString().padLeft(4, '0')}-${dob!.month.toString().padLeft(2, '0')}-${dob!.day.toString().padLeft(2, '0')}",
+    "location": location,
+    "phone_number": phoneNumber,
   };
 }

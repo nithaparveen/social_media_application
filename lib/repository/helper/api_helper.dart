@@ -55,6 +55,34 @@ class ApiHelper {
     }
   }
 
+  //for patch
+  static Future<dynamic> patchData({
+    required String endPoint,
+    Map<String, String>? header,
+    required Map<String, dynamic> body,
+  }) async {
+    log("input $body");
+    final url = Uri.parse(AppConfig.baseurl + endPoint);
+    log("url -> $url");
+    try {
+      var response = await http.patch(url, body: body, headers: header);
+      log("StatusCode -> ${response.statusCode}");
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        var data = response.body;
+        var decodedData = jsonDecode(data);
+        return decodedData;
+      } else {
+        log("Api Failed");
+        var data = response.body;
+        var decodedData = jsonDecode(data);
+        return decodedData;
+      }
+    } catch (e) {
+      log("$e");
+      return null;
+    }
+  }
+
   static Map<String, String> getApiHeader({String? access, String? dbName}) {
     if (access != null) {
       return {

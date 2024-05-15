@@ -2,13 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
-
-void main() {
-  runApp(MaterialApp(
-    home: SearchScreen(),
-  ));
-}
-
 class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -31,7 +24,7 @@ class SearchScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.all(10.0),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
               height: size.height * .08,

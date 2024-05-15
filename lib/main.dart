@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
+import 'package:socialmedia/presentation/edit_profile_screen/controller/edit_profile_controller.dart';
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
 import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
@@ -20,6 +21,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => RegistrationController()),
     ChangeNotifierProvider(create: (context) => ProfileController()),
     ChangeNotifierProvider(create: (context) => PostController()),
+    ChangeNotifierProvider(create: (context) => EditProfileController()),
   ], child: const MyApp()));
 }
 

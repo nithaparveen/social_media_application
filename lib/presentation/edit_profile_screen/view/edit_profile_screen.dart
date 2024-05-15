@@ -1,29 +1,58 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
+import 'package:socialmedia/presentation/edit_profile_screen/controller/edit_profile_controller.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
 import '../../profile_screen/view/profile_screen.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen(
+      {super.key,
+      required this.name,
+      required this.dob,
+      required this.phone,
+      required this.location});
+
+  final String name;
+  final String dob;
+  final String phone;
+  final String location;
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  TextEditingController nameController = TextEditingController();
+  var dobController = TextEditingController();
+  var phoneController = TextEditingController();
+  var locationController = TextEditingController();
+  DateTime now = DateTime.now();
+  String? selectedDate;
+
   @override
   Widget build(BuildContext context) {
+    nameController.text = widget.name;
+    now = DateTime.parse(widget.dob);
+    phoneController.text = widget.phone;
+    locationController.text = widget.location;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Profile"),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new,size: 20,),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            size: 20,
+          ),
           onPressed: () {
             Navigator.pop(context);
-           },
+          },
         ),
         // centerTitle: true,
         titleTextStyle: GLTextStyles.ralewayStyl(
@@ -52,7 +81,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(right: size.width*.79),
+                      padding: EdgeInsets.only(right: size.width * .79),
                       child: Text(
                         "Name",
                         style:
@@ -60,45 +89,61 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     TextField(
+                      controller: nameController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(width: .1))),
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(right: size.width*.7),
+                      padding: EdgeInsets.only(right: size.width * .65),
                       child: Text(
-                        "Username",
+                        "Date of Birth",
+                        style:
+                            GLTextStyles.ralewayStyl(color: ColorTheme.brown),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 150,
+                      child: CupertinoDatePicker(
+                          mode: CupertinoDatePickerMode.date,
+                          initialDateTime: now,
+                          minimumDate: now.subtract(Duration(days: 36500)),
+                          maximumDate: now.add(Duration(days: 180)),
+                          dateOrder: DatePickerDateOrder.ymd,
+                          onDateTimeChanged: (newDateTime) {
+                            selectedDate =
+                                DateFormat("yyyy-MM-dd").format(newDateTime);
+                          }),
+                    ),
+                    // TextField(
+                    //   decoration: InputDecoration(
+                    //       border: OutlineInputBorder(
+                    //           borderSide: BorderSide(width: .1))),
+                    // ),
+                    Padding(
+                      padding: EdgeInsets.only(right: size.width * .61),
+                      child: Text(
+                        "Phone Number",
                         style:
                             GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                       ),
                     ),
                     TextField(
+                      controller: phoneController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(width: .1))),
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(right: size.width*.7),
+                      padding: EdgeInsets.only(right: size.width * .73),
                       child: Text(
-                        "Password",
+                        "Location",
                         style:
                             GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                       ),
                     ),
                     TextField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderSide: BorderSide(width: .1))),
-                    ),
-                    Padding(
-                      padding:  EdgeInsets.only(right: size.width*.82),
-                      child: Text(
-                        "Bio",
-                        style:
-                        GLTextStyles.ralewayStyl(color: ColorTheme.brown),
-                      ),
-                    ),
-                    TextField(maxLines: 2,
+                      controller: locationController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(width: .1))),
@@ -111,7 +156,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           color: ColorTheme.blue,
                           minWidth: size.width * .4,
                           height: size.height * .07,
-                          onPressed: () {},
+                          onPressed: () {
+                            Provider.of<EditProfileController>(context,
+                                    listen: false)
+                                .update(
+                                    nameController.text.trim(),
+                                    selectedDate!,
+                                    "+91${phoneController.text.trim()}",
+                                    locationController.text.trim(),
+                                    context);
+                          },
                           child: Text(
                             "Save Changes",
                             style: GLTextStyles.leagueSpartan(

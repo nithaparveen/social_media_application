@@ -11,6 +11,18 @@ import '../presentation/drawer_widgets/termsandconditions.dart';
 import '../presentation/edit_profile_screen/view/edit_profile_screen.dart';
 
 class DrawerRefactored extends StatefulWidget {
+  final String name;
+  final String dob;
+  final String phone;
+  final String location;
+
+  const DrawerRefactored(
+      {super.key,
+      required this.name,
+      required this.dob,
+      required this.phone,
+      required this.location});
+
   @override
   State<DrawerRefactored> createState() => _DrawerRefactoredState();
 }
@@ -56,7 +68,12 @@ class _DrawerRefactoredState extends State<DrawerRefactored> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => EditProfileScreen(),
+                  builder: (context) => EditProfileScreen(
+                    name: widget.name,
+                    dob: widget.dob,
+                    phone: widget.phone,
+                    location: widget.location,
+                  ),
                 ));
           },
         ),

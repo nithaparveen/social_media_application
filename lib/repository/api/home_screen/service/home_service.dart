@@ -15,4 +15,25 @@ class HomeService {
       log("$e");
     }
   }
+  static Future<dynamic> likedItem(id) async {
+    try {
+      var decodedData = ApiHelper.postLike(
+          endPoint: "like-unlike-post/",
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> onUnlike(id) async {
+    try {
+      var decodedData = ApiHelper.delete(
+          endPoint: "like-unlike-post/",
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

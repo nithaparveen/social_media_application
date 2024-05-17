@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
@@ -8,7 +7,6 @@ import 'package:socialmedia/presentation/profile_screen/controller/profile_contr
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
-import '../../home_screen/view/home_screen.dart';
 import '../../home_screen/widgets/feed_widget.dart';
 
 class ProfileScreen extends StatefulWidget {

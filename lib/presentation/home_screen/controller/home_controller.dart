@@ -24,3 +24,23 @@ class HomeController extends ChangeNotifier {
     notifyListeners();
   }
 }
+void likeTapped(id, context) {
+    HomeService.likedItem(id).then((value) {
+      log("================$value");
+      if (value["status"] == 1) {
+        AppUtils.oneTimeSnackBar(value["message"], context: context);
+      } else {
+        AppUtils.oneTimeSnackBar(value["message"], context: context, bgColor: Colors.redAccent);
+      }
+    });
+  }
+
+  void onUnlike(id, context) {
+    HomeService.onUnlike(id).then((value) {
+      if (value["status"] == 1) {
+        AppUtils.oneTimeSnackBar(value["message"], context: context);
+      } else {
+        AppUtils.oneTimeSnackBar(value["message"], context: context, bgColor: Colors.redAccent);
+      }
+    });
+  }

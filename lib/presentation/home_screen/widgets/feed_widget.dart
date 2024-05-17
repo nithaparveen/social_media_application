@@ -18,22 +18,22 @@ class FeedWidget extends StatefulWidget {
   final bool? is_liked;
   final int? post_id;
   final int? author_id;
-  final void Function() likePressed;
-  final void Function() unlike;
-  final void Function() comment;
+  // final void Function() likePressed;
+  // final void Function() unlike;
+  // final void Function() comment;
 
   FeedWidget({
     this.profile_image,
     required this.author_name,
     this.post_id,
-    required this.likePressed,
-    required this.unlike,
-    required this.comment,
+    // this.likePressed,
+    //  this.unlike,
+    //  this.comment,
     required this.created_at,
     required this.image,
     required this.caption,
     required this.location,
-    this.like_count,
+    required this.like_count,
     required this.comments_count,
     this.author_id,
     this.is_liked,

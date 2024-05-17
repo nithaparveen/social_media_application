@@ -240,12 +240,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                               title: Text(
                                                 "${control.postListModel.data?[index].author?.authorName}",
-                                                style: GLTextStyles
-                                                    .poppinsStyl(
-                                                        size: size.width *
-                                                            .04,
-                                                        weight: FontWeight
-                                                            .w600),
+                                                style: GLTextStyles.poppinsStyl(
+                                                    size: size.width * .04,
+                                                    weight: FontWeight.w600),
                                               ),
                                               subtitle: GestureDetector(
                                                 onTap: () {
@@ -253,12 +250,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 },
                                                 child: Text(
                                                   "${control.postListModel.data?[index].location}",
-                                                  style: GLTextStyles
-                                                      .kanitStyl(
-                                                          size: size.width *
-                                                              .035,
-                                                          weight: FontWeight
-                                                              .w300),
+                                                  style: GLTextStyles.kanitStyl(
+                                                      size: size.width * .035,
+                                                      weight: FontWeight.w300),
                                                 ),
                                               ),
                                             ),
@@ -269,8 +263,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       fit: BoxFit.contain,
                                                       image: control
                                                                   .postListModel
-                                                                  .data?[
-                                                                      index]
+                                                                  .data?[index]
                                                                   .image ==
                                                               null
                                                           ? NetworkImage(
@@ -280,10 +273,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                             ))),
                                             ),
                                             Container(
-                                              padding: const EdgeInsets
-                                                  .symmetric(
-                                                  horizontal: 10,
-                                                  vertical: 10),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 10),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -297,20 +290,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       Wrap(
                                                         children: [
                                                           Container(
-                                                            width:
-                                                                size.width *
-                                                                    .05,
-                                                            height:
-                                                                size.width *
-                                                                    .05,
+                                                            width: size.width *
+                                                                .05,
+                                                            height: size.width *
+                                                                .05,
                                                             decoration: BoxDecoration(
-                                                                color: ColorTheme
-                                                                    .yellow,
+                                                                color:
+                                                                    ColorTheme
+                                                                        .yellow,
                                                                 shape: BoxShape
                                                                     .circle),
                                                             child: const Icon(
-                                                                Icons
-                                                                    .thumb_up,
+                                                                Icons.thumb_up,
                                                                 color: Colors
                                                                     .white,
                                                                 size: 14),
@@ -326,18 +317,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       ),
                                                       SizedBox(
                                                           width:
-                                                              size.width *
-                                                                  .04),
+                                                              size.width * .04),
                                                       displayText(
                                                           label:
                                                               "${control.postListModel.data?[index].commentsCount}"),
                                                       SizedBox(
                                                           width:
-                                                              size.width *
-                                                                  .02),
+                                                              size.width * .02),
                                                       displayText(
-                                                          label:
-                                                              "Comments"),
+                                                          label: "Comments"),
                                                     ],
                                                   )
                                                 ],
@@ -345,15 +333,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceEvenly,
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 headerButton(
                                                     buttonText: "Like",
                                                     buttonIcon: control
                                                                 .postListModel
-                                                                .data?[
-                                                                    index]
+                                                                .data?[index]
                                                                 .isLiked ==
                                                             true
                                                         ? Icons
@@ -365,8 +351,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         ColorTheme.yellow),
                                                 headerButton(
                                                     buttonText: "Comment",
-                                                    buttonIcon: Icons
-                                                        .message_outlined,
+                                                    buttonIcon:
+                                                        Icons.message_outlined,
                                                     buttonAction: () {},
                                                     buttonColor:
                                                         ColorTheme.yellow),

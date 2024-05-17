@@ -221,7 +221,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                       content: SizedBox(
-                                        height: size.height * .55,
+                                        height: size.height * .62,
                                         width: size.height * .75,
                                         child: Column(
                                           children: [
@@ -263,10 +263,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                             ),
                                             Container(
-                                              height: size.width * .75,
+                                              height: size.width * .65,
                                               decoration: BoxDecoration(
                                                   image: DecorationImage(
-                                                      fit: BoxFit.cover,
+                                                      fit: BoxFit.contain,
                                                       image: control
                                                                   .postListModel
                                                                   .data?[

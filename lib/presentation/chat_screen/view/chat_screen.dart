@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 
 class ChatScreen extends StatefulWidget {
-
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -64,7 +63,7 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-   buildTextComposer() {
+  buildTextComposer() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
@@ -90,13 +89,13 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-   buildMessage(String message) {
+  buildMessage(String message) {
     final bool isUserMessage = message.startsWith('You: ');
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
         mainAxisAlignment:
-        isUserMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
+            isUserMessage ? MainAxisAlignment.end : MainAxisAlignment.start,
         children: [
           Container(
             padding: EdgeInsets.all(10.0),
@@ -107,7 +106,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Text(
               message,
               style:
-              TextStyle(color: isUserMessage ? Colors.white : Colors.black),
+                  TextStyle(color: isUserMessage ? Colors.white : Colors.black),
             ),
           ),
         ],

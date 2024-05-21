@@ -15,13 +15,15 @@ class HomeController extends ChangeNotifier {
     HomeService.fetchFeed().then((resData) {
       if (resData["status"] == 1) {
         homeModel = HomeModel.fromJson(resData);
+        isLoading = false;
       } else {
         AppUtils.oneTimeSnackBar("Failed to Fetch Data",
             context: context, bgColor: Colors.red);
       }
-      isLoading = false;
+
+      notifyListeners();
     });
-    notifyListeners();
+
   }
 }
 void likeTapped(id, context) {

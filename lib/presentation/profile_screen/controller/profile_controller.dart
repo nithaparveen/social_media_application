@@ -12,7 +12,7 @@ class ProfileController extends ChangeNotifier {
   bool isLoading = false;
   bool isPostLoading = false;
 
-  fetchData(context) {
+  Future<void> fetchData(BuildContext context) async {
     isLoading = true;
     isPostLoading = true;
     notifyListeners();

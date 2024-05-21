@@ -10,12 +10,19 @@ class EditProfileController extends ChangeNotifier {
   bool isLoading = false;
   EditProfileModel editProfileModel = EditProfileModel();
 
-   update(String name, String dob, String phone_number, String location, BuildContext context) async {
+  update(String name, String dob, String phoneNumber, String location, BuildContext context) async {
+    // Format the dob to yyyy-MM-dd
+    DateTime parsedDob = DateTime.parse(dob);
+    String formattedDob = "${parsedDob.year.toString().padLeft(4, '0')}-${parsedDob.month.toString().padLeft(2, '0')}-${parsedDob.day.toString().padLeft(2, '0')}";
+
+    // Ensure phone number is formatted correctly
+    String formattedPhoneNumber = phoneNumber.startsWith("+91") ? phoneNumber : "+91$phoneNumber";
+
     var data = {
-      "name": "$name",
-      "dob": "$dob",
-      "phone_number": "$phone_number",
-      "location": "$location",
+      "name": name,
+      "dob": formattedDob,
+      "phone_number": formattedPhoneNumber,
+      "location": location,
     };
     isLoading = true;
     notifyListeners();
@@ -28,7 +35,8 @@ class EditProfileController extends ChangeNotifier {
         isLoading = false;
       } else {
         AppUtils.oneTimeSnackBar("error", context: context);
-      }notifyListeners();
+      }
+      notifyListeners();
     });
   }
 }

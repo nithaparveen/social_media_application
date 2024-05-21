@@ -8,12 +8,13 @@ import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen(
-      {super.key,
-      required this.name,
-      required this.dob,
-      required this.phone,
-      required this.location});
+  const EditProfileScreen({
+    Key? key,
+    required this.name,
+    required this.dob,
+    required this.phone,
+    required this.location,
+  }) : super(key: key);
 
   final String name;
   final String dob;
@@ -25,19 +26,34 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  TextEditingController nameController = TextEditingController();
-  var dobController = TextEditingController();
-  var phoneController = TextEditingController();
-  var locationController = TextEditingController();
-  DateTime now = DateTime.now();
-  String? selectedDate;
+  late TextEditingController nameController;
+  late TextEditingController dobController;
+  late TextEditingController phoneController;
+  late TextEditingController locationController;
+  late DateTime selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: widget.name);
+    phoneController = TextEditingController(text: widget.phone);
+    locationController = TextEditingController(text: widget.location);
+    selectedDate = DateTime.parse(widget.dob);
+    dobController = TextEditingController(
+        text: DateFormat('yyyy-MM-dd').format(selectedDate));
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    dobController.dispose();
+    phoneController.dispose();
+    locationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    nameController.text = widget.name;
-    now = DateTime.parse(widget.dob);
-    phoneController.text = widget.phone;
-    locationController.text = widget.location;
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +67,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Navigator.pop(context);
           },
         ),
-        // centerTitle: true,
         titleTextStyle: GLTextStyles.ralewayStyl(
             weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
       ),
@@ -60,19 +75,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CircleAvatar(
-                radius: 55,
-                backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2788&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Edit Photo",
-                  style: GLTextStyles.poppinsStyl(
-                      color: ColorTheme.brown, size: 20),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
@@ -82,7 +84,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Text(
                         "Name",
                         style:
-                            GLTextStyles.ralewayStyl(color: ColorTheme.brown),
+                        GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                       ),
                     ),
                     TextField(
@@ -96,33 +98,30 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Text(
                         "Date of Birth",
                         style:
-                            GLTextStyles.ralewayStyl(color: ColorTheme.brown),
+                        GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                       ),
                     ),
                     SizedBox(
                       height: 150,
                       child: CupertinoDatePicker(
                           mode: CupertinoDatePickerMode.date,
-                          initialDateTime: now,
-                          minimumDate: now.subtract(Duration(days: 36500)),
-                          maximumDate: now.add(Duration(days: 180)),
+                          initialDateTime: selectedDate,
+                          minimumDate: DateTime.now().subtract(Duration(days: 36500)),
+                          maximumDate: DateTime.now().add(Duration(days: 180)),
                           dateOrder: DatePickerDateOrder.ymd,
                           onDateTimeChanged: (newDateTime) {
-                            selectedDate =
-                                DateFormat("yyyy-MM-dd").format(newDateTime);
+                            setState(() {
+                              selectedDate = newDateTime;
+                              dobController.text = DateFormat('yyyy-MM-dd').format(newDateTime);
+                            });
                           }),
                     ),
-                    // TextField(
-                    //   decoration: InputDecoration(
-                    //       border: OutlineInputBorder(
-                    //           borderSide: BorderSide(width: .1))),
-                    // ),
                     Padding(
                       padding: EdgeInsets.only(right: size.width * .61),
                       child: Text(
                         "Phone Number",
                         style:
-                            GLTextStyles.ralewayStyl(color: ColorTheme.brown),
+                        GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                       ),
                     ),
                     TextField(
@@ -136,7 +135,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: Text(
                         "Location",
                         style:
-                            GLTextStyles.ralewayStyl(color: ColorTheme.brown),
+                        GLTextStyles.ralewayStyl(color: ColorTheme.brown),
                       ),
                     ),
                     TextField(
@@ -154,14 +153,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           minWidth: size.width * .4,
                           height: size.height * .07,
                           onPressed: () {
-                            Provider.of<EditProfileController>(context,
-                                    listen: false)
-                                .update(
-                                    nameController.text.trim(),
-                                    selectedDate!,
-                                    "+91${phoneController.text.trim()}",
-                                    locationController.text.trim(),
-                                    context);
+                            Provider.of<EditProfileController>(context, listen: false).update(
+                                nameController.text.trim(),
+                                dobController.text.trim(),
+                                phoneController.text.trim(),
+                                locationController.text.trim(),
+                                context);
                           },
                           child: Text(
                             "Save Changes",

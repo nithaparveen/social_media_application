@@ -22,7 +22,8 @@ class ProfileController extends ChangeNotifier {
         profileModel = ProfileModel.fromJson(value);
         isLoading = false;
       } else {
-        AppUtils.oneTimeSnackBar("error", context: context,bgColor: Colors.red);
+        AppUtils.oneTimeSnackBar("error",
+            context: context, bgColor: Colors.red);
       }
       notifyListeners();
     });
@@ -31,7 +32,23 @@ class ProfileController extends ChangeNotifier {
         postListModel = PostListModel.fromJson(resData);
         isPostLoading = false;
       } else {
-        AppUtils.oneTimeSnackBar("Failed", context: context,bgColor: Colors.red);
+        AppUtils.oneTimeSnackBar("Failed",
+            context: context, bgColor: Colors.red);
+      }
+      notifyListeners();
+    });
+  }
+
+  Future<void> postDeleted(postId, context) async {
+    log("ProfileController -> postDeleted");
+
+    ProfileService.deletePost(postId).then((value) {
+      if (value["status"] == 1) {
+        AppUtils.oneTimeSnackBar("Post Deleted Successfully", context: context);
+        // Refresh data after deletion
+      } else {
+        AppUtils.oneTimeSnackBar(value["message"],
+            context: context, bgColor: Colors.redAccent);
       }
       notifyListeners();
     });

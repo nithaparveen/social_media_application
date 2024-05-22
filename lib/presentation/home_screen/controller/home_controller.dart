@@ -54,14 +54,18 @@ class HomeController extends ChangeNotifier {
       }
     });
   }
-}
 
-void onUnlike(id, context) {
-  HomeService.onUnlike(id).then((value) {
-    if (value["status"] == 1) {
-      AppUtils.oneTimeSnackBar(value["message"], context: context);
-    } else {
-      AppUtils.oneTimeSnackBar(value["message"], context: context, bgColor: Colors.redAccent);
-    }
-  });
+  postComment(postId, content, context) {
+    log("HomeController -> postComments()");
+    var body = {"post": "$postId", "content": "$content"};
+    HomeService.postComment(body).then((value) {
+      if (value["status"] == 1) {
+        AppUtils.oneTimeSnackBar(value["message"], context: context);
+      } else {
+        AppUtils.oneTimeSnackBar(value["message"],
+            context: context, bgColor: ColorTheme.red, textStyle: TextStyle(color: ColorTheme.white));
+      }
+      notifyListeners();
+    });
+  }
 }

@@ -48,4 +48,16 @@ class HomeService {
       log("$e");
     }
   }
+
+  static Future<dynamic> postComment(Map<String, String> body) async {
+    try {
+      var decodedData = ApiHelper.postData(
+          endPoint: "comments-create/",
+          body: body,
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

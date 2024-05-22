@@ -25,6 +25,8 @@ class _CommentScreenState extends State<CommentScreen> {
     super.initState();
   }
 
+  var commentController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
@@ -48,25 +50,26 @@ class _CommentScreenState extends State<CommentScreen> {
           return controller.isLoadingComments
               ? Center(child: CircularProgressIndicator())
               : ListView.builder(
-                  itemCount: controller.commentsModel.data?.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(controller
-                                      .commentsModel.data?[index].user?.profileImage ==
-                                  null
-                              ? AppConfig.noImage
-                              : "${AppConfig.mediaUrl}${controller.commentsModel.data?[index].user?.profileImage}"),
-                        ),
-                        title: Text(
-                          controller.commentsModel.data?[index].user?.userName ?? "",
-                          style: TextStyle(color: ColorTheme.blue, fontWeight: FontWeight.w500),
-                        ),
-                        subtitle: Text(
-                          controller.commentsModel.data?[index].content ?? "",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-                        ));
-                  });
+              itemCount: controller.commentsModel.data?.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(controller
+                          .commentsModel.data?[index].user?.profileImage ==
+                          null
+                          ? AppConfig.noImage
+                          : "${AppConfig.mediaUrl}${controller.commentsModel.data?[index].user
+                          ?.profileImage}"),
+                    ),
+                    title: Text(
+                      controller.commentsModel.data?[index].user?.userName ?? "",
+                      style: TextStyle(color: ColorTheme.blue, fontWeight: FontWeight.w500),
+                    ),
+                    subtitle: Text(
+                      controller.commentsModel.data?[index].content ?? "",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                    ));
+              });
         }),
       ),
       bottomNavigationBar: Padding(
@@ -78,7 +81,8 @@ class _CommentScreenState extends State<CommentScreen> {
                 height: size.height * .08,
                 width: size.width * .75,
                 child: TextField(
-                  // maxLines: 6,
+                  controller: commentController,
+                  maxLines: 6,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -91,7 +95,10 @@ class _CommentScreenState extends State<CommentScreen> {
             SizedBox(
               height: size.height * .08,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Provider.of<HomeController>(context, listen: false).postComment(
+                      widget.id, commentController.text.trim(), context);
+                },
                 child: Center(
                   child: Icon(
                     Icons.send_outlined,

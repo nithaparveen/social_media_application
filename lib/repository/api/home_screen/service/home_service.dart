@@ -51,7 +51,7 @@ class HomeService {
 
   static Future<dynamic> postComment(Map<String, String> body) async {
     try {
-      var decodedData = ApiHelper.postData(
+      var decodedData = ApiHelper.postComment(
           endPoint: "comments-create/",
           body: body,
           header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));

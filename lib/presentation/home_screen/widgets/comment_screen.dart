@@ -50,30 +50,29 @@ class _CommentScreenState extends State<CommentScreen> {
           return controller.isLoadingComments
               ? Center(child: CircularProgressIndicator())
               : ListView.builder(
-              itemCount: controller.commentsModel.data?.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(controller
-                          .commentsModel.data?[index].user?.profileImage ==
-                          null
-                          ? AppConfig.noImage
-                          : "${AppConfig.mediaUrl}${controller.commentsModel.data?[index].user
-                          ?.profileImage}"),
-                    ),
-                    title: Text(
-                      controller.commentsModel.data?[index].user?.userName ?? "",
-                      style: TextStyle(color: ColorTheme.blue, fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(
-                      controller.commentsModel.data?[index].content ?? "",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-                    ));
-              });
+                  itemCount: controller.commentsModel.data?.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(controller
+                                      .commentsModel.data?[index].user?.profileImage ==
+                                  null
+                              ? AppConfig.noImage
+                              : "${AppConfig.mediaUrl}${controller.commentsModel.data?[index].user?.profileImage}"),
+                        ),
+                        title: Text(
+                          controller.commentsModel.data?[index].user?.userName ?? "",
+                          style: TextStyle(color: ColorTheme.blue, fontWeight: FontWeight.w500),
+                        ),
+                        subtitle: Text(
+                          controller.commentsModel.data?[index].content ?? "",
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                        ));
+                  });
         }),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: size.width * .02),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -96,8 +95,8 @@ class _CommentScreenState extends State<CommentScreen> {
               height: size.height * .08,
               child: ElevatedButton(
                 onPressed: () {
-                  Provider.of<HomeController>(context, listen: false).postComment(
-                      widget.id, commentController.text.trim(), context);
+                  Provider.of<HomeController>(context, listen: false)
+                      .postComment(widget.id, commentController.text.trim(), context);
                 },
                 child: Center(
                   child: Icon(

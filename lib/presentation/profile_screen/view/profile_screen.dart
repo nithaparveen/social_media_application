@@ -7,6 +7,7 @@ import 'package:socialmedia/presentation/profile_screen/controller/profile_contr
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../../core/utils/app_utils.dart';
 import '../../home_screen/widgets/feed_widget.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -372,11 +373,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 ],
                                               ),
                                               headerButton(
-                                                  buttonText: "Delete",
-                                                  buttonIcon:
-                                                      Icons.delete_outline,
-                                                  buttonAction: () {},
-                                                  buttonColor: ColorTheme.yellow)
+                                                buttonText: "Delete",
+                                                buttonIcon:
+                                                    Icons.delete_outline,
+                                                buttonAction: () {
+                                                  Provider.of<ProfileController>(
+                                                          context,
+                                                          listen: false)
+                                                      .postDeleted(
+                                                          controller
+                                                              .postListModel
+                                                              .data?[index]
+                                                              .postId,
+                                                          context);
+                                                },
+                                                buttonColor: ColorTheme.yellow,
+                                              )
                                             ],
                                           ),
                                         ),

@@ -113,6 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Provider.of<HomeController>(context).fetchData(context);
                           },
                           like_count: "${Provider.of<HomeController>(context).homeModel.data?[index].likeCount}",
+                          post_id: controller.homeModel.data?[index].postId,
                         );
                       },
                       separatorBuilder: (context, index) {

@@ -14,7 +14,7 @@ class HomeService {
     }
   }
 
-  static Future<dynamic> likedItem(Map<String,dynamic> body) async {
+  static Future<dynamic> likedItem(Map<String, dynamic> body) async {
     try {
       log("HomeService -> likedItem");
       var decodedData = ApiHelper.postLike(
@@ -31,6 +31,17 @@ class HomeService {
     try {
       var decodedData = ApiHelper.delete(
           endPoint: "like-unlike-post/",
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> fetchComments(postId) async {
+    try {
+      var decodedData = ApiHelper.getData(
+          endPoint: "list-comments-of-post/$postId/",
           header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {

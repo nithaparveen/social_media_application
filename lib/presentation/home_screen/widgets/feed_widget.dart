@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
+import 'comment_screen.dart';
 
 // class FeedWidget extends StatefulWidget {
 //   //const PostCard({super.key});
@@ -335,11 +338,12 @@ class FeedWidget extends StatelessWidget {
                       buttonText: "Comment",
                       buttonIcon: Icons.message_outlined,
                       buttonAction: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) =>
-                        //             CommentScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CommentScreen(id: post_id),
+                            ));
+                        log("postId -> $post_id");
                       },
                       buttonColor: ColorTheme.yellow),
                   headerButton(

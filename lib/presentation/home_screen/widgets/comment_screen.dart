@@ -97,6 +97,7 @@ class _CommentScreenState extends State<CommentScreen> {
                 onPressed: () {
                   Provider.of<HomeController>(context, listen: false)
                       .postComment(widget.id, commentController.text.trim(), context);
+                  commentController.clear();
                 },
                 child: Center(
                   child: Icon(

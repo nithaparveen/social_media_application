@@ -77,55 +77,58 @@ class _HomeScreenState extends State<HomeScreen> {
       //     ),
       //   );
       // }),
-      body: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: size.width * .03),
-              child: StorySlider(),
+      body: RefreshIndicator(
+        onRefresh: () =>Provider.of<HomeController>(context, listen: false).fetchData(context),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: size.width * .03),
+                child: StorySlider(),
+              ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: 10),
-          ),
-          Consumer<HomeController>(
-            builder: (context, controller, child) {
-              return controller.isLoading
-                  ? SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                  : SliverList.separated(
-                      itemCount: controller.homeModel.data?.length,
-                      itemBuilder: (context, index) {
-                        return FeedWidget(
-                          size: size,
-                          author_name: '${controller.homeModel.data?[index].author?.authorName}',
-                          created_at: '${controller.homeModel.data?[index].createdAt}',
-                          image: controller.homeModel.data?[index].image == null
-                              ? "https://th.bing.com/th/id/OIP.y6HMdOJ4LiIUWk7n5ZGlpAHaHa?w=480&h=480&rs=1&pid=ImgDetMain"
-                              : "${controller.homeModel.data?[index].image}",
-                          caption: '${controller.homeModel.data?[index].caption}',
-                          location: '${controller.homeModel.data?[index].location ?? ""}',
-                          comments_count: '${controller.homeModel.data?[index].commentsCount}',
-                          isLiked: controller.homeModel.data?[index].isLiked,
-                          likePressed: () {
-                            controller.likeTapped(controller.homeModel.data?[index].postId, context);
-                            Provider.of<HomeController>(context).fetchData(context);
-                          },
-                          like_count: "${Provider.of<HomeController>(context).homeModel.data?[index].likeCount}",
-                          post_id: controller.homeModel.data?[index].postId,
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return SizedBox(height: 10);
-                      },
-                    );
-            },
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(height: size.width * .2),
-          )
-        ],
+            SliverToBoxAdapter(
+              child: SizedBox(height: 10),
+            ),
+            Consumer<HomeController>(
+              builder: (context, controller, child) {
+                return controller.isLoading
+                    ? SliverToBoxAdapter(
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    : SliverList.separated(
+                        itemCount: controller.homeModel.data?.length,
+                        itemBuilder: (context, index) {
+                          return FeedWidget(
+                            size: size,
+                            author_name: '${controller.homeModel.data?[index].author?.authorName}',
+                            created_at: '${controller.homeModel.data?[index].createdAt}',
+                            image: controller.homeModel.data?[index].image == null
+                                ? "https://th.bing.com/th/id/OIP.y6HMdOJ4LiIUWk7n5ZGlpAHaHa?w=480&h=480&rs=1&pid=ImgDetMain"
+                                : "${controller.homeModel.data?[index].image}",
+                            caption: '${controller.homeModel.data?[index].caption}',
+                            location: '${controller.homeModel.data?[index].location ?? ""}',
+                            comments_count: '${controller.homeModel.data?[index].commentsCount}',
+                            isLiked: controller.homeModel.data?[index].isLiked,
+                            likePressed: () {
+                              controller.likeTapped(controller.homeModel.data?[index].postId, context);
+                              Provider.of<HomeController>(context).fetchData(context);
+                            },
+                            like_count: "${Provider.of<HomeController>(context).homeModel.data?[index].likeCount}",
+                            post_id: controller.homeModel.data?[index].postId,
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(height: 10);
+                        },
+                      );
+              },
+            ),
+            SliverToBoxAdapter(
+              child: SizedBox(height: size.width * .2),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -13,7 +13,7 @@ class HomeController extends ChangeNotifier {
   HomeModel homeModel = HomeModel();
   CommentsModel commentsModel = CommentsModel();
 
-  fetchData(BuildContext context) {
+  Future<void>fetchData(BuildContext context) async{
     isLoading = true;
     notifyListeners();
     log("HomeController=>started");

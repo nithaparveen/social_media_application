@@ -60,4 +60,15 @@ class HomeService {
       log("$e");
     }
   }
+
+  static Future<dynamic> deleteComment(commentId) async {
+    try {
+      var decodedData = ApiHelper.delete(
+          endPoint: "comment-delete/$commentId/",
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

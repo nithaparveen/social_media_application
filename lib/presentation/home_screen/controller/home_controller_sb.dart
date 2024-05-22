@@ -1,34 +1,29 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:socialmedia/core/constants/colors.dart';
-import 'package:socialmedia/core/utils/app_utils.dart';
-import 'package:socialmedia/repository/api/home_screen/model/comments_model.dart';
-import 'package:socialmedia/repository/api/home_screen/model/home_model.dart';
-import 'package:socialmedia/repository/api/home_screen/service/home_service.dart';
 
-class HomeController extends ChangeNotifier {
+import '../../../core/constants/colors.dart';
+import '../../../core/utils/app_utils.dart';
+import '../../../repository/api/home_screen/model/comments_model.dart';
+import '../../../repository/api/home_screen/model/home_model.dart';
+import '../../../repository/api/home_screen/service/home_service.dart';
+
+class HomeControllerSB extends ChangeNotifier {
   bool isLoading = false;
   bool isLoadingComments = true;
   HomeModel homeModel = HomeModel();
   CommentsModel commentsModel = CommentsModel();
 
-  Future<void>fetchData(BuildContext context) async{
-    isLoading = true;
-    notifyListeners();
-    log("HomeController=>started");
-    HomeService.fetchFeed().then((resData) {
-      if (resData["status"] == 1) {
-        homeModel = HomeModel.fromJson(resData);
-        isLoading = false;
-      } else {
-        AppUtils.oneTimeSnackBar("Failed to Fetch Data", context: context, bgColor: Colors.red);
-      }
-      notifyListeners();
-    });
-  }
+  // Create a StreamController for comments
+  final _commentsController = StreamController<CommentsModel>.broadcast();
 
-  Future<dynamic> fetchComments(context, postId) async {
+  // Expose the stream to the UI
+  Stream<CommentsModel> get commentsStream => _commentsController.stream;
+
+
+  // Modify fetchComments to use the stream controller
+  Future<void> fetchComments(context, postId) async{
     isLoadingComments = true;
     notifyListeners();
     log("HomeController -> fetchComments()");
@@ -36,6 +31,8 @@ class HomeController extends ChangeNotifier {
       if (value["status"] == 1) {
         commentsModel = CommentsModel.fromJson(value);
         isLoadingComments = false;
+        // Add commentsModel to the stream
+        _commentsController.sink.add(commentsModel);
       } else {
         AppUtils.oneTimeSnackBar("unable to fetch comments", context: context, bgColor: ColorTheme.red);
       }
@@ -69,16 +66,9 @@ class HomeController extends ChangeNotifier {
     });
   }
 
-  deleteComment(context,commentId){
-    log("HomeController -> deleteComment()");
-    HomeService.deleteComment(commentId).then((value) {
-      if(value["status"]==1){
-        AppUtils.oneTimeSnackBar(value["message"], context: context);
-        Navigator.pop(context);
-      }else{
-        AppUtils.oneTimeSnackBar(value["message"], context: context);
-      }
-      notifyListeners();
-    });
+  // Dispose the stream controller when no longer needed
+  void dispose() {
+    _commentsController.close();
+    super.dispose();
   }
 }

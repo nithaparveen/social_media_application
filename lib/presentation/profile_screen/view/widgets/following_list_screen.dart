@@ -12,7 +12,8 @@ class FollowingListScreen extends StatefulWidget {
 
 class _FollowingListScreenState extends State<FollowingListScreen> {
   fetchData() {
-    Provider.of<ProfileController>(context, listen: false).fetchFollowing(context);
+    Provider.of<ProfileController>(context, listen: false)
+        .fetchFollowing(context);
   }
 
   @override
@@ -37,7 +38,8 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () =>Provider.of<ProfileController>(context, listen: false).fetchFollowing(context),
+        onRefresh: () => Provider.of<ProfileController>(context, listen: false)
+            .fetchFollowing(context),
         child: Consumer<ProfileController>(builder: (context, controller, _) {
           return controller.isLoadingFollowing
               ? Center(child: CircularProgressIndicator())
@@ -46,13 +48,17 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: CircleAvatar(
-                        backgroundImage: controller.followingModel.data?[index].image == null
+                        backgroundImage: controller
+                                    .followingModel.data?[index].image ==
+                                null
                             ? NetworkImage("${AppConfig.noImage}")
                             : NetworkImage(
                                 "${AppConfig.mediaUrl}${controller.followingModel.data?[index].image}"),
                       ),
-                      title: Text("${controller.followingModel.data?[index].username}"),
-                      trailing: ElevatedButton(onPressed: () {}, child: Text("UnFollow")),
+                      title: Text(
+                          "${controller.followingModel.data?[index].username}"),
+                      trailing: ElevatedButton(
+                          onPressed: () {}, child: Text("UnFollow")),
                     );
                   },
                 );

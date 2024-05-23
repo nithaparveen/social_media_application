@@ -12,7 +12,8 @@ class FollowersListScreen extends StatefulWidget {
 
 class _FollowersListScreenState extends State<FollowersListScreen> {
   fetchData() {
-    Provider.of<ProfileController>(context, listen: false).fetchFollower(context);
+    Provider.of<ProfileController>(context, listen: false)
+        .fetchFollower(context);
   }
 
   @override
@@ -37,25 +38,29 @@ class _FollowersListScreenState extends State<FollowersListScreen> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () =>Provider.of<ProfileController>(context, listen: false).fetchFollower(context),
+        onRefresh: () => Provider.of<ProfileController>(context, listen: false)
+            .fetchFollower(context),
         child: Consumer<ProfileController>(builder: (context, controller, _) {
           return controller.isLoadingFollower
               ? Center(child: CircularProgressIndicator())
               : ListView.builder(
-            itemCount: controller.followersModel.data?.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: controller.followersModel.data?[index].image == null
-                      ? NetworkImage("${AppConfig.noImage}")
-                      : NetworkImage(
-                      "${AppConfig.mediaUrl}${controller.followersModel.data?[index].image}"),
-                ),
-                title: Text("${controller.followersModel.data?[index].username}"),
-                // trailing: ElevatedButton(onPressed: () {}, child: Text("UnFollow")),
-              );
-            },
-          );
+                  itemCount: controller.followersModel.data?.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: controller
+                                    .followersModel.data?[index].image ==
+                                null
+                            ? NetworkImage("${AppConfig.noImage}")
+                            : NetworkImage(
+                                "${AppConfig.mediaUrl}${controller.followersModel.data?[index].image}"),
+                      ),
+                      title: Text(
+                          "${controller.followersModel.data?[index].username}"),
+                      // trailing: ElevatedButton(onPressed: () {}, child: Text("UnFollow")),
+                    );
+                  },
+                );
         }),
       ),
     );

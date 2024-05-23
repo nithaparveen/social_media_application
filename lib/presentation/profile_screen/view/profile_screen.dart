@@ -70,7 +70,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           location: controller.profileModel.data?.location ?? "",
         ),
         body: RefreshIndicator(
-          onRefresh: () => Provider.of<ProfileController>(context, listen: false).fetchData(context),
+          onRefresh: () =>
+              Provider.of<ProfileController>(context, listen: false)
+                  .fetchData(context),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -92,7 +94,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 },
                                 child: CircleAvatar(
                                   radius: 45,
-                                  backgroundImage: controller.profileModel.data?.image == null
+                                  backgroundImage: controller
+                                              .profileModel.data?.image ==
+                                          null
                                       ? NetworkImage("${AppConfig.noImage}")
                                       : NetworkImage(
                                           "${AppConfig.mediaUrl}${controller.profileModel.data?.image}"),
@@ -131,7 +135,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             InkWell(
                               onTap: () {
                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => FollowersListScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FollowersListScreen()));
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -159,7 +166,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             InkWell(
                               onTap: () {
                                 Navigator.push(
-                                    context, MaterialPageRoute(builder: (context) => FollowingListScreen()));
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FollowingListScreen()));
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -236,7 +246,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             children: [
                                               ListTile(
                                                 leading: CircleAvatar(
-                                                  backgroundImage: control.postListModel.data?[index].author
+                                                  backgroundImage: control
+                                                              .postListModel
+                                                              .data?[index]
+                                                              .author
                                                               ?.profileImage ==
                                                           null
                                                       ? NetworkImage(
@@ -246,8 +259,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 ),
                                                 title: Text(
                                                   "${control.postListModel.data?[index].author?.authorName}",
-                                                  style: GLTextStyles.poppinsStyl(
-                                                      size: size.width * .04, weight: FontWeight.w600),
+                                                  style:
+                                                      GLTextStyles.poppinsStyl(
+                                                          size:
+                                                              size.width * .04,
+                                                          weight:
+                                                              FontWeight.w600),
                                                 ),
                                                 subtitle: GestureDetector(
                                                   onTap: () {
@@ -255,8 +272,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   },
                                                   child: Text(
                                                     "${control.postListModel.data?[index].location}",
-                                                    style: GLTextStyles.kanitStyl(
-                                                        size: size.width * .035, weight: FontWeight.w300),
+                                                    style:
+                                                        GLTextStyles.kanitStyl(
+                                                            size: size.width *
+                                                                .035,
+                                                            weight: FontWeight
+                                                                .w300),
                                                   ),
                                                 ),
                                               ),
@@ -265,7 +286,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 decoration: BoxDecoration(
                                                     image: DecorationImage(
                                                         fit: BoxFit.contain,
-                                                        image: control.postListModel.data?[index].image ==
+                                                        image: control
+                                                                    .postListModel
+                                                                    .data?[
+                                                                        index]
+                                                                    .image ==
                                                                 null
                                                             ? NetworkImage(
                                                                 "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
@@ -275,9 +300,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                               Container(
                                                 padding:
-                                                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 10),
                                                 child: Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     displayText(
                                                         label:
@@ -287,56 +316,91 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         Wrap(
                                                           children: [
                                                             Container(
-                                                              width: size.width * .05,
-                                                              height: size.width * .05,
+                                                              width:
+                                                                  size.width *
+                                                                      .05,
+                                                              height:
+                                                                  size.width *
+                                                                      .05,
                                                               decoration: BoxDecoration(
-                                                                  color: ColorTheme.yellow,
-                                                                  shape: BoxShape.circle),
-                                                              child: const Icon(Icons.thumb_up,
-                                                                  color: Colors.white, size: 14),
+                                                                  color:
+                                                                      ColorTheme
+                                                                          .yellow,
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                              child: const Icon(
+                                                                  Icons
+                                                                      .thumb_up,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 14),
                                                             ),
-                                                            SizedBox(width: size.width * .02),
+                                                            SizedBox(
+                                                                width:
+                                                                    size.width *
+                                                                        .02),
                                                             displayText(
                                                                 label:
                                                                     "${control.postListModel.data?[index].likeCount}"),
                                                           ],
                                                         ),
-                                                        SizedBox(width: size.width * .04),
+                                                        SizedBox(
+                                                            width: size.width *
+                                                                .04),
                                                         displayText(
                                                             label:
                                                                 "${control.postListModel.data?[index].commentsCount}"),
-                                                        SizedBox(width: size.width * .02),
-                                                        displayText(label: "Comments"),
+                                                        SizedBox(
+                                                            width: size.width *
+                                                                .02),
+                                                        displayText(
+                                                            label: "Comments"),
                                                       ],
                                                     )
                                                   ],
                                                 ),
                                               ),
                                               Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
                                                 children: [
                                                   headerButton(
                                                       buttonText: "Like",
-                                                      buttonIcon:
-                                                          control.postListModel.data?[index].isLiked == true
-                                                              ? Icons.thumb_up_alt_outlined
-                                                              : Icons.thumb_up_off_alt_sharp,
+                                                      buttonIcon: control
+                                                                  .postListModel
+                                                                  .data?[index]
+                                                                  .isLiked ==
+                                                              true
+                                                          ? Icons
+                                                              .thumb_up_alt_outlined
+                                                          : Icons
+                                                              .thumb_up_off_alt_sharp,
                                                       buttonAction: () {},
-                                                      buttonColor: ColorTheme.yellow),
+                                                      buttonColor:
+                                                          ColorTheme.yellow),
                                                   headerButton(
                                                       buttonText: "Comment",
-                                                      buttonIcon: Icons.message_outlined,
+                                                      buttonIcon: Icons
+                                                          .message_outlined,
                                                       buttonAction: () {},
-                                                      buttonColor: ColorTheme.yellow),
+                                                      buttonColor:
+                                                          ColorTheme.yellow),
                                                 ],
                                               ),
                                               headerButton(
                                                 buttonText: "Delete",
-                                                buttonIcon: Icons.delete_outline,
+                                                buttonIcon:
+                                                    Icons.delete_outline,
                                                 buttonAction: () {
-                                                  Provider.of<ProfileController>(context, listen: false)
+                                                  Provider.of<ProfileController>(
+                                                          context,
+                                                          listen: false)
                                                       .postDeleted(
-                                                          controller.postListModel.data?[index].postId,
+                                                          controller
+                                                              .postListModel
+                                                              .data?[index]
+                                                              .postId,
                                                           context);
                                                 },
                                                 buttonColor: ColorTheme.yellow,
@@ -350,7 +414,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       fit: BoxFit.cover,
-                                      image: control.postListModel.data?[index].image == null
+                                      image: control.postListModel.data?[index]
+                                                  .image ==
+                                              null
                                           ? NetworkImage(
                                               "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
                                           : NetworkImage(

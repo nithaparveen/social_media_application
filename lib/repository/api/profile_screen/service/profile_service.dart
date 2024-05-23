@@ -21,8 +21,7 @@ class ProfileService {
     try {
       var decodedData = await ApiHelper.getData(
           endPoint: "list_posts_of_authenticatedUser/",
-          header:
-              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -33,11 +32,20 @@ class ProfileService {
     try {
       var decodedData = await ApiHelper.delete(
           endPoint: "post-delete/$post_id/",
-          header:
-              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("Error in ProfileService -> postDelete: $e");
+    }
+  }
+
+  static Future<dynamic> fetchFollowing() async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "followingslist/", header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
     }
   }
 }

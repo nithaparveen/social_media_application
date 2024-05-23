@@ -8,13 +8,17 @@ import 'package:socialmedia/repository/api/profile_screen/model/post_list_model.
 import 'package:socialmedia/repository/api/profile_screen/model/profile_model.dart';
 import 'package:socialmedia/repository/api/profile_screen/service/profile_service.dart';
 
+import '../../../repository/api/profile_screen/model/followers_model.dart';
+
 class ProfileController extends ChangeNotifier {
   ProfileModel profileModel = ProfileModel();
   PostListModel postListModel = PostListModel();
   FollowingModel followingModel = FollowingModel();
+  FollowersModel followersModel = FollowersModel();
   bool isLoading = false;
   bool isPostLoading = false;
   bool isLoadingFollowing = false;
+  bool isLoadingFollower = false;
 
   Future<void> fetchData(BuildContext context) async {
     isLoading = true;
@@ -63,6 +67,21 @@ class ProfileController extends ChangeNotifier {
       if (value["status"] == 1) {
         followingModel = FollowingModel.fromJson(value);
         isLoadingFollowing = false;
+      } else {
+        AppUtils.oneTimeSnackBar("Unable to fetch Data", context: context, bgColor: ColorTheme.red);
+      }
+      notifyListeners();
+    });
+  }
+
+  fetchFollower(context) async {
+    isLoadingFollower= true;
+    notifyListeners();
+    log("ProfileController -> fetchFollower()");
+    ProfileService.fetchFollower().then((value) {
+      if (value["status"] == 1) {
+        followersModel = FollowersModel.fromJson(value);
+        isLoadingFollower = false;
       } else {
         AppUtils.oneTimeSnackBar("Unable to fetch Data", context: context, bgColor: ColorTheme.red);
       }

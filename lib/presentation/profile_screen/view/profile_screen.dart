@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:socialmedia/global_widgets/drawer_refactored.dart';
 import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
+import 'package:socialmedia/presentation/profile_screen/view/widgets/followers_list_screen.dart';
 import 'package:socialmedia/presentation/profile_screen/view/widgets/following_list_screen.dart';
 
 import '../../../core/constants/colors.dart';
@@ -128,7 +129,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           children: [
                             //  following
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context, MaterialPageRoute(builder: (context) => FollowersListScreen()));
+                              },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [

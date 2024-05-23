@@ -5,6 +5,7 @@ import 'package:socialmedia/presentation/home_screen/controller/home_controller.
 import 'package:socialmedia/presentation/home_screen/widgets/feed_widget.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
 import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
+import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:socialmedia/presentation/search_screen/view/search_screen.dart';
 
 import '../../../core/constants/text_styles.dart';
@@ -25,7 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     super.initState();
   }
-  fetchData(){
+
+  fetchData() {
     Provider.of<HomeController>(context, listen: false).fetchData(context);
   }
 
@@ -36,12 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           "ThingShare",
-          style: GLTextStyles.leagueSpartan(size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
+          style: GLTextStyles.leagueSpartan(
+              size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
         ),
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchScreen()));
               },
               // _searchClicked,
               icon: Icon(
@@ -51,7 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
               )),
           IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MessageScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MessageScreen()));
               },
               icon: Icon(
                 Icons.message,
@@ -78,7 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
       //   );
       // }),
       body: RefreshIndicator(
-        onRefresh: () =>Provider.of<HomeController>(context, listen: false).fetchData(context),
+        onRefresh: () => Provider.of<HomeController>(context, listen: false)
+            .fetchData(context),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -101,21 +107,35 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (context, index) {
                           return FeedWidget(
                             size: size,
-                            author_name: '${controller.homeModel.data?[index].author?.authorName}',
-                            created_at: '${controller.homeModel.data?[index].createdAt}',
-                            image: controller.homeModel.data?[index].image == null
+                            author_name:
+                                '${controller.homeModel.data?[index].author?.authorName}',
+                            created_at:
+                                '${controller.homeModel.data?[index].createdAt}',
+                            image: controller.homeModel.data?[index].image ==
+                                    null
                                 ? "https://th.bing.com/th/id/OIP.y6HMdOJ4LiIUWk7n5ZGlpAHaHa?w=480&h=480&rs=1&pid=ImgDetMain"
                                 : "${controller.homeModel.data?[index].image}",
-                            caption: '${controller.homeModel.data?[index].caption}',
-                            location: '${controller.homeModel.data?[index].location ?? ""}',
-                            comments_count: '${controller.homeModel.data?[index].commentsCount}',
+                            caption:
+                                '${controller.homeModel.data?[index].caption}',
+                            location:
+                                '${controller.homeModel.data?[index].location ?? ""}',
+                            comments_count:
+                                '${controller.homeModel.data?[index].commentsCount}',
                             isLiked: controller.homeModel.data?[index].isLiked,
                             likePressed: () {
-                              controller.likeTapped(controller.homeModel.data?[index].postId, context);
-                              Provider.of<HomeController>(context).fetchData(context);
+                              controller.likeTapped(
+                                  controller.homeModel.data?[index].postId,
+                                  context);
+                              Provider.of<HomeController>(context)
+                                  .fetchData(context);
                             },
-                            like_count: "${Provider.of<HomeController>(context).homeModel.data?[index].likeCount}",
+                            like_count:
+                                "${Provider.of<HomeController>(context).homeModel.data?[index].likeCount}",
                             post_id: controller.homeModel.data?[index].postId,
+                            followPressed: () {
+                              Provider.of<HomeController>(context,listen: false)
+                                  .followTapped(controller.homeModel.data?[index].author?.authorId,context);
+                            },
                           );
                         },
                         separatorBuilder: (context, index) {

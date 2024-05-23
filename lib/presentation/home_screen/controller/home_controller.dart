@@ -54,6 +54,16 @@ class HomeController extends ChangeNotifier {
       }
     });
   }
+  followTapped(id, context) {
+    log("HomeController -> followTapped");
+    HomeService.followTapped(id).then((value) {
+      if (value["status"] == 1) {
+        AppUtils.oneTimeSnackBar(value["message"], context: context);
+      } else {
+        AppUtils.oneTimeSnackBar(value["message"], context: context, bgColor: Colors.redAccent);
+      }
+    });
+  }
 
   postComment(postId, content, context) {
     log("HomeController -> postComments()");

@@ -242,6 +242,8 @@ class FeedWidget extends StatelessWidget {
     this.post_id,
     this.author_id,
     required this.likePressed,
+    required this.followPressed,
+    this.isFollowed,
   });
 
   final String? profile_image;
@@ -253,10 +255,13 @@ class FeedWidget extends StatelessWidget {
   final String like_count;
   final String comments_count;
   final bool? isLiked;
+  final bool? isFollowed;
   final int? post_id;
   final int? author_id;
   final Size size;
   final Function() likePressed;
+  final Function() followPressed;
+
 
   @override
   Widget build(BuildContext context) {
@@ -288,7 +293,7 @@ class FeedWidget extends StatelessWidget {
                   ),
                 ),
                 trailing: InkWell(
-                  onTap: () {},
+                  onTap: followPressed,
                   child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 16,
@@ -298,7 +303,7 @@ class FeedWidget extends StatelessWidget {
                         color: ColorTheme.blue,
                         borderRadius: BorderRadius.circular(8)),
                     child: Text(
-                      "Follow",
+                      "Unfollow",
                       style: TextStyle(color: ColorTheme.white, fontSize: 11),
                     ),
                   ),

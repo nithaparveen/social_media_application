@@ -7,7 +7,9 @@ class HomeService {
   static Future<dynamic> fetchFeed() async {
     try {
       var decodedData = ApiHelper.getData(
-          endPoint: "feed/", header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          endPoint: "feed/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -20,7 +22,8 @@ class HomeService {
       var decodedData = ApiHelper.postLike(
           endPoint: "like-unlike-post/",
           body: body,
-          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -31,7 +34,8 @@ class HomeService {
     try {
       var decodedData = ApiHelper.delete(
           endPoint: "like-unlike-post/",
-          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -42,7 +46,8 @@ class HomeService {
     try {
       var decodedData = ApiHelper.getData(
           endPoint: "list-comments-of-post/$postId/",
-          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -54,7 +59,8 @@ class HomeService {
       var decodedData = ApiHelper.postComment(
           endPoint: "comments-create/",
           body: body,
-          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -65,6 +71,18 @@ class HomeService {
     try {
       var decodedData = ApiHelper.delete(
           endPoint: "comment-delete/$commentId/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> followTapped(id) async {
+    try {
+      var decodedData = await ApiHelper.postData(
+          endPoint: "CreateFollower/$id/",
           header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {

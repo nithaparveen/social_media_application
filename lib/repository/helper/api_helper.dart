@@ -33,10 +33,11 @@ class ApiHelper {
   static postData({
     required String endPoint,
     Map<String, String>? header,
-    required Map<String, dynamic> body,
+    Map<String, dynamic>? body,
   }) async {
     log("input $body");
     final url = Uri.parse(AppConfig.baseurl + endPoint);
+    log("$url -> url");
     try {
       var response = await http.post(url, body: body, headers: header);
       log("StatusCode -> ${response.statusCode}");

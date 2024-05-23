@@ -267,40 +267,50 @@ class FeedWidget extends StatelessWidget {
           child: Column(
             children: [
               ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(profile_image ?? "${AppConfig.noImage}"),
+                leading: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(profile_image ?? "${AppConfig.noImage}"),
+                ),
+                title: Text(
+                  author_name,
+                  style: GLTextStyles.poppinsStyl(
+                      size: size.width * .04, weight: FontWeight.w600),
+                ),
+                subtitle: GestureDetector(
+                  onTap: () {
+                    // un comment this line and rplace the url
+                    // maplaunchURL(surl);
+                  },
+                  child: Text(
+                    location,
+                    style: GLTextStyles.kanitStyl(
+                        size: size.width * .035, weight: FontWeight.w300),
                   ),
-                  title: Text(
-                    author_name,
-                    style: GLTextStyles.poppinsStyl(size: size.width * .04, weight: FontWeight.w600),
-                  ),
-                  subtitle: GestureDetector(
-                    onTap: () {
-                      // un comment this line and rplace the url
-                      // maplaunchURL(surl);
-                    },
-                    child: Text(
-                      location,
-                      style: GLTextStyles.kanitStyl(size: size.width * .035, weight: FontWeight.w300),
-                    ),
-                  ),
-                  trailing: Container(
+                ),
+                trailing: InkWell(
+                  onTap: () {},
+                  child: Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 8,
                     ),
-                    decoration: BoxDecoration(color: ColorTheme.blue, borderRadius: BorderRadius.circular(8)),
+                    decoration: BoxDecoration(
+                        color: ColorTheme.blue,
+                        borderRadius: BorderRadius.circular(8)),
                     child: Text(
                       "Follow",
                       style: TextStyle(color: ColorTheme.white, fontSize: 11),
                     ),
-                  )),
+                  ),
+                ),
+              ),
               Container(
                 height: size.width * .75,
                 child: Image.network(image, fit: BoxFit.contain),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -309,8 +319,10 @@ class FeedWidget extends StatelessWidget {
                         Container(
                           width: size.width * .05,
                           height: size.width * .05,
-                          decoration: BoxDecoration(color: ColorTheme.yellow, shape: BoxShape.circle),
-                          child: const Icon(Icons.thumb_up, color: Colors.white, size: 14),
+                          decoration: BoxDecoration(
+                              color: ColorTheme.yellow, shape: BoxShape.circle),
+                          child: const Icon(Icons.thumb_up,
+                              color: Colors.white, size: 14),
                         ),
                         SizedBox(width: size.width * .02),
                         displayText(label: "${like_count}"),
@@ -331,7 +343,9 @@ class FeedWidget extends StatelessWidget {
                 children: [
                   headerButton(
                       buttonText: "Like",
-                      buttonIcon: isLiked == true ? Icons.thumb_up_alt_sharp : Icons.thumb_up_alt_outlined,
+                      buttonIcon: isLiked == true
+                          ? Icons.thumb_up_alt_sharp
+                          : Icons.thumb_up_alt_outlined,
                       buttonAction: likePressed,
                       buttonColor: ColorTheme.yellow),
                   headerButton(
@@ -367,7 +381,10 @@ class HeaderButtonSection extends StatelessWidget {
   final Widget buttonThree;
 
   const HeaderButtonSection(
-      {super.key, required this.buttonOne, required this.buttonTwo, required this.buttonThree});
+      {super.key,
+      required this.buttonOne,
+      required this.buttonTwo,
+      required this.buttonThree});
 
   @override
   Widget build(BuildContext context) {

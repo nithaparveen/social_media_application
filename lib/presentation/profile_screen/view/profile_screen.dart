@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         endDrawer: DrawerRefactored(
           name: controller.profileModel.data?.name ?? "",
-          dob: "${controller.profileModel.data?.dob}",
+          dob: "${controller.profileModel.data?.dob ?? DateTime.now()}",
           phone: controller.profileModel.data?.phoneNumber ?? "",
           location: controller.profileModel.data?.location ?? "",
         ),
@@ -103,19 +103,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "${controller.profileModel.data?.name}",
+                                  "${controller.profileModel.data?.name ?? ""}",
                                   style: GLTextStyles.ralewayStyl(size: 18),
                                 ),
                                 Text(
-                                  "${DateFormat('dd/MM/yyyy').format((controller.profileModel.data!.dob)!).toString()}",
+                                  "${DateFormat('dd/MM/yyyy').format((controller.profileModel.data!.dob) ?? DateTime.now()).toString()}",
                                   style: GLTextStyles.ralewayStyl(size: 15),
                                 ),
                                 Text(
-                                  "${controller.profileModel.data?.phoneNumber}",
+                                  "${controller.profileModel.data?.phoneNumber ?? ""}",
                                   style: GLTextStyles.ralewayStyl(size: 15),
                                 ),
                                 Text(
-                                  "${controller.profileModel.data?.location}",
+                                  "${controller.profileModel.data?.location ?? ""}",
                                   style: GLTextStyles.ralewayStyl(size: 15),
                                 ),
                               ],

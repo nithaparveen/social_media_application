@@ -4,22 +4,42 @@
 
 import 'dart:convert';
 
-List<SearchModel> searchModelFromJson(String str) => List<SearchModel>.from(json.decode(str).map((x) => SearchModel.fromJson(x)));
+SearchModel searchModelFromJson(String str) => SearchModel.fromJson(json.decode(str));
 
-String searchModelToJson(List<SearchModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String searchModelToJson(SearchModel data) => json.encode(data.toJson());
 
 class SearchModel {
+  int? status;
+  List<Datum>? data;
+
+  SearchModel({
+    this.status,
+    this.data,
+  });
+
+  factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
+    status: json["status"],
+    data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "status": status,
+    "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+  };
+}
+
+class Datum {
   String? username;
   String? name;
   String? image;
 
-  SearchModel({
+  Datum({
     this.username,
     this.name,
     this.image,
   });
 
-  factory SearchModel.fromJson(Map<String, dynamic> json) => SearchModel(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     username: json["username"],
     name: json["name"],
     image: json["image"],

@@ -15,14 +15,38 @@ class ApiHelper {
     final url = Uri.parse(AppConfig.baseurl + endPoint);
     log("url -> $url");
     try {
-      var response = await http.get(url,headers: header);
-      log("Status code -> ${response.statusCode}");
+      var response = await http.get(url, headers: header);
+      log("getData -> Status code -> ${response.statusCode}");
       if (response.statusCode == 200) {
         var decodedData = jsonDecode(response.body);
         log("$decodedData");
         return decodedData;
       } else {
         log("Else Condition >> Api failed");
+      }
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static getDataWOStatus({
+    required String endPoint,
+    Map<String, String>? header,
+  }) async {
+    log("ApiHelper -> getData");
+    final url = Uri.parse(AppConfig.baseurl + endPoint);
+    log("url -> $url");
+    try {
+      var response = await http.get(url, headers: header);
+      log("getDataWOStatus -> Status code -> ${response.statusCode}");
+      if (response.statusCode == 200) {
+        var decodedData = jsonDecode(response.body);
+        var data = {"status": 1, "data": decodedData};
+        return data;
+      } else {
+        log("Else Condition >> Api failed");
+        var data = {"status": 0, "data": null};
+        return data;
       }
     } catch (e) {
       log("$e");
@@ -86,10 +110,7 @@ class ApiHelper {
 
   static Map<String, String> getApiHeader({String? access, String? dbName}) {
     if (access != null) {
-      return {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $access'
-      };
+      return {'Content-Type': 'application/json', 'Authorization': 'Bearer $access'};
     } else if (dbName != null) {
       return {'Content-Type': 'application/json', 'dbName': dbName};
     } else {
@@ -99,7 +120,7 @@ class ApiHelper {
     }
   }
 
-   static postLike({
+  static postLike({
     required String endPoint,
     Map<String, String>? header,
     Map<String, dynamic>? body,
@@ -149,7 +170,7 @@ class ApiHelper {
       log("$e");
     }
   }
-  
+
   static Future<dynamic> delete({
     required String endPoint,
     Map<String, String>? header,
@@ -160,7 +181,7 @@ class ApiHelper {
     log("header -> $header");
     log("final url -> $url");
     try {
-      var response = await http.delete(url, headers: header,body: body);
+      var response = await http.delete(url, headers: header, body: body);
       log("ApiHelper -> Api Called -> status code=${response.statusCode}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         var decodedData = jsonDecode(response.body);
@@ -176,4 +197,3 @@ class ApiHelper {
     }
   }
 }
-

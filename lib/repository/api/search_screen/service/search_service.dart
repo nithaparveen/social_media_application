@@ -7,7 +7,7 @@ class SearchService {
   static Future<dynamic> fetchSearchData(username)async{
     log("SearchService -> fetchSearchData()");
     try {
-      var decodedData = await ApiHelper.getData(
+      var decodedData = await ApiHelper.getDataWOStatus(
         endPoint: "searchview/?username=$username",
         header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()),
       );

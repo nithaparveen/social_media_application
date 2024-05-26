@@ -28,4 +28,40 @@ class ProfileService {
       log("$e");
     }
   }
+
+  static Future<dynamic> deletePost(post_id) async {
+    try {
+      var decodedData = await ApiHelper.delete(
+          endPoint: "post-delete/$post_id/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("Error in ProfileService -> postDelete: $e");
+    }
+  }
+
+  static Future<dynamic> fetchFollowing() async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "followingslist/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> fetchFollower() async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "followerslist/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

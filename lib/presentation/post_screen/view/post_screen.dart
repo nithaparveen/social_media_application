@@ -128,8 +128,9 @@ class _PostDataScreenState extends State<PostDataScreen> {
                             context,
                             image,
                             captionController.text.trim(),
-                    locationController.text.trim());
-
+                            locationController.text.trim());
+                    captionController.clear();
+                    locationController.clear();
                   },
                   child: Text(
                     "Upload",

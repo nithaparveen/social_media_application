@@ -1,16 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/bottom_navigation_screen/controller/bottom_navigation_controller.dart';
-import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
 import 'package:socialmedia/presentation/edit_profile_screen/controller/edit_profile_controller.dart';
+import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
-import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
 import 'package:socialmedia/presentation/post_screen/controller/post_controller.dart';
 import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/controller/registration_controller.dart';
-import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
+import 'package:socialmedia/presentation/search_screen/controller/search_controller.dart';
 import 'package:socialmedia/presentation/splash_screen/view/splash_screen.dart';
 
 void main() {
@@ -22,6 +22,8 @@ void main() {
     ChangeNotifierProvider(create: (context) => ProfileController()),
     ChangeNotifierProvider(create: (context) => PostController()),
     ChangeNotifierProvider(create: (context) => EditProfileController()),
+    ChangeNotifierProvider(create: (context) => HomeController()),
+    ChangeNotifierProvider(create: (context)=> SearchScreenController())
   ], child: const MyApp()));
 }
 

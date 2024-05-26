@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
-import 'package:socialmedia/presentation/bottom_navigation_screen/view/bottom_navigation_screen.dart';
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
 import '../../../global_widgets/title_and_textformfield.dart';

@@ -8,7 +8,6 @@ import 'package:socialmedia/presentation/login_screen/view/login_screen.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -43,13 +42,19 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.sizeOf(context);
     return Scaffold(
+      backgroundColor: ColorTheme.blue,
       body: Center(
-        child: Text(
-          "ThingShare",
-          style: GLTextStyles.leagueSpartan(
-              size: 28, weight: FontWeight.w600, color: ColorTheme.brown),
-        ),
+        child: Container(
+            height:size.height*.4,
+            width: size.height*.4,
+            child: Image.asset("assets/images/ThingShare logo.png"))
+        // Text(
+        //   "ThingShare",
+        //   style: GLTextStyles.leagueSpartan(
+        //       size: 28, weight: FontWeight.w600, color: ColorTheme.brown),
+        // ),
       ),
     );
   }

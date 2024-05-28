@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:socialmedia/core/constants/colors.dart';
+import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/post_story_screen.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/story_view_page.dart';
 
@@ -46,7 +48,7 @@ class _StorySliderState extends State<StorySlider> {
                         MaterialPageRoute(
                           builder: (context) => PostStoryScreen(),
                         ),
-                        (route) => false);
+                            (route) => false);
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -63,52 +65,72 @@ class _StorySliderState extends State<StorySlider> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  width: size.width * .01,
-                ),
+                SizedBox(width: size.width * .01),
                 Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      // physics: FixedExtentScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 10,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Stack(children: [
-                              InkWell(
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: ColorTheme.lightBrown,
+                  child: Consumer<HomeController>(builder: (context, control, _) {
+                      return ListView.builder(
+                          shrinkWrap: true,
+                          // physics: FixedExtentScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: control.storyModel.stories!.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Stack(children: [
+                                  InkWell(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: ColorTheme.lightBrown,
+                                          image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: control
+                                                  .storyModel
+                                                  .stories?[index]
+                                                  .image ==
+                                                  null
+                                                  ? NetworkImage(
+                                                  "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                                                  : NetworkImage(
+                                                "${control.storyModel.stories?[index].image}",
+                                              ))),
+                                      height: size.width * .22,
+                                      width: size.width * .16,
+                                    ),
+                                    onTap: () {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => StoryView(),
+                                          ),
+                                              (route) => false);
+                                    },
                                   ),
-                                  height: size.width * .22,
-                                  width: size.width * .16,
-                                ),
-                                onTap: () {
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => StoryView(),
+                                  Positioned(
+                                    left: 8,
+                                    top: 10,
+                                    child: CircleAvatar(
+                                      backgroundImage: control.storyModel
+                                          .stories?[index].author?.image ==
+                                          null
+                                          ? NetworkImage(
+                                          "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                                          : NetworkImage(
+                                        "${control.storyModel.stories?[index].author?.image}",
                                       ),
-                                      (route) => false);
-                                },
-                              ),
-                              Positioned(
-                                left: 8,
-                                top: 10,
-                                child: CircleAvatar(
-                                  backgroundColor: Colors.white,
-                                  radius: size.width * .035,
-                                ),
-                              )
-                            ]),
-                          ],
-                        );
-                      }),
+                                      backgroundColor: Colors.white,
+                                      radius: size.width * .035,
+                                    ),
+                                  )
+                                ]),
+                              ],
+                            );
+                          });
+                    }
+                  ),
                 )
               ],
             ),

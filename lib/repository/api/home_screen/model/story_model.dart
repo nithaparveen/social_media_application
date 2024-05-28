@@ -10,25 +10,21 @@ String storyModelToJson(StoryModel data) => json.encode(data.toJson());
 
 class StoryModel {
   int? status;
-  String? message;
-  Story? story;
+  List<Story>? stories;
 
   StoryModel({
     this.status,
-    this.message,
-    this.story,
+    this.stories,
   });
 
   factory StoryModel.fromJson(Map<String, dynamic> json) => StoryModel(
     status: json["status"],
-    message: json["message"],
-    story: json["story"] == null ? null : Story.fromJson(json["story"]),
+    stories: json["stories"] == null ? [] : List<Story>.from(json["stories"]!.map((x) => Story.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
-    "message": message,
-    "story": story?.toJson(),
+    "stories": stories == null ? [] : List<dynamic>.from(stories!.map((x) => x.toJson())),
   };
 }
 
@@ -39,7 +35,7 @@ class Story {
   dynamic location;
   DateTime? createdAt;
   DateTime? updatedAt;
-  dynamic image;
+  String? image;
 
   Story({
     this.id,
@@ -74,7 +70,7 @@ class Story {
 
 class Author {
   String? username;
-  String? image;
+  dynamic image;
 
   Author({
     this.username,

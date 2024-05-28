@@ -9,6 +9,7 @@ import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/utils/app_utils.dart';
 import 'package:socialmedia/repository/api/home_screen/model/comments_model.dart';
 import 'package:socialmedia/repository/api/home_screen/model/home_model.dart';
+import 'package:socialmedia/repository/api/home_screen/model/story_model.dart';
 import 'package:socialmedia/repository/api/home_screen/service/home_service.dart';
 
 import '../../../app_config/app_config.dart';
@@ -17,8 +18,10 @@ import '../../bottom_navigation_screen/view/bottom_navigation_screen.dart';
 class HomeController extends ChangeNotifier {
   bool isLoading = false;
   bool isLoadingComments = true;
+  bool isLoadingStories = false;
   HomeModel homeModel = HomeModel();
   CommentsModel commentsModel = CommentsModel();
+  StoryModel storyModel = StoryModel();
 
   Future<void> fetchData(BuildContext context) async {
     isLoading = true;
@@ -105,7 +108,21 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     });
   }
-  /// story post
+
+  fetchStories(id, context) {
+    log("HomeController -> followTapped");
+    HomeService.fetchStory(id).then((resData) {
+      if (resData["status"] == 1) {
+        storyModel = StoryModel.fromJson(resData);
+        isLoadingStories = false;
+      } else {
+        AppUtils.oneTimeSnackBar("Failed to Fetch Data",
+            context: context, bgColor: Colors.red);
+      }
+      notifyListeners();
+    });
+  }
+  /// post story
   Future<String?> getAccessToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     String? tokenJsonString = sharedPreferences.getString(AppConfig.loginData);

@@ -24,7 +24,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => EditProfileController()),
     ChangeNotifierProvider(create: (context) => HomeController()),
     ChangeNotifierProvider(create: (context)=> SearchScreenController())
-  ], child: const MyApp()));
+  ], child: const MyApp())); 
 }
 
 class MyApp extends StatelessWidget {

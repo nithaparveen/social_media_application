@@ -89,4 +89,26 @@ class HomeService {
       log("$e");
     }
   }
+
+  static Future<dynamic> postStory(id) async {
+    try {
+      var decodedData = await ApiHelper.postData(
+          endPoint: "stories/",
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> fetchStory(id) async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "stories/",
+          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
 }

@@ -33,12 +33,14 @@ class Data {
   DateTime? dob;
   String? phoneNumber;
   String? location;
+  String? image;
 
   Data({
     this.name,
     this.dob,
     this.phoneNumber,
     this.location,
+    this.image,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -46,6 +48,7 @@ class Data {
     dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
     phoneNumber: json["phone_number"],
     location: json["location"],
+    image: json["image"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +56,6 @@ class Data {
     "dob": "${dob!.year.toString().padLeft(4, '0')}-${dob!.month.toString().padLeft(2, '0')}-${dob!.day.toString().padLeft(2, '0')}",
     "phone_number": phoneNumber,
     "location": location,
+    "image": image,
   };
 }

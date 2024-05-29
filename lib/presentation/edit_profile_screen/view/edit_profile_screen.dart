@@ -79,6 +79,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
+                    CircleAvatar(radius: 55),
+                    TextButton(onPressed: (){}, child:  Text(
+                      "Edit Photo",
+                      style:
+                      GLTextStyles.ralewayStyl(color: ColorTheme.brown,size: 18),
+                    ),),
                     Padding(
                       padding: EdgeInsets.only(right: size.width * .79),
                       child: Text(

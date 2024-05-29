@@ -28,13 +28,22 @@ class GLTextStyles {
     );
   }
 
-  static ralewayStyl({double? size, FontWeight? weight, Color? color}) {
+  static ralewayStyl(
+      {double? size,
+      FontWeight? weight,
+      Color? color,
+      TextDecoration? textDecoration,
+      TextDecorationStyle? textDecorationStyle,
+      Color? decorationColor}) {
     return GoogleFonts.raleway(
-      fontSize: size ?? 16,
-      fontWeight: weight ?? FontWeight.bold,
-      color: color ?? ColorTheme.black,
-    );
+        fontSize: size ?? 16,
+        fontWeight: weight ?? FontWeight.bold,
+        color: color ?? ColorTheme.black,
+        decoration: textDecoration,
+        decorationStyle: textDecorationStyle,
+        decorationColor: decorationColor);
   }
+
   static leagueSpartan({double? size, FontWeight? weight, Color? color}) {
     return GoogleFonts.leagueSpartan(
       fontSize: size ?? 16,

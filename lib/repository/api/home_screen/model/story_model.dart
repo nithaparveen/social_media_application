@@ -30,9 +30,9 @@ class StoryModel {
 
 class Story {
   int? id;
-  Author? author;
-  dynamic caption;
-  dynamic location;
+  String? author;
+  String? caption;
+  String? location;
   DateTime? createdAt;
   DateTime? updatedAt;
   String? image;
@@ -49,7 +49,7 @@ class Story {
 
   factory Story.fromJson(Map<String, dynamic> json) => Story(
     id: json["id"],
-    author: json["author"] == null ? null : Author.fromJson(json["author"]),
+    author: json["author"],
     caption: json["caption"],
     location: json["location"],
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -59,31 +59,11 @@ class Story {
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "author": author?.toJson(),
+    "author": author,
     "caption": caption,
     "location": location,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
-    "image": image,
-  };
-}
-
-class Author {
-  String? username;
-  dynamic image;
-
-  Author({
-    this.username,
-    this.image,
-  });
-
-  factory Author.fromJson(Map<String, dynamic> json) => Author(
-    username: json["username"],
-    image: json["image"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "username": username,
     "image": image,
   };
 }

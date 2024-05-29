@@ -17,6 +17,7 @@ class ApiHelper {
     try {
       var response = await http.get(url, headers: header);
       log("getData -> Status code -> ${response.statusCode}");
+      log("response -> ${response.body.toString()}");
       if (response.statusCode == 200) {
         var decodedData = jsonDecode(response.body);
         log("$decodedData");

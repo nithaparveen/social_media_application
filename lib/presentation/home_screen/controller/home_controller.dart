@@ -110,7 +110,7 @@ class HomeController extends ChangeNotifier {
   }
 
   fetchStories(id, context) {
-    log("HomeController -> followTapped");
+    log("HomeController -> fetchStories");
     HomeService.fetchStory(id).then((resData) {
       if (resData["status"] == 1) {
         storyModel = StoryModel.fromJson(resData);
@@ -122,6 +122,7 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     });
   }
+
   /// post story
   Future<String?> getAccessToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -159,8 +160,8 @@ class HomeController extends ChangeNotifier {
     }
   }
 
-  Future<http.Response> onUploadImage(String url, File? selectedImage,
-      String? accessToken) async {
+  Future<http.Response> onUploadImage(
+      String url, File? selectedImage, String? accessToken) async {
     var request = http.MultipartRequest('POST', Uri.parse(url));
     Map<String, String> headers = {
       "Content-type": "multipart/form-data",

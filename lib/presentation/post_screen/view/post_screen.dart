@@ -129,6 +129,7 @@ class _PostDataScreenState extends State<PostDataScreen> {
                             image,
                             captionController.text.trim(),
                             locationController.text.trim());
+                    image == null;
                     captionController.clear();
                     locationController.clear();
                   },

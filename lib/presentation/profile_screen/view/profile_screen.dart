@@ -73,364 +73,362 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onRefresh: () =>
               Provider.of<ProfileController>(context, listen: false)
                   .fetchData(context),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      children: [
-                        // profile photo
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: InkWell(
-                                onLongPress: () {
-                                  //getProfilePic(ImageSource.gallery);
-                                  print("long pressed profile");
-                                },
-                                child: CircleAvatar(
-                                  radius: 45,
-                                  backgroundImage: controller
-                                              .profileModel.data?.image ==
-                                          null
-                                      ? NetworkImage("${AppConfig.noImage}")
-                                      : NetworkImage(
-                                          "${AppConfig.mediaUrl}${controller.profileModel.data?.image}"),
-                                ),
-                              ),
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "${controller.profileModel.data?.name ?? ""}",
-                                  style: GLTextStyles.ralewayStyl(size: 18),
-                                ),
-                                Text(
-                                  "${DateFormat('dd/MM/yyyy').format((controller.profileModel.data!.dob) ?? DateTime.now()).toString()}",
-                                  style: GLTextStyles.ralewayStyl(size: 15),
-                                ),
-                                Text(
-                                  "${controller.profileModel.data?.phoneNumber ?? ""}",
-                                  style: GLTextStyles.ralewayStyl(size: 15),
-                                ),
-                                Text(
-                                  "${controller.profileModel.data?.location ?? ""}",
-                                  style: GLTextStyles.ralewayStyl(size: 15),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            //  following
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            FollowersListScreen()));
+          child: ListView(
+            children: [
+              SizedBox(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    children: [
+                      // profile photo
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onLongPress: () {
+                                //getProfilePic(ImageSource.gallery);
+                                print("long pressed profile");
                               },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Followers",
-                                    style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${controller.profileModel.data?.followerCount ?? ""}",
-                                    style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
+                              child: CircleAvatar(
+                                radius: 45,
+                                backgroundImage: controller
+                                            .profileModel.data?.image ==
+                                        null
+                                    ? NetworkImage("${AppConfig.noImage}")
+                                    : NetworkImage(
+                                        "${AppConfig.mediaUrl}${controller.profileModel.data?.image}"),
                               ),
                             ),
-
-                            // followers
-                            InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            FollowingListScreen()));
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Following",
-                                    style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${controller.profileModel.data?.followingCount ?? ""}",
-                                    style: TextStyle(
-                                      fontStyle: FontStyle.italic,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                    ),
-                                  )
-                                ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${controller.profileModel.data?.name ?? ""}",
+                                style: GLTextStyles.ralewayStyl(size: 18),
                               ),
-                            ),
-
-                            /// Posts
-
-                            Column(
+                              Text(
+                                "${DateFormat('dd/MM/yyyy').format((controller.profileModel.data!.dob) ?? DateTime.now()).toString()}",
+                                style: GLTextStyles.ralewayStyl(size: 15),
+                              ),
+                              Text(
+                                "${controller.profileModel.data?.phoneNumber ?? ""}",
+                                style: GLTextStyles.ralewayStyl(size: 15),
+                              ),
+                              Text(
+                                "${controller.profileModel.data?.location ?? ""}",
+                                style: GLTextStyles.ralewayStyl(size: 15),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          //  following
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          FollowersListScreen()));
+                            },
+                            child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "Posts",
+                                  "Followers",
                                   style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Text(
-                                  "${controller.postListModel.data!.length}",
+                                  "${controller.profileModel.data?.followerCount ?? ""}",
                                   style: TextStyle(
                                     fontStyle: FontStyle.italic,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
                                   ),
-                                ),
+                                )
                               ],
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                            ),
+                          ),
+
+                          // followers
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          FollowingListScreen()));
+                            },
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Following",
+                                  style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                Text(
+                                  "${controller.profileModel.data?.followingCount ?? ""}",
+                                  style: TextStyle(
+                                    fontStyle: FontStyle.italic,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+
+                          /// Posts
+
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Posts",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                "${controller.postListModel.data!.length}",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 30),
-                Consumer<ProfileController>(
-                  builder: (context, control, child) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: GridView.count(
-                        shrinkWrap: true,
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 8,
-                        mainAxisSpacing: 8,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: List.generate(
-                          control.postListModel.data!.length,
-                          (index) => InkWell(
-                            onLongPress: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                        content: SizedBox(
-                                          height: size.height * .70,
-                                          width: size.height * .75,
-                                          child: Column(
-                                            children: [
-                                              ListTile(
-                                                leading: CircleAvatar(
-                                                  backgroundImage: control
-                                                              .postListModel
-                                                              .data?[index]
-                                                              .author
-                                                              ?.profileImage ==
-                                                          null
-                                                      ? NetworkImage(
-                                                          "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
-                                                      : NetworkImage(
-                                                          "${AppConfig.mediaUrl}${control.postListModel.data![index].author!.profileImage}"),
-                                                ),
-                                                title: Text(
-                                                  "${control.postListModel.data?[index].author?.authorName}",
+              ),
+              SizedBox(height: 30),
+              Consumer<ProfileController>(
+                builder: (context, control, child) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: GridView.count(
+                      shrinkWrap: true,
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 8,
+                      mainAxisSpacing: 8,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: List.generate(
+                        control.postListModel.data!.length,
+                        (index) => InkWell(
+                          onLongPress: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      content: SizedBox(
+                                        height: size.height * .70,
+                                        width: size.height * .75,
+                                        child: Column(
+                                          children: [
+                                            ListTile(
+                                              leading: CircleAvatar(
+                                                backgroundImage: control
+                                                            .postListModel
+                                                            .data?[index]
+                                                            .author
+                                                            ?.profileImage ==
+                                                        null
+                                                    ? NetworkImage(
+                                                        "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                                                    : NetworkImage(
+                                                        "${AppConfig.mediaUrl}${control.postListModel.data![index].author!.profileImage}"),
+                                              ),
+                                              title: Text(
+                                                "${control.postListModel.data?[index].author?.authorName}",
+                                                style:
+                                                    GLTextStyles.poppinsStyl(
+                                                        size:
+                                                            size.width * .04,
+                                                        weight:
+                                                            FontWeight.w600),
+                                              ),
+                                              subtitle: GestureDetector(
+                                                onTap: () {
+                                                  // maplaunchURL(surl);
+                                                },
+                                                child: Text(
+                                                  "${control.postListModel.data?[index].location}",
                                                   style:
-                                                      GLTextStyles.poppinsStyl(
-                                                          size:
-                                                              size.width * .04,
-                                                          weight:
-                                                              FontWeight.w600),
-                                                ),
-                                                subtitle: GestureDetector(
-                                                  onTap: () {
-                                                    // maplaunchURL(surl);
-                                                  },
-                                                  child: Text(
-                                                    "${control.postListModel.data?[index].location}",
-                                                    style:
-                                                        GLTextStyles.kanitStyl(
-                                                            size: size.width *
-                                                                .035,
-                                                            weight: FontWeight
-                                                                .w300),
-                                                  ),
+                                                      GLTextStyles.kanitStyl(
+                                                          size: size.width *
+                                                              .035,
+                                                          weight: FontWeight
+                                                              .w300),
                                                 ),
                                               ),
-                                              Container(
-                                                height: size.width * .65,
-                                                decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        fit: BoxFit.contain,
-                                                        image: control
-                                                                    .postListModel
-                                                                    .data?[
-                                                                        index]
-                                                                    .image ==
-                                                                null
-                                                            ? NetworkImage(
-                                                                "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
-                                                            : NetworkImage(
-                                                                "${control.postListModel.data?[index].image}",
-                                                              ))),
-                                              ),
-                                              Container(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10,
-                                                        vertical: 10),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    displayText(
-                                                        label:
-                                                            "${control.postListModel.data?[index].caption}"),
-                                                    Wrap(
-                                                      children: [
-                                                        Wrap(
-                                                          children: [
-                                                            Container(
-                                                              width:
-                                                                  size.width *
-                                                                      .05,
-                                                              height:
-                                                                  size.width *
-                                                                      .05,
-                                                              decoration: BoxDecoration(
-                                                                  color:
-                                                                      ColorTheme
-                                                                          .yellow,
-                                                                  shape: BoxShape
-                                                                      .circle),
-                                                              child: const Icon(
-                                                                  Icons
-                                                                      .thumb_up,
-                                                                  color: Colors
-                                                                      .white,
-                                                                  size: 14),
-                                                            ),
-                                                            SizedBox(
-                                                                width:
-                                                                    size.width *
-                                                                        .02),
-                                                            displayText(
-                                                                label:
-                                                                    "${control.postListModel.data?[index].likeCount}"),
-                                                          ],
-                                                        ),
-                                                        SizedBox(
-                                                            width: size.width *
-                                                                .04),
-                                                        displayText(
-                                                            label:
-                                                                "${control.postListModel.data?[index].commentsCount}"),
-                                                        SizedBox(
-                                                            width: size.width *
-                                                                .02),
-                                                        displayText(
-                                                            label: "Comments"),
-                                                      ],
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              Row(
+                                            ),
+                                            Container(
+                                              height: size.width * .65,
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      fit: BoxFit.contain,
+                                                      image: control
+                                                                  .postListModel
+                                                                  .data?[
+                                                                      index]
+                                                                  .image ==
+                                                              null
+                                                          ? NetworkImage(
+                                                              "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                                                          : NetworkImage(
+                                                              "${control.postListModel.data?[index].image}",
+                                                            ))),
+                                            ),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10,
+                                                      vertical: 10),
+                                              child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
-                                                        .spaceEvenly,
+                                                        .spaceBetween,
                                                 children: [
-                                                  headerButton(
-                                                      buttonText: "Like",
-                                                      buttonIcon: control
-                                                                  .postListModel
-                                                                  .data?[index]
-                                                                  .isLiked ==
-                                                              true
-                                                          ? Icons
-                                                              .thumb_up_alt_outlined
-                                                          : Icons
-                                                              .thumb_up_off_alt_sharp,
-                                                      buttonAction: () {},
-                                                      buttonColor:
-                                                          ColorTheme.yellow),
-                                                  headerButton(
-                                                      buttonText: "Comment",
-                                                      buttonIcon: Icons
-                                                          .message_outlined,
-                                                      buttonAction: () {},
-                                                      buttonColor:
-                                                          ColorTheme.yellow),
+                                                  displayText(
+                                                      label:
+                                                          "${control.postListModel.data?[index].caption}"),
+                                                  Wrap(
+                                                    children: [
+                                                      Wrap(
+                                                        children: [
+                                                          Container(
+                                                            width:
+                                                                size.width *
+                                                                    .05,
+                                                            height:
+                                                                size.width *
+                                                                    .05,
+                                                            decoration: BoxDecoration(
+                                                                color:
+                                                                    ColorTheme
+                                                                        .yellow,
+                                                                shape: BoxShape
+                                                                    .circle),
+                                                            child: const Icon(
+                                                                Icons
+                                                                    .thumb_up,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 14),
+                                                          ),
+                                                          SizedBox(
+                                                              width:
+                                                                  size.width *
+                                                                      .02),
+                                                          displayText(
+                                                              label:
+                                                                  "${control.postListModel.data?[index].likeCount}"),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                          width: size.width *
+                                                              .04),
+                                                      displayText(
+                                                          label:
+                                                              "${control.postListModel.data?[index].commentsCount}"),
+                                                      SizedBox(
+                                                          width: size.width *
+                                                              .02),
+                                                      displayText(
+                                                          label: "Comments"),
+                                                    ],
+                                                  )
                                                 ],
                                               ),
-                                              headerButton(
-                                                buttonText: "Delete",
-                                                buttonIcon:
-                                                    Icons.delete_outline,
-                                                buttonAction: () {
-                                                  Provider.of<ProfileController>(
-                                                          context,
-                                                          listen: false)
-                                                      .postDeleted(
-                                                          controller
-                                                              .postListModel
-                                                              .data?[index]
-                                                              .postId,
-                                                          context);
-                                                },
-                                                buttonColor: ColorTheme.yellow,
-                                              )
-                                            ],
-                                          ),
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceEvenly,
+                                              children: [
+                                                headerButton(
+                                                    buttonText: "Like",
+                                                    buttonIcon: control
+                                                                .postListModel
+                                                                .data?[index]
+                                                                .isLiked ==
+                                                            true
+                                                        ? Icons
+                                                            .thumb_up_alt_outlined
+                                                        : Icons
+                                                            .thumb_up_off_alt_sharp,
+                                                    buttonAction: () {},
+                                                    buttonColor:
+                                                        ColorTheme.yellow),
+                                                headerButton(
+                                                    buttonText: "Comment",
+                                                    buttonIcon: Icons
+                                                        .message_outlined,
+                                                    buttonAction: () {},
+                                                    buttonColor:
+                                                        ColorTheme.yellow),
+                                              ],
+                                            ),
+                                            headerButton(
+                                              buttonText: "Delete",
+                                              buttonIcon:
+                                                  Icons.delete_outline,
+                                              buttonAction: () {
+                                                Provider.of<ProfileController>(
+                                                        context,
+                                                        listen: false)
+                                                    .postDeleted(
+                                                        controller
+                                                            .postListModel
+                                                            .data?[index]
+                                                            .postId,
+                                                        context);
+                                              },
+                                              buttonColor: ColorTheme.yellow,
+                                            )
+                                          ],
                                         ),
-                                      ));
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: control.postListModel.data?[index]
-                                                  .image ==
-                                              null
-                                          ? NetworkImage(
-                                              "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
-                                          : NetworkImage(
-                                              "${control.postListModel.data?[index].image}",
-                                            ))),
-                            ),
+                                      ),
+                                    ));
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: control.postListModel.data?[index]
+                                                .image ==
+                                            null
+                                        ? NetworkImage(
+                                            "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                                        : NetworkImage(
+                                            "${control.postListModel.data?[index].image}",
+                                          ))),
                           ),
                         ),
                       ),
-                    );
-                  },
-                )
-              ],
-            ),
+                    ),
+                  );
+                },
+              )
+            ],
           ),
         ),
       );

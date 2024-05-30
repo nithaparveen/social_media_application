@@ -29,23 +29,27 @@ class SearchModel {
 }
 
 class Datum {
+  int? id;
   String? username;
   String? name;
   String? image;
 
   Datum({
+    this.id,
     this.username,
     this.name,
     this.image,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"],
     username: json["username"],
     name: json["name"],
     image: json["image"],
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "username": username,
     "name": name,
     "image": image,

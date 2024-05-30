@@ -102,6 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           "${controller.searchModel?.data?[index].image ?? "${AppConfig.noImage}"}")),
                   title: Text("${controller.searchModel?.data?[index].username}"),
                   subtitle: Text("${controller.searchModel?.data?[index].name}"),
+                  trailing: ElevatedButton(onPressed: (){}, child: Text("Follow")),
                 );
               }),
         );

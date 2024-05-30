@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 
@@ -47,9 +48,7 @@ class _StorySliderState extends State<StorySlider> {
                   size: 24, weight: FontWeight.w700, color: ColorTheme.blue),
             ),
           ),
-          SizedBox(
-            height: 5,
-          ),
+          SizedBox(height: 5),
           Expanded(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,9 +90,7 @@ class _StorySliderState extends State<StorySlider> {
                         itemBuilder: (context, index) {
                           return Row(
                             children: [
-                              SizedBox(
-                                width: 10,
-                              ),
+                              SizedBox(width: 10),
                               Column(
                                 children: [
                                   InkWell(
@@ -101,38 +98,43 @@ class _StorySliderState extends State<StorySlider> {
                                       height: size.width * .22,
                                       width: size.width * .14,
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: ColorTheme.lightBrown,
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: control
-                                                          .storyModel
-                                                          .stories?[index]
-                                                          .image ==
-                                                      null
-                                                  ? NetworkImage(
-                                                      "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
-                                                  : NetworkImage(
-                                                      "${AppConfig.mediaUrl}${control.storyModel.stories?[index].image}",
-                                                    ))),
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: ColorTheme.lightBrown,
+                                        image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: control.storyModel
+                                                      .stories?[index].image ==
+                                                  null
+                                              ? NetworkImage(
+                                                  "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                                              : NetworkImage(
+                                                  "${AppConfig.mediaUrl}${control.storyModel.stories?[index].image}",
+                                                ),
+                                        ),
+                                      ),
                                     ),
                                     onTap: () {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) => StoryView(
-                                              authorName: control.storyModel
-                                                      .stories?[index].author ??
+                                              authorName: control
+                                                      .storyModel
+                                                      .stories?[index]
+                                                      .author
+                                                      ?.username ??
                                                   "",
                                               image:
                                                   '${AppConfig.mediaUrl}${control.storyModel.stories?[index].image}',
+                                              time:
+                                                  "${DateFormat('hh:mm a').format((control.storyModel.stories?[index].updatedAt) ?? DateTime.now()).toString()}",
                                             ),
                                           ));
                                     },
                                   ),
                                   Text(
-                                    control.storyModel.stories?[index].author ??
+                                    control.storyModel.stories?[index].author
+                                            ?.username ??
                                         "",
                                     style: GLTextStyles.ralewayStyl(size: 14),
                                   )

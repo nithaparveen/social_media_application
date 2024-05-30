@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/presentation/edit_profile_screen/controller/edit_profile_controller.dart';
@@ -31,6 +34,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late TextEditingController phoneController;
   late TextEditingController locationController;
   late DateTime selectedDate;
+  File? image;
+
+  Future<void> getImage(ImageSource source) async {
+    final pickedImage = await ImagePicker().pickImage(source: source);
+    if (pickedImage != null) {
+      setState(() {
+        image = File(pickedImage.path);
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -79,8 +92,40 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 padding: const EdgeInsets.all(15.0),
                 child: Column(
                   children: [
-                    CircleAvatar(radius: 55),
-                    TextButton(onPressed: (){}, child:  Text(
+                    CircleAvatar(radius: 55,backgroundImage: image!=null? FileImage(image!):null),
+                    TextButton(onPressed: (){
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text("Choose the Source"),
+                              actions: [
+                                ElevatedButton.icon(
+                                    onPressed: () {
+                                      getImage(ImageSource.camera);
+                                      Navigator.pop(context);
+                                    },
+                                    style: ElevatedButton.styleFrom(backgroundColor: ColorTheme.blue),
+                                    icon:  Icon(
+                                      Icons.camera,
+                                      color: ColorTheme.yellow,
+                                    ),
+                                    label:  Text("Camera", style: TextStyle(color: ColorTheme.yellow))),
+                                ElevatedButton.icon(
+                                    onPressed: () {
+                                      getImage(ImageSource.gallery);
+                                      Navigator.pop(context);
+                                    },
+                                    style: ElevatedButton.styleFrom(backgroundColor: ColorTheme.blue),
+                                    icon:  Icon(
+                                      Icons.photo,
+                                      color: ColorTheme.yellow,
+                                    ),
+                                    label:  Text("Gallery", style: TextStyle(color: ColorTheme.yellow)))
+                              ],
+                            );
+                          });
+                    }, child:  Text(
                       "Edit Photo",
                       style:
                       GLTextStyles.ralewayStyl(color: ColorTheme.brown,size: 18),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
+import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
 import 'package:socialmedia/presentation/search_screen/controller/search_controller.dart';
 
 import '../../../core/constants/colors.dart';
@@ -13,6 +14,12 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   var searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    searchController;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   //height: size.height * .08,
                   width: size.width * .75,
-                  child: TextField(
+                  child: TextFormField(
                     // maxLines: 6,
                     controller: searchController,
                     decoration: InputDecoration(
@@ -51,6 +58,12 @@ class _SearchScreenState extends State<SearchScreen> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(color: Colors.black, width: .5)),
                     ),
+                    validator: (value){
+                      if(value==null){
+                        return "Enter the string";
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 SizedBox(width: size.width * .05),
@@ -90,23 +103,47 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
-      body: Consumer<SearchScreenController>(builder: (context, controller, _) {
-        return Visibility(
-          visible: controller.showData,
-          child: ListView.builder(
-              itemCount: controller.searchModel?.data?.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "${controller.searchModel?.data?[index].image ?? "${AppConfig.noImage}"}")),
-                  title: Text("${controller.searchModel?.data?[index].username}"),
-                  subtitle: Text("${controller.searchModel?.data?[index].name}"),
-                  trailing: ElevatedButton(onPressed: (){}, child: Text("Follow")),
-                );
-              }),
-        );
-      }),
+      body: RefreshIndicator(
+        onRefresh: ()=>Provider.of<SearchScreenController>(context, listen: false)
+            .fetchData(searchController.text.trim(), context),
+        child: Consumer<SearchScreenController>(builder: (context, controller, _) {
+          return Visibility(
+            visible: controller.showData,
+            child: ListView.builder(
+                itemCount: controller.searchModel?.data?.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    leading: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                            "${controller.searchModel?.data?[index].image ?? "${AppConfig.noImage}"}")),
+                    title: Text("${controller.searchModel?.data?[index].username}"),
+                    subtitle: Text("${controller.searchModel?.data?[index].name}"),
+                    trailing: SizedBox(
+                      width: 100,
+                      child: ElevatedButton(
+                          onPressed: () {
+                            Provider.of<HomeController>(context, listen: false)
+                                .followTapped(controller.searchModel?.data?[index].id, context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: controller.searchModel?.data?[index].isFollowing == true
+                                  ? ColorTheme.white
+                                  : ColorTheme.blue),
+                          child: controller.searchModel?.data?[index].isFollowing == true
+                              ? Text(
+                                  "Unfollow",
+                                  style: TextStyle(color: ColorTheme.blue),
+                                )
+                              : Text(
+                                  "Follow",
+                                  style: TextStyle(color: ColorTheme.white),
+                                )),
+                    ),
+                  );
+                }),
+          );
+        }),
+      ),
     );
   }
 }

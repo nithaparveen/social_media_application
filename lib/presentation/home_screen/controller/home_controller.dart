@@ -10,6 +10,7 @@ import 'package:socialmedia/core/utils/app_utils.dart';
 import 'package:socialmedia/repository/api/home_screen/model/comments_model.dart';
 import 'package:socialmedia/repository/api/home_screen/model/home_model.dart';
 import 'package:socialmedia/repository/api/home_screen/model/story_model.dart';
+import 'package:socialmedia/repository/api/home_screen/model/user_story_model.dart';
 import 'package:socialmedia/repository/api/home_screen/service/home_service.dart';
 
 import '../../../app_config/app_config.dart';
@@ -19,9 +20,11 @@ class HomeController extends ChangeNotifier {
   bool isLoading = false;
   bool isLoadingComments = true;
   bool isLoadingStories = false;
+  bool isLoadingUserStories = false;
   HomeModel homeModel = HomeModel();
   CommentsModel commentsModel = CommentsModel();
   StoryModel storyModel = StoryModel();
+  UserStoryModel userStoryModel = UserStoryModel();
 
   Future<void> fetchData(BuildContext context) async {
     isLoading = true;
@@ -115,6 +118,20 @@ class HomeController extends ChangeNotifier {
       if (resData["status"] == 1) {
         storyModel = StoryModel.fromJson(resData);
         isLoadingStories = false;
+      } else {
+        AppUtils.oneTimeSnackBar("Failed to Fetch Data",
+            context: context, bgColor: Colors.red);
+      }
+      notifyListeners();
+    });
+  }
+
+  fetchUserStories(id, context) {
+    log("HomeController -> fetchUserStories");
+    HomeService.fetchUserStory(id).then((resData) {
+      if (resData["status"] == 1) {
+        userStoryModel = UserStoryModel.fromJson(resData);
+        isLoadingUserStories = false;
       } else {
         AppUtils.oneTimeSnackBar("Failed to Fetch Data",
             context: context, bgColor: Colors.red);

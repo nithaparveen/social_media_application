@@ -23,6 +23,8 @@ class _StorySliderState extends State<StorySlider> {
   fetchData() {
     Provider.of<HomeController>(context, listen: false)
         .fetchStories(widget.id, context);
+    Provider.of<HomeController>(context, listen: false)
+        .fetchUserStories(widget.id, context);
   }
 
   @override
@@ -82,66 +84,38 @@ class _StorySliderState extends State<StorySlider> {
                 Expanded(
                   child: Consumer<HomeController>(
                     builder: (context, control, _) {
+                      bool userHasStory =
+                          control.userStoryModel.story != null &&
+                              control.userStoryModel.story!.isNotEmpty;
                       return ListView.builder(
                         shrinkWrap: true,
                         // physics: FixedExtentScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        itemCount: control.storyModel.stories?.length ?? 0,
+                        itemCount: (userHasStory ? 1 : 0) +
+                            (control.storyModel.stories?.length ?? 0),
                         itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              SizedBox(width: 10),
-                              Column(
-                                children: [
-                                  InkWell(
-                                    child: Container(
-                                      height: size.width * .22,
-                                      width: size.width * .14,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: ColorTheme.lightBrown,
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: control.storyModel
-                                                      .stories?[index].image ==
-                                                  null
-                                              ? NetworkImage(
-                                                  "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
-                                              : NetworkImage(
-                                                  "${AppConfig.mediaUrl}${control.storyModel.stories?[index].image}",
-                                                ),
-                                        ),
-                                      ),
-                                    ),
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => StoryView(
-                                              authorName: control
-                                                      .storyModel
-                                                      .stories?[index]
-                                                      .author
-                                                      ?.username ??
-                                                  "",
-                                              image:
-                                                  '${AppConfig.mediaUrl}${control.storyModel.stories?[index].image}',
-                                              time:
-                                                  "${DateFormat('hh:mm a').format((control.storyModel.stories?[index].updatedAt) ?? DateTime.now()).toString()}",
-                                            ),
-                                          ));
-                                    },
-                                  ),
-                                  Text(
-                                    control.storyModel.stories?[index].author
-                                            ?.username ??
-                                        "",
-                                    style: GLTextStyles.ralewayStyl(size: 14),
-                                  )
-                                ],
-                              ),
-                            ],
-                          );
+                          if (index == 0 && userHasStory) {
+                            return buildStoryItem(
+                              context,
+                              control,
+                              control.userStoryModel.story?[0].author
+                                      ?.username ??
+                                  "",
+                              control.userStoryModel.story?[0].image,
+                              control.userStoryModel.story?[0].updatedAt,
+                            );
+                          } else {
+                            int storyIndex = userHasStory ? index - 1 : index;
+                            return buildStoryItem(
+                              context,
+                              control,
+                              control.storyModel.stories?[storyIndex].author
+                                      ?.username ??
+                                  "",
+                              control.storyModel.stories?[storyIndex].image,
+                              control.storyModel.stories?[storyIndex].updatedAt,
+                            );
+                          }
                         },
                       );
                     },
@@ -152,6 +126,55 @@ class _StorySliderState extends State<StorySlider> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildStoryItem(BuildContext context, HomeController control,
+      String authorName, String? imageUrl, DateTime? updatedAt) {
+    var size = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        SizedBox(width: 10),
+        Column(
+          children: [
+            InkWell(
+              child: Container(
+                height: size.width * .22,
+                width: size.width * .14,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: ColorTheme.lightBrown,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: imageUrl == null
+                        ? NetworkImage(
+                            "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                        : NetworkImage("${AppConfig.mediaUrl}$imageUrl"),
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StoryView(
+                      authorName: authorName,
+                      image: '${AppConfig.mediaUrl}$imageUrl',
+                      time: DateFormat('hh:mm a')
+                          .format(updatedAt ?? DateTime.now())
+                          .toString(),
+                    ),
+                  ),
+                );
+              },
+            ),
+            Text(
+              authorName,
+              style: GLTextStyles.ralewayStyl(size: 14),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

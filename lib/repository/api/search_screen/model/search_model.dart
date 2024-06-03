@@ -33,12 +33,14 @@ class Datum {
   String? username;
   String? name;
   String? image;
+  bool? isFollowing;
 
   Datum({
     this.id,
     this.username,
     this.name,
     this.image,
+    this.isFollowing,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -46,6 +48,7 @@ class Datum {
     username: json["username"],
     name: json["name"],
     image: json["image"],
+    isFollowing: json["is_following"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +56,6 @@ class Datum {
     "username": username,
     "name": name,
     "image": image,
+    "is_following": isFollowing,
   };
 }

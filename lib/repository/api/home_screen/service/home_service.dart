@@ -83,7 +83,45 @@ class HomeService {
     try {
       var decodedData = await ApiHelper.postData(
           endPoint: "CreateFollower/$id/",
-          header: ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> postStory(id) async {
+    try {
+      var decodedData = await ApiHelper.postData(
+          endPoint: "stories/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> fetchStory(id) async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "stories/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> fetchUserStory(id) async {
+    try {
+      var decodedData = await ApiHelper.getData(
+          endPoint: "userstoryview/",
+          header:
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      print(decodedData);
       return decodedData;
     } catch (e) {
       log("$e");

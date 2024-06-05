@@ -29,25 +29,33 @@ class SearchModel {
 }
 
 class Datum {
+  int? id;
   String? username;
   String? name;
   String? image;
+  bool? isFollowing;
 
   Datum({
+    this.id,
     this.username,
     this.name,
     this.image,
+    this.isFollowing,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"],
     username: json["username"],
     name: json["name"],
     image: json["image"],
+    isFollowing: json["is_following"],
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "username": username,
     "name": name,
     "image": image,
+    "is_following": isFollowing,
   };
 }

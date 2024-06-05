@@ -93,9 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: StorySlider(),
               ),
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(height: 10),
-            ),
+            //SliverToBoxAdapter(child: SizedBox(height: 10)),
             Consumer<HomeController>(
               builder: (context, controller, child) {
                 return controller.isLoading
@@ -133,8 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                 "${Provider.of<HomeController>(context).homeModel.data?[index].likeCount}",
                             post_id: controller.homeModel.data?[index].postId,
                             followPressed: () {
-                              Provider.of<HomeController>(context,listen: false)
-                                  .followTapped(controller.homeModel.data?[index].author?.authorId,context);
+                              Provider.of<HomeController>(context,
+                                      listen: false)
+                                  .followTapped(
+                                      controller.homeModel.data?[index].author
+                                          ?.authorId,
+                                      context);
                             },
                           );
                         },

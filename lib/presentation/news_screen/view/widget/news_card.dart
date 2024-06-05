@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:socialmedia/presentation/news_screen/controller/news_controller.dart';
+
+import '../../../home_screen/controller/home_controller.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard(
@@ -74,10 +78,9 @@ class NewsCard extends StatelessWidget {
                         "$sourceName | ${DateFormat('dd/MM/yyyy').format(date!).toString()}"),
                     IconButton(
                         onPressed: () {
-                          // String newsToShare = "$title \n \n $description \n \n $url";
-                          // // Provider.of<HomeScreenController>(context,
-                          // //         listen: false)
-                          // //     .shareText(textToShare: newsToShare);
+                          String newsToShare = "$title \n \n $description \n \n $url";
+                          Provider.of<NewsController>(context,
+                                  listen: false).share(toShare: newsToShare);
                         },
                         icon: const Icon(Icons.share))
                   ],

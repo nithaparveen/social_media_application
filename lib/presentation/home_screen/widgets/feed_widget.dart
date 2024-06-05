@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -149,7 +150,9 @@ class FeedWidget extends StatelessWidget {
                   headerButton(
                       buttonText: "Share",
                       buttonIcon: Icons.share_outlined,
-                      buttonAction: () {},
+                      buttonAction: () {
+                        Share.share('Check out this awesome content!');
+                      },
                       buttonColor: ColorTheme.yellow),
                 ],
               )

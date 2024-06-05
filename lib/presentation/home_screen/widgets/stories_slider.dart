@@ -95,7 +95,7 @@ class _StorySliderState extends State<StorySlider> {
                             (control.storyModel.stories?.length ?? 0),
                         itemBuilder: (context, index) {
                           if (index == 0 && userHasStory) {
-                            return buildStoryItem(
+                            return buildUserStoryItem(
                               context,
                               control,
                               control.userStoryModel.story?[0].author
@@ -160,6 +160,55 @@ class _StorySliderState extends State<StorySlider> {
                     builder: (context) => StoryView(
                       authorName: authorName,
                       image: '${AppConfig.mediaUrl}$imageUrl',
+                      time: DateFormat('hh:mm a')
+                          .format(updatedAt ?? DateTime.now())
+                          .toString(),
+                    ),
+                  ),
+                );
+              },
+            ),
+            Text(
+              authorName,
+              style: GLTextStyles.ralewayStyl(size: 14),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildUserStoryItem(BuildContext context, HomeController control,
+      String authorName, String? imageUrl, DateTime? updatedAt) {
+    var size = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        SizedBox(width: 10),
+        Column(
+          children: [
+            InkWell(
+              child: Container(
+                height: size.width * .22,
+                width: size.width * .14,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: ColorTheme.lightBrown,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: imageUrl == null
+                        ? NetworkImage(
+                            "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                        : NetworkImage("$imageUrl"),
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StoryView(
+                      authorName: authorName,
+                      image: '$imageUrl',
                       time: DateFormat('hh:mm a')
                           .format(updatedAt ?? DateTime.now())
                           .toString(),

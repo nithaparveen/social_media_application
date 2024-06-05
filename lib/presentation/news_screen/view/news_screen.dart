@@ -30,10 +30,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
+    var height = MediaQuery.of(context).size.height;
     return Consumer<NewsController>(
       builder: (context, provider, child) {
         return DefaultTabController(
@@ -41,6 +38,7 @@ class _NewsScreenState extends State<NewsScreen> {
           initialIndex: 0,
           child: Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               elevation: 0,
               titleTextStyle: GLTextStyles.ralewayStyl(
                   color: ColorTheme.blue, size: 25, weight: FontWeight.w700),
@@ -66,10 +64,9 @@ class _NewsScreenState extends State<NewsScreen> {
                 isScrollable: true,
                 tabs: List.generate(
                   provider.categoryList.length,
-                      (index) =>
-                      Tab(
-                        text: provider.categoryList[index],
-                      ),
+                  (index) => Tab(
+                    text: provider.categoryList[index],
+                  ),
                 ),
                 onTap: (value) {
                   provider.onTap(index: value);
@@ -84,78 +81,69 @@ class _NewsScreenState extends State<NewsScreen> {
             body: provider.isLoading == true
                 ? const Center(child: CircularProgressIndicator())
                 : Padding(
-              padding: const EdgeInsets.all(10),
-              child: ListView.separated(
-                  itemBuilder: (context, index) =>
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      NewsViewScreen(
-                                          title: provider.newsDataModel
-                                              .articles?[index].title
-                                              .toString() ??
-                                              "",
-                                          description: provider
-                                              .newsDataModel
-                                              .articles?[index]
-                                              .description
-                                              .toString() ??
-                                              "",
-                                          imageUrl: provider.newsDataModel
-                                              .articles?[index].urlToImage
-                                              .toString() ??
-                                              "https://clareproject.org.uk/wp-content/uploads/2021/12/placeholder-1.jpg",
-                                          contant: provider.newsDataModel
-                                              .articles?[index].content
-                                              .toString() ??
-                                              "",
-                                          sourceName: provider.newsDataModel
-                                              .articles?[index].source?.name
-                                              .toString() ?? "",
-                                          url: provider.newsDataModel
-                                              .articles?[index].url
-                                              .toString() ?? "",
-                                          date: provider.newsDataModel
-                                              .articles?[index].publishedAt)));
-                        },
-                        child: NewsCard(
-                          title: provider
-                              .newsDataModel.articles?[index].title
-                              .toString() ??
-                              "",
-                          description: provider.newsDataModel
-                              .articles?[index].description
-                              .toString() ??
-                              "",
-                          date: provider
-                              .newsDataModel.articles?[index].publishedAt,
-                          imageUrl: provider.newsDataModel
-                              .articles?[index].urlToImage
-                              .toString() ??
-                              "https://clareproject.org.uk/wp-content/uploads/2021/12/placeholder-1.jpg",
-                          contant: provider
-                              .newsDataModel.articles?[index].content
-                              .toString() ??
-                              "",
-                          sourceName: provider.newsDataModel
-                              .articles?[index].source?.name
-                              .toString() ??
-                              "",
-                          url: provider.newsDataModel.articles?[index].url
-                              .toString() ??
-                              "",
-                        ),
-                      ),
-                  separatorBuilder: (context, index) =>
-                  const Divider(
-                    height: 20,
+                    padding: const EdgeInsets.all(10),
+                    child: ListView.separated(
+                        itemBuilder: (context, index) => InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => NewsViewScreen(
+                                            title: provider.newsDataModel.articles?[index].title
+                                                    .toString() ??
+                                                "",
+                                            description: provider
+                                                    .newsDataModel
+                                                    .articles?[index]
+                                                    .description
+                                                    .toString() ??
+                                                "",
+                                            imageUrl: provider.newsDataModel
+                                                    .articles?[index].urlToImage
+                                                    .toString() ??
+                                                "https://clareproject.org.uk/wp-content/uploads/2021/12/placeholder-1.jpg",
+                                            contant: provider.newsDataModel
+                                                    .articles?[index].content
+                                                    .toString() ??
+                                                "",
+                                            sourceName: provider.newsDataModel.articles?[index].source?.name.toString() ?? "",
+                                            url: provider.newsDataModel.articles?[index].url.toString() ?? "",
+                                            date: provider.newsDataModel.articles?[index].publishedAt)));
+                              },
+                              child: NewsCard(
+                                title: provider
+                                        .newsDataModel.articles?[index].title
+                                        .toString() ??
+                                    "",
+                                description: provider.newsDataModel
+                                        .articles?[index].description
+                                        .toString() ??
+                                    "",
+                                date: provider
+                                    .newsDataModel.articles?[index].publishedAt,
+                                imageUrl: provider.newsDataModel
+                                        .articles?[index].urlToImage
+                                        .toString() ??
+                                    "https://clareproject.org.uk/wp-content/uploads/2021/12/placeholder-1.jpg",
+                                contant: provider
+                                        .newsDataModel.articles?[index].content
+                                        .toString() ??
+                                    "",
+                                sourceName: provider.newsDataModel
+                                        .articles?[index].source?.name
+                                        .toString() ??
+                                    "",
+                                url: provider.newsDataModel.articles?[index].url
+                                        .toString() ??
+                                    "",
+                              ),
+                            ),
+                        separatorBuilder: (context, index) => const Divider(
+                              height: 20,
+                            ),
+                        itemCount:
+                            provider.newsDataModel.articles?.length ?? 0),
                   ),
-                  itemCount:
-                  provider.newsDataModel.articles?.length ?? 0),
-            ),
           ),
         );
       },

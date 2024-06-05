@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/utils/app_utils.dart';
@@ -60,6 +61,7 @@ class HomeController extends ChangeNotifier {
       notifyListeners();
     });
   }
+
   Future<dynamic> fetchLikes(context, postId) async {
     isLoadingLikes = true;
     notifyListeners();
@@ -218,5 +220,13 @@ class HomeController extends ChangeNotifier {
     log("request : " + request.toString());
     var res = await request.send();
     return await http.Response.fromStream(res);
+  }
+
+  share({String toShare = ""}) {
+    try {
+      Share.share(toShare);
+    } catch (e) {
+      print("Error sharing $e");
+    }
   }
 }

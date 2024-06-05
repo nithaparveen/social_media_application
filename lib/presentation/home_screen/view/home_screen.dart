@@ -18,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // bool _isSearchBarVisible = false;
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -144,11 +143,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-// void _searchClicked() {
-//   setState(() {
-//     _isSearchBarVisible = !_isSearchBarVisible;
-//     log("message");
-//   });
-// }
 }

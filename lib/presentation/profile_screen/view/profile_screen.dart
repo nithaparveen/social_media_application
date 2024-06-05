@@ -9,7 +9,9 @@ import 'package:socialmedia/presentation/profile_screen/view/widgets/following_l
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../home_screen/widgets/comment_screen.dart';
 import '../../home_screen/widgets/feed_widget.dart';
+import '../../home_screen/widgets/likes_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -131,7 +133,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          //  following
+                          // Posts
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Posts",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              Text(
+                                "${controller.postListModel.data!.length}",
+                                style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          //  followers
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -162,7 +185,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ),
 
-                          // followers
+                          // following
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -192,29 +215,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ],
                             ),
                           ),
-
-                          /// Posts
-
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Posts",
-                                style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                "${controller.postListModel.data!.length}",
-                                style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     ],
@@ -243,6 +243,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         height: size.height * .70,
                                         width: size.height * .75,
                                         child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: [
                                             ListTile(
                                               leading: CircleAvatar(
@@ -259,25 +260,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               ),
                                               title: Text(
                                                 "${control.postListModel.data?[index].author?.authorName}",
-                                                style:
-                                                    GLTextStyles.poppinsStyl(
-                                                        size:
-                                                            size.width * .04,
-                                                        weight:
-                                                            FontWeight.w600),
+                                                style: GLTextStyles.poppinsStyl(
+                                                    size: size.width * .04,
+                                                    weight: FontWeight.w600),
                                               ),
                                               subtitle: GestureDetector(
                                                 onTap: () {
-                                                  // maplaunchURL(surl);
+                                                  maplaunchURL("https://www.google.com/maps/place/?q=${control.postListModel.data?[index].location}");
                                                 },
                                                 child: Text(
                                                   "${control.postListModel.data?[index].location}",
-                                                  style:
-                                                      GLTextStyles.kanitStyl(
-                                                          size: size.width *
-                                                              .035,
-                                                          weight: FontWeight
-                                                              .w300),
+                                                  style: GLTextStyles.kanitStyl(
+                                                      size: size.width * .035,
+                                                      weight: FontWeight.w300),
                                                 ),
                                               ),
                                             ),
@@ -288,8 +283,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       fit: BoxFit.contain,
                                                       image: control
                                                                   .postListModel
-                                                                  .data?[
-                                                                      index]
+                                                                  .data?[index]
                                                                   .image ==
                                                               null
                                                           ? NetworkImage(
@@ -303,95 +297,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 10,
                                                       vertical: 10),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   displayText(
                                                       label:
                                                           "${control.postListModel.data?[index].caption}"),
-                                                  Wrap(
+                                                  SizedBox(height: size.height*.03),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
                                                     children: [
-                                                      Wrap(
-                                                        children: [
-                                                          Container(
-                                                            width:
-                                                                size.width *
-                                                                    .05,
-                                                            height:
-                                                                size.width *
-                                                                    .05,
-                                                            decoration: BoxDecoration(
-                                                                color:
-                                                                    ColorTheme
-                                                                        .yellow,
-                                                                shape: BoxShape
-                                                                    .circle),
-                                                            child: const Icon(
-                                                                Icons
-                                                                    .thumb_up,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 14),
-                                                          ),
-                                                          SizedBox(
+                                                      InkWell(
+                                                        onTap: () => Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) => LikeScreen(
+                                                                id: control.postListModel.data?[index].postId,
+                                                              ),
+                                                            )),
+                                                        child: Wrap(
+                                                          children: [
+                                                            Container(
                                                               width:
                                                                   size.width *
-                                                                      .02),
-                                                          displayText(
-                                                              label:
-                                                                  "${control.postListModel.data?[index].likeCount}"),
-                                                        ],
+                                                                      .05,
+                                                              height:
+                                                                  size.width *
+                                                                      .05,
+                                                              decoration: BoxDecoration(
+                                                                  color: ColorTheme
+                                                                      .yellow,
+                                                                  shape: BoxShape
+                                                                      .circle),
+                                                              child: const Icon(
+                                                                  Icons
+                                                                      .thumb_up,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  size: 14),
+                                                            ),
+                                                            SizedBox(
+                                                                width:
+                                                                    size.width *
+                                                                        .02),
+                                                            displayText(
+                                                                label:
+                                                                    "${control.postListModel.data?[index].likeCount}"),
+                                                          ],
+                                                        ),
                                                       ),
-                                                      SizedBox(
-                                                          width: size.width *
-                                                              .04),
-                                                      displayText(
-                                                          label:
-                                                              "${control.postListModel.data?[index].commentsCount}"),
-                                                      SizedBox(
-                                                          width: size.width *
-                                                              .02),
-                                                      displayText(
-                                                          label: "Comments"),
+                                                      InkWell(
+                                                        onTap: () => Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) => CommentScreen(id: control.postListModel.data?[index].postId),
+                                                            )),
+                                                        child: Wrap(
+                                                          children: [
+                                                            SizedBox(
+                                                                width:
+                                                                    size.width *
+                                                                        .04),
+                                                            displayText(
+                                                                label:
+                                                                    "${control.postListModel.data?[index].commentsCount}"),
+                                                            SizedBox(
+                                                                width:
+                                                                    size.width *
+                                                                        .02),
+                                                            displayText(
+                                                                label:
+                                                                    "Comments"),
+                                                          ],
+                                                        ),
+                                                      )
                                                     ],
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                             ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceEvenly,
-                                              children: [
-                                                headerButton(
-                                                    buttonText: "Like",
-                                                    buttonIcon: control
-                                                                .postListModel
-                                                                .data?[index]
-                                                                .isLiked ==
-                                                            true
-                                                        ? Icons
-                                                            .thumb_up_alt_outlined
-                                                        : Icons
-                                                            .thumb_up_off_alt_sharp,
-                                                    buttonAction: () {},
-                                                    buttonColor:
-                                                        ColorTheme.yellow),
-                                                headerButton(
-                                                    buttonText: "Comment",
-                                                    buttonIcon: Icons
-                                                        .message_outlined,
-                                                    buttonAction: () {},
-                                                    buttonColor:
-                                                        ColorTheme.yellow),
-                                              ],
-                                            ),
                                             headerButton(
                                               buttonText: "Delete",
-                                              buttonIcon:
-                                                  Icons.delete_outline,
+                                              buttonIcon: Icons.delete_outline,
                                               buttonAction: () {
                                                 Provider.of<ProfileController>(
                                                         context,

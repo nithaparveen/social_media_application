@@ -36,6 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -9,6 +9,7 @@ import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/utils/app_utils.dart';
 import 'package:socialmedia/repository/api/home_screen/model/comments_model.dart';
 import 'package:socialmedia/repository/api/home_screen/model/home_model.dart';
+import 'package:socialmedia/repository/api/home_screen/model/likes_model.dart';
 import 'package:socialmedia/repository/api/home_screen/model/story_model.dart';
 import 'package:socialmedia/repository/api/home_screen/model/user_story_model.dart';
 import 'package:socialmedia/repository/api/home_screen/service/home_service.dart';
@@ -19,10 +20,12 @@ import '../../bottom_navigation_screen/view/bottom_navigation_screen.dart';
 class HomeController extends ChangeNotifier {
   bool isLoading = false;
   bool isLoadingComments = true;
+  bool isLoadingLikes = true;
   bool isLoadingStories = false;
   bool isLoadingUserStories = false;
   HomeModel homeModel = HomeModel();
   CommentsModel commentsModel = CommentsModel();
+  LikesModel likesModel = LikesModel();
   StoryModel storyModel = StoryModel();
   UserStoryModel userStoryModel = UserStoryModel();
 
@@ -51,7 +54,22 @@ class HomeController extends ChangeNotifier {
         commentsModel = CommentsModel.fromJson(value);
         isLoadingComments = false;
       } else {
-        AppUtils.oneTimeSnackBar("unable to fetch comments",
+        AppUtils.oneTimeSnackBar("Unable to fetch comments",
+            context: context, bgColor: ColorTheme.red);
+      }
+      notifyListeners();
+    });
+  }
+  Future<dynamic> fetchLikes(context, postId) async {
+    isLoadingLikes = true;
+    notifyListeners();
+    log("HomeController -> fetchLikes()");
+    HomeService.fetchLikes(postId).then((value) {
+      if (value["status"] == 1) {
+        likesModel = LikesModel.fromJson(value);
+        isLoadingLikes = false;
+      } else {
+        AppUtils.oneTimeSnackBar("Unable to fetch likes",
             context: context, bgColor: ColorTheme.red);
       }
       notifyListeners();

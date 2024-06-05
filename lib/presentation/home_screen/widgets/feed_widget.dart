@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:socialmedia/app_config/app_config.dart';
+import 'package:socialmedia/presentation/home_screen/widgets/likes_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/colors.dart';
@@ -101,26 +102,43 @@ class FeedWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Wrap(
-                      children: [
-                        Container(
-                          width: size.width * .05,
-                          height: size.width * .05,
-                          decoration: BoxDecoration(
-                              color: ColorTheme.yellow, shape: BoxShape.circle),
-                          child: const Icon(Icons.thumb_up,
-                              color: Colors.white, size: 14),
-                        ),
-                        SizedBox(width: size.width * .02),
-                        displayText(label: "${like_count}"),
-                      ],
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LikeScreen(
+                              id: post_id,
+                            ),
+                          )),
+                      child: Wrap(
+                        children: [
+                          Container(
+                            width: size.width * .05,
+                            height: size.width * .05,
+                            decoration: BoxDecoration(
+                                color: ColorTheme.yellow,
+                                shape: BoxShape.circle),
+                            child: const Icon(Icons.thumb_up,
+                                color: Colors.white, size: 14),
+                          ),
+                          SizedBox(width: size.width * .02),
+                          displayText(label: "${like_count}"),
+                        ],
+                      ),
                     ),
-                    Wrap(
-                      children: [
-                        displayText(label: "${comments_count}"),
-                        SizedBox(width: size.width * .02),
-                        displayText(label: "Comments"),
-                      ],
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CommentScreen(id: post_id),
+                          )),
+                      child: Wrap(
+                        children: [
+                          displayText(label: "${comments_count}"),
+                          SizedBox(width: size.width * .02),
+                          displayText(label: "Comments"),
+                        ],
+                      ),
                     )
                   ],
                 ),

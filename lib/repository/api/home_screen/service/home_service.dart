@@ -42,6 +42,18 @@ class HomeService {
     }
   }
 
+  static Future<dynamic> fetchLikes(postId) async {
+    try {
+      var decodedData = ApiHelper.getData(
+          endPoint: "list-liked-users-of-post/$postId/",
+          header:
+          ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
   static Future<dynamic> fetchComments(postId) async {
     try {
       var decodedData = ApiHelper.getData(

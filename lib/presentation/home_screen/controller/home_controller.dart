@@ -132,9 +132,9 @@ class HomeController extends ChangeNotifier {
     });
   }
 
-  fetchStories(id, context) {
+  fetchStories( context) {
     log("HomeController -> fetchStories");
-    HomeService.fetchStory(id).then((resData) {
+    HomeService.fetchStory().then((resData) {
       if (resData["status"] == 1) {
         storyModel = StoryModel.fromJson(resData);
         isLoadingStories = false;
@@ -146,15 +146,28 @@ class HomeController extends ChangeNotifier {
     });
   }
 
-  fetchUserStories(id, context) {
+  fetchUserStories( context) {
     log("HomeController -> fetchUserStories");
-    HomeService.fetchUserStory(id).then((resData) {
+    HomeService.fetchUserStory().then((resData) {
       if (resData["status"] == 1) {
         userStoryModel = UserStoryModel.fromJson(resData);
         isLoadingUserStories = false;
       } else {
         AppUtils.oneTimeSnackBar("Failed to Fetch Data",
             context: context, bgColor: Colors.red);
+      }
+      notifyListeners();
+    });
+  }
+
+  deleteStory(context, id) {
+    log("HomeController -> deleteStory()");
+    HomeService.deleteStory(id).then((value) {
+      if (value["status"] == 1) {
+        AppUtils.oneTimeSnackBar(value["message"], context: context);
+        Navigator.pop(context);
+      } else {
+        AppUtils.oneTimeSnackBar(value["message"], context: context);
       }
       notifyListeners();
     });

@@ -115,7 +115,7 @@ class HomeService {
     }
   }
 
-  static Future<dynamic> fetchStory(id) async {
+  static Future<dynamic> fetchStory() async {
     try {
       var decodedData = await ApiHelper.getData(
           endPoint: "stories/",
@@ -127,13 +127,25 @@ class HomeService {
     }
   }
 
-  static Future<dynamic> fetchUserStory(id) async {
+  static Future<dynamic> fetchUserStory() async {
     try {
       var decodedData = await ApiHelper.getData(
           endPoint: "userstoryview/",
           header:
               ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       print(decodedData);
+      return decodedData;
+    } catch (e) {
+      log("$e");
+    }
+  }
+
+  static Future<dynamic> deleteStory(id) async {
+    try {
+      var decodedData = ApiHelper.delete(
+          endPoint: "storydelete/$id/",
+          header:
+          ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");

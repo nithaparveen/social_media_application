@@ -36,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "ThingShare",
           style: GLTextStyles.leagueSpartan(
@@ -67,24 +68,13 @@ class _HomeScreenState extends State<HomeScreen> {
           // Icon(Icons.search),
         ],
       ),
-      // body: Consumer<HomeController>(builder: (context, hcontrol, _) {
-      //   return Padding(
-      //     padding: const EdgeInsets.symmetric(horizontal: 6),
-      //     child: SingleChildScrollView(
-      //       child: Column(
-      //         children: [
-      //           // _isSearchBarVisible ? SearchField() :  SizedBox(),
-      //           StorySlider(),
-      //           SizedBox(height: 10),
-      //           FeedWidget(size: size)
-      //         ],
-      //       ),
-      //     ),
-      //   );
-      // }),
       body: RefreshIndicator(
-        onRefresh: () => Provider.of<HomeController>(context, listen: false)
-            .fetchData(context),
+        onRefresh: () async {
+          Provider.of<HomeController>(context, listen: false)
+              .fetchData(context);
+          Provider.of<HomeController>(context, listen: false)
+              .fetchUserStories(context);
+        },
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(

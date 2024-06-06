@@ -54,131 +54,139 @@ class FeedWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Card(
-            child: Column(
-          children: [
-            ListTile(
-              leading: CircleAvatar(
-                backgroundImage:
-                    NetworkImage(profile_image ?? "${AppConfig.noImage}"),
-              ),
-              title: Text(
-                author_name,
-                style: GLTextStyles.poppinsStyl(
-                    size: size.width * .04, weight: FontWeight.w600),
-              ),
-              subtitle: GestureDetector(
-                onTap: () {
-                  maplaunchURL(
-                      "https://www.google.com/maps/place/?q=$location");
-                },
-                child: Text(
-                  location,
-                  style: GLTextStyles.kanitStyl(
-                      size: size.width * .035, weight: FontWeight.w300),
+          child: Column(
+            children: [
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundImage:
+                      NetworkImage(profile_image ?? "${AppConfig.noImage}"),
                 ),
-              ),
-              trailing: InkWell(
-                onTap: followPressed,
-                child: Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  decoration: BoxDecoration(
-                      color: ColorTheme.blue,
-                      borderRadius: BorderRadius.circular(8)),
+                title: Text(
+                  author_name,
+                  style: GLTextStyles.poppinsStyl(
+                      size: size.width * .04, weight: FontWeight.w600),
+                ),
+                subtitle: GestureDetector(
+                  onTap: () {
+                    maplaunchURL(
+                        "https://www.google.com/maps/place/?q=$location");
+                  },
                   child: Text(
-                    "Unfollow",
-                    style: TextStyle(color: ColorTheme.white, fontSize: 11),
+                    location,
+                    style: GLTextStyles.kanitStyl(
+                        size: size.width * .035, weight: FontWeight.w300),
+                  ),
+                ),
+                trailing: InkWell(
+                  onTap: followPressed,
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                        color: ColorTheme.blue,
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Text(
+                      "Unfollow",
+                      style: TextStyle(color: ColorTheme.white, fontSize: 11),
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              height: size.width * .75,
-              child: Image.network(image, fit: BoxFit.contain),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LikeScreen(
-                            id: post_id,
-                          ),
-                        )),
-                    child: Wrap(
-                      children: [
-                        Container(
-                          width: size.width * .05,
-                          height: size.width * .05,
-                          decoration: BoxDecoration(
-                              color: ColorTheme.yellow, shape: BoxShape.circle),
-                          child: const Icon(Icons.thumb_up,
-                              color: Colors.white, size: 14),
-                        ),
-                        SizedBox(width: size.width * .02),
-                        displayText(label: "${like_count}"),
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CommentScreen(id: post_id),
-                        )),
-                    child: Wrap(
-                      children: [
-                        displayText(label: "${comments_count}"),
-                        SizedBox(width: size.width * .02),
-                        displayText(label: "Comments"),
-                      ],
-                    ),
-                  )
-                ],
+              Container(
+                height: size.width * .75,
+                child: Image.network(image, fit: BoxFit.contain),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                headerButton(
-                    buttonText: "Like",
-                    buttonIcon: isLiked == true
-                        ? Icons.thumb_up_alt_sharp
-                        : Icons.thumb_up_alt_outlined,
-                    buttonAction: likePressed,
-                    buttonColor: ColorTheme.yellow),
-                headerButton(
-                    buttonText: "Comment",
-                    buttonIcon: Icons.message_outlined,
-                    buttonAction: () {
-                      Navigator.push(
+              Text(
+                caption,
+                style: GLTextStyles.kanitStyl(
+                    size: size.width * .04, weight: FontWeight.w400),
+              ),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LikeScreen(
+                              id: post_id,
+                            ),
+                          )),
+                      child: Wrap(
+                        children: [
+                          Container(
+                            width: size.width * .05,
+                            height: size.width * .05,
+                            decoration: BoxDecoration(
+                                color: ColorTheme.yellow,
+                                shape: BoxShape.circle),
+                            child: const Icon(Icons.thumb_up,
+                                color: Colors.white, size: 14),
+                          ),
+                          SizedBox(width: size.width * .02),
+                          displayText(label: "${like_count}"),
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => CommentScreen(id: post_id),
-                          ));
-                      log("postId -> $post_id");
-                    },
-                    buttonColor: ColorTheme.yellow),
-                headerButton(
-                    buttonText: "Share",
-                    buttonIcon: Icons.share_outlined,
-                    buttonAction: () {
-                      String postToShare = "$author_name \n $image";
-                      Provider.of<HomeController>(context, listen: false)
-                          .share(toShare: postToShare);
-                      // Share.share('');
-                    },
-                    buttonColor: ColorTheme.yellow),
-              ],
-            )
-          ],
-        )),
+                          )),
+                      child: Wrap(
+                        children: [
+                          displayText(label: "${comments_count}"),
+                          SizedBox(width: size.width * .02),
+                          displayText(label: "Comments"),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  headerButton(
+                      buttonText: "Like",
+                      buttonIcon: isLiked == true
+                          ? Icons.thumb_up_alt_sharp
+                          : Icons.thumb_up_alt_outlined,
+                      buttonAction: likePressed,
+                      buttonColor: ColorTheme.yellow),
+                  headerButton(
+                      buttonText: "Comment",
+                      buttonIcon: Icons.message_outlined,
+                      buttonAction: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CommentScreen(id: post_id),
+                            ));
+                        log("postId -> $post_id");
+                      },
+                      buttonColor: ColorTheme.yellow),
+                  headerButton(
+                      buttonText: "Share",
+                      buttonIcon: Icons.share_outlined,
+                      buttonAction: () {
+                        String postToShare = "$author_name \n $image";
+                        Provider.of<HomeController>(context, listen: false)
+                            .share(toShare: postToShare);
+                        // Share.share('');
+                      },
+                      buttonColor: ColorTheme.yellow),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

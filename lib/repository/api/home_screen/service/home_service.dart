@@ -47,7 +47,7 @@ class HomeService {
       var decodedData = ApiHelper.getData(
           endPoint: "list-liked-users-of-post/$postId/",
           header:
-          ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");
@@ -145,7 +145,7 @@ class HomeService {
       var decodedData = ApiHelper.delete(
           endPoint: "storydelete/$id/",
           header:
-          ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
+              ApiHelper.getApiHeader(access: await AppUtils.getAccessKey()));
       return decodedData;
     } catch (e) {
       log("$e");

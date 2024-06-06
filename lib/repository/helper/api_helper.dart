@@ -91,7 +91,8 @@ class ApiHelper {
     final url = Uri.parse(AppConfig.baseurl + endPoint);
     log("$url -> url");
     try {
-      var response = await http.post(url, body: jsonEncode(body), headers: header);
+      var response =
+          await http.post(url, body: jsonEncode(body), headers: header);
       log("StatusCode -> ${response.statusCode}");
       if (response.statusCode == 200 || response.statusCode == 201) {
         var data = response.body;

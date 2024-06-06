@@ -48,45 +48,28 @@ class NewsCard extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          InkWell(
-            onTap: () {
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => NewsViewScreen(
-              //         title: title,
-              //         description: description,
-              //         imageUrl: imageUrl,
-              //         date: date,
-              //         contant: contant,
-              //         sourceName: sourceName,
-              //         url: url,
-              //       ),
-              //     ));
-            },
-            child: Column(
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                        "$sourceName | ${DateFormat('dd/MM/yyyy').format(date!).toString()}"),
-                    IconButton(
-                        onPressed: () {
-                          String newsToShare = "$title \n \n $description \n \n $url";
-                          Provider.of<NewsController>(context,
-                                  listen: false).share(toShare: newsToShare);
-                        },
-                        icon: const Icon(Icons.share))
-                  ],
-                )
-              ],
-            ),
+          Column(
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                    fontSize: 18, fontWeight: FontWeight.w600),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                      "$sourceName | ${DateFormat('dd/MM/yyyy').format(date!).toString()}"),
+                  IconButton(
+                      onPressed: () {
+                        String newsToShare = "$title \n \n $description \n \n $url";
+                        Provider.of<NewsController>(context,
+                                listen: false).share(toShare: newsToShare);
+                      },
+                      icon: const Icon(Icons.share))
+                ],
+              ),
+            ],
           ),
         ],
       ),

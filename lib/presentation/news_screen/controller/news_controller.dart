@@ -15,11 +15,11 @@ class NewsController with ChangeNotifier {
     "Sports",
     "Technology",
   ];
-  String catagory = "business";
+  String category = "business";
 
   onTap({required int index}) {
-    catagory = categoryList[index].toLowerCase();
-    fethchData();
+    category = categoryList[index].toLowerCase();
+    fetchData();
     // print("$catagory is selected");
     notifyListeners();
   }
@@ -28,12 +28,12 @@ class NewsController with ChangeNotifier {
 
   bool isLoading = false;
 
-  fethchData() async {
+  fetchData() async {
     isLoading = true;
     notifyListeners();
-    // print("$catagory is selected");
+    // print("$category is selected");
     final url = Uri.parse(
-        "https://newsapi.org/v2/top-headlines?country=in&category=$catagory&apiKey=233c06f8ee1b4faf9aba34353b5e73c7");
+        "https://newsapi.org/v2/top-headlines?country=in&category=$category&apiKey=233c06f8ee1b4faf9aba34353b5e73c7");
 
     final response = await http.get(url);
     print(response.statusCode);

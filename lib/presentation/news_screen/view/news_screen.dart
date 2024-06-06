@@ -17,7 +17,7 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   Future<void> fetchData(BuildContext context) async {
-    Provider.of<NewsController>(context, listen: false).fethchData();
+    Provider.of<NewsController>(context, listen: false).fetchData();
   }
 
   @override
@@ -41,6 +41,7 @@ class _NewsScreenState extends State<NewsScreen> {
           initialIndex: 0,
           child: Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               elevation: 0,
               titleTextStyle: GLTextStyles.ralewayStyl(
                   color: ColorTheme.blue, size: 25, weight: FontWeight.w700),
@@ -108,7 +109,7 @@ class _NewsScreenState extends State<NewsScreen> {
                                               .articles?[index].urlToImage
                                               .toString() ??
                                               "https://clareproject.org.uk/wp-content/uploads/2021/12/placeholder-1.jpg",
-                                          contant: provider.newsDataModel
+                                          content: provider.newsDataModel
                                               .articles?[index].content
                                               .toString() ??
                                               "",

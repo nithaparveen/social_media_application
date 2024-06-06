@@ -1,23 +1,23 @@
 // To parse this JSON data, do
 //
-//     final messageSendersModel = messageSendersModelFromJson(jsonString);
+//     final likesModel = likesModelFromJson(jsonString);
 
 import 'dart:convert';
 
-MessageSendersModel messageSendersModelFromJson(String str) => MessageSendersModel.fromJson(json.decode(str));
+LikesModel likesModelFromJson(String str) => LikesModel.fromJson(json.decode(str));
 
-String messageSendersModelToJson(MessageSendersModel data) => json.encode(data.toJson());
+String likesModelToJson(LikesModel data) => json.encode(data.toJson());
 
-class MessageSendersModel {
+class LikesModel {
   int? status;
   List<Datum>? data;
 
-  MessageSendersModel({
+  LikesModel({
     this.status,
     this.data,
   });
 
-  factory MessageSendersModel.fromJson(Map<String, dynamic> json) => MessageSendersModel(
+  factory LikesModel.fromJson(Map<String, dynamic> json) => LikesModel(
     status: json["status"],
     data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
   );

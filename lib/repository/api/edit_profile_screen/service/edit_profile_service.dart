@@ -10,9 +10,8 @@ class EditProfileService {
       var decodedData = await ApiHelper.patchData(
           endPoint: "updatebio/",
           body: data,
-          header:
-              apiHeader(access: await AppUtils.getAccessKey()));
-    return decodedData;
+          header: apiHeader(access: await AppUtils.getAccessKey()));
+      return decodedData;
     } catch (e) {
       log("$e");
     }
@@ -29,5 +28,4 @@ class EditProfileService {
       };
     }
   }
-
 }

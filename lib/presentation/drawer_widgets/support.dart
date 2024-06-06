@@ -67,7 +67,7 @@ class _SupportScreenState extends State<SupportScreen> {
                           width: 20,
                         ),
                         Text(
-                          'contact@luminartecnolab.com',
+                          'contact@luminartecnohub.com',
                           style: descriptionstyle,
                         ),
                       ],

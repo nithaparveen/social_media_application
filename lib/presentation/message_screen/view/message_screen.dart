@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:socialmedia/app_config/app_config.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/chat_screen/view/chat_screen.dart';
 import 'package:socialmedia/presentation/message_screen/controller/message_screen_controller.dart';
@@ -106,68 +107,51 @@ class _MessageScreenState extends State<MessageScreen> {
           style: GLTextStyles.leagueSpartan(size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
         ),
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              size: 20,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            size: 20,
+          ),
+        ),
       ),
       body: Consumer<MessageScreenController>(builder: (context, controller, _) {
         return controller.isLoading
             ? Center(child: CircularProgressIndicator())
-            : ListView.separated(
-                itemCount: controller.messageSendersModel.data!.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChatScreen(id: controller.messageSendersModel.data![index].id!),
-                          ));
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 5, right: 10),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 28,
-                          backgroundImage: NetworkImage(profile[index]['dp']),
+            : RefreshIndicator(
+                onRefresh: () =>
+                    Provider.of<MessageScreenController>(context, listen: false).fetchMessage(context),
+                child: ListView.separated(
+                  itemCount: controller.messageSendersModel.data!.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  ChatScreen(id: controller.messageSendersModel.data![index].id!),
+                            ));
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5, right: 10),
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            radius: 28,
+                            backgroundImage: NetworkImage(
+                                controller.messageSendersModel.data?[index].image ?? AppConfig.noImage),
+                          ),
+                          title: Text(
+                            controller.messageSendersModel.data?[index].username ?? "",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
                         ),
-                        title: Text(
-                          controller.messageSendersModel.data?[index].username??"",
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                        ),
-                        subtitle: Text(
-                          profile[index]['sub'],
-                          style: TextStyle(fontSize: 15),
-                        ),
-                        // trailing: Column(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   // ignore: prefer_const_literals_to_create_immutables
-                        //   children: [
-                        //     Text(
-                        //       profile[index]['time'],
-                        //     ),
-                        //     SizedBox(
-                        //       height: 5,
-                        //     ),
-                        //     CircleAvatar(
-                        //       radius: 10,
-                        //       backgroundColor: ColorTheme.brown,
-                        //       child: Text(
-                        //         '$index',
-                        //         style: TextStyle(color: Colors.white, fontSize: 12),
-                        //       ),
-                        //     )
-                        //   ],
-                        // ),
                       ),
-                    ),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) => const Divider(),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+                ),
               );
       }),
     );

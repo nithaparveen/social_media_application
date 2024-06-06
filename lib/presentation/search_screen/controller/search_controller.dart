@@ -10,14 +10,15 @@ class SearchScreenController extends ChangeNotifier {
   SearchModel? searchModel;
   bool showData = false;
 
-  Future<void> fetchData(username, context) async {
+  fetchData(username, context) async {
     log("SearchController -> fetchData()");
     SearchService.fetchSearchData(username).then((value) {
       if (value["status"] == 1) {
         searchModel = SearchModel.fromJson(value);
         showData = true;
       } else {
-        AppUtils.oneTimeSnackBar("error", context: context, bgColor: Colors.red);
+        AppUtils.oneTimeSnackBar("error",
+            context: context, bgColor: Colors.red);
       }
       notifyListeners();
     });

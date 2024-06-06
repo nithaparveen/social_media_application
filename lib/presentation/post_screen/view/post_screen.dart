@@ -33,6 +33,7 @@ class _PostDataScreenState extends State<PostDataScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text("Create Post"),
         titleTextStyle: GLTextStyles.ralewayStyl(
             weight: FontWeight.w700, size: 22, color: ColorTheme.blue),

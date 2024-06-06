@@ -102,21 +102,22 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       MaterialButton(
-                          minWidth: size.width * .3,
-                          height: size.height * .07,
-                          onPressed: () {},
-                          child: TextButton.icon(
-                            onPressed: () => _getImage(ImageSource.camera),
-                            icon: Icon(
-                              Icons.camera_alt_outlined,
-                              color: ColorTheme.blue,
-                            ),
-                            label: Text(
-                              "Camera",
-                              style: GLTextStyles.leagueSpartan(
-                                  size: 16, color: ColorTheme.yellow),
-                            ),
-                          )),
+                        minWidth: size.width * .3,
+                        height: size.height * .07,
+                        onPressed: () {},
+                        child: TextButton.icon(
+                          onPressed: () => _getImage(ImageSource.camera),
+                          icon: Icon(
+                            Icons.camera_alt_outlined,
+                            color: ColorTheme.blue,
+                          ),
+                          label: Text(
+                            "Camera",
+                            style: GLTextStyles.leagueSpartan(
+                                size: 16, color: ColorTheme.yellow),
+                          ),
+                        ),
+                      ),
                       MaterialButton(
                           minWidth: size.width * .3,
                           height: size.height * .07,
@@ -149,39 +150,41 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     height: size.height * .023,
                   ),
                   MaterialButton(
-                      color: ColorTheme.blue,
-                      minWidth: size.width * .5,
-                      height: size.height * .07,
-                      onPressed: () {
-                        Provider.of<RegistrationController>(context,
-                                listen: false)
-                            .onRegister(
-                                context,
-                                image,
-                                usernameController.text.trim(),
-                                emailController.text.trim(),
-                                passwordController.text.trim());
-                        // usernameController.clear();
-                        // emailController.clear();
-                        // passwordController.clear();
-                      },
-                      child: Text(
-                        "SignUp",
-                        style: GLTextStyles.leagueSpartan(
-                            size: 18, color: ColorTheme.yellow),
-                      )),
+                    color: ColorTheme.blue,
+                    minWidth: size.width * .5,
+                    height: size.height * .07,
+                    onPressed: () {
+                      Provider.of<RegistrationController>(context,
+                              listen: false)
+                          .onRegister(
+                              context,
+                              image,
+                              usernameController.text.trim(),
+                              emailController.text.trim(),
+                              passwordController.text.trim());
+                      usernameController.clear();
+                      emailController.clear();
+                      passwordController.clear();
+                    },
+                    child: Text(
+                      "SignUp",
+                      style: GLTextStyles.leagueSpartan(
+                          size: 18, color: ColorTheme.yellow),
+                    ),
+                  ),
                 ],
               ),
             ),
             TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ));
-                },
-                child: Text("Already a User ? Login here"))
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ));
+              },
+              child: Text("Already a User ? Login here"),
+            ),
           ],
         ),
       ),

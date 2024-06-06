@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
-
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
 import 'package:socialmedia/presentation/home_screen/widgets/post_story_screen.dart';
@@ -11,9 +10,9 @@ import 'package:socialmedia/presentation/home_screen/widgets/story_view_page.dar
 import '../../../core/constants/text_styles.dart';
 
 class StorySlider extends StatefulWidget {
-  const StorySlider({super.key, this.id});
+  const StorySlider({super.key});
 
-  final int? id;
+
 
   @override
   State<StorySlider> createState() => _StorySliderState();
@@ -22,9 +21,9 @@ class StorySlider extends StatefulWidget {
 class _StorySliderState extends State<StorySlider> {
   fetchData() {
     Provider.of<HomeController>(context, listen: false)
-        .fetchStories(widget.id, context);
+        .fetchStories( context);
     Provider.of<HomeController>(context, listen: false)
-        .fetchUserStories(widget.id, context);
+        .fetchUserStories(context);
   }
 
   @override
@@ -95,14 +94,15 @@ class _StorySliderState extends State<StorySlider> {
                             (control.storyModel.stories?.length ?? 0),
                         itemBuilder: (context, index) {
                           if (index == 0 && userHasStory) {
-                            return buildStoryItem(
+                            return buildUserStoryItem(
                               context,
                               control,
                               control.userStoryModel.story?[0].author
-                                      ?.username ??
+                                  ?.username ??
                                   "",
                               control.userStoryModel.story?[0].image,
                               control.userStoryModel.story?[0].updatedAt,
+                              control.userStoryModel.story?[0].id,  // Pass storyId
                             );
                           } else {
                             int storyIndex = userHasStory ? index - 1 : index;
@@ -110,10 +110,11 @@ class _StorySliderState extends State<StorySlider> {
                               context,
                               control,
                               control.storyModel.stories?[storyIndex].author
-                                      ?.username ??
+                                  ?.username ??
                                   "",
                               control.storyModel.stories?[storyIndex].image,
                               control.storyModel.stories?[storyIndex].updatedAt,
+                              control.storyModel.stories?[storyIndex].id,  // Pass storyId
                             );
                           }
                         },
@@ -130,7 +131,7 @@ class _StorySliderState extends State<StorySlider> {
   }
 
   Widget buildStoryItem(BuildContext context, HomeController control,
-      String authorName, String? imageUrl, DateTime? updatedAt) {
+      String authorName, String? imageUrl, DateTime? updatedAt, int? storyId) {
     var size = MediaQuery.of(context).size;
     return Row(
       children: [
@@ -148,7 +149,7 @@ class _StorySliderState extends State<StorySlider> {
                     fit: BoxFit.cover,
                     image: imageUrl == null
                         ? NetworkImage(
-                            "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                        "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
                         : NetworkImage("${AppConfig.mediaUrl}$imageUrl"),
                   ),
                 ),
@@ -163,6 +164,59 @@ class _StorySliderState extends State<StorySlider> {
                       time: DateFormat('hh:mm a')
                           .format(updatedAt ?? DateTime.now())
                           .toString(),
+                      isUserStory: false,  // Not a user story
+                      storyId: storyId ?? 0,  // Pass storyId
+                    ),
+                  ),
+                );
+              },
+            ),
+            Text(
+              authorName,
+              style: GLTextStyles.ralewayStyl(size: 14),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget buildUserStoryItem(BuildContext context, HomeController control,
+      String authorName, String? imageUrl, DateTime? updatedAt, int? storyId) {
+    var size = MediaQuery.of(context).size;
+    return Row(
+      children: [
+        SizedBox(width: 10),
+        Column(
+          children: [
+            InkWell(
+              child: Container(
+                height: size.width * .22,
+                width: size.width * .14,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: ColorTheme.lightBrown,
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: imageUrl == null
+                        ? NetworkImage(
+                        "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                        : NetworkImage("$imageUrl"),
+                  ),
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StoryView(
+                      authorName: authorName,
+                      image: '$imageUrl',
+                      time: DateFormat('hh:mm a')
+                          .format(updatedAt ?? DateTime.now())
+                          .toString(),
+                      isUserStory: true,  // This is a user story
+                      storyId: storyId ?? 0,  // Pass storyId
                     ),
                   ),
                 );

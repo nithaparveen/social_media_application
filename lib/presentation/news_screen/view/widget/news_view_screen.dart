@@ -12,14 +12,15 @@ class NewsViewScreen extends StatelessWidget {
       required this.description,
       required this.date,
       required this.imageUrl,
-      required this.contant,
+      required this.content,
       required this.sourceName,
       required this.url});
+
   final String title;
   final String description;
   final DateTime? date;
   final String imageUrl;
-  final String contant;
+  final String content;
   final String sourceName;
   final String url;
 
@@ -80,7 +81,7 @@ class NewsViewScreen extends StatelessWidget {
               ),
               SingleChildScrollView(
                 child: Text(
-                  "$contant",
+                  "$content",
                   style: const TextStyle(
                       fontSize: 15, fontWeight: FontWeight.w500),
                 ),

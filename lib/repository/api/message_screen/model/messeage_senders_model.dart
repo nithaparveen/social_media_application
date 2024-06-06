@@ -31,19 +31,23 @@ class MessageSendersModel {
 class Datum {
   int? id;
   String? username;
+  String? image;
 
   Datum({
     this.id,
     this.username,
+    this.image,
   });
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
     username: json["username"],
+    image: json["image"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "username": username,
+    "image": image,
   };
 }

@@ -17,18 +17,19 @@ class MessageScreen extends StatefulWidget {
 class _MessageScreenState extends State<MessageScreen> {
   @override
   void initState() {
-    Provider.of<MessageScreenController>(context, listen: false).fetchMessage(context);
+    Provider.of<MessageScreenController>(context, listen: false)
+        .fetchMessage(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "ThingShare",
-          style: GLTextStyles.leagueSpartan(size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
+          style: GLTextStyles.leagueSpartan(
+              size: 25, weight: FontWeight.w500, color: ColorTheme.brown),
         ),
         leading: IconButton(
           onPressed: () {
@@ -40,12 +41,14 @@ class _MessageScreenState extends State<MessageScreen> {
           ),
         ),
       ),
-      body: Consumer<MessageScreenController>(builder: (context, controller, _) {
+      body:
+          Consumer<MessageScreenController>(builder: (context, controller, _) {
         return controller.isLoading
             ? Center(child: CircularProgressIndicator())
             : RefreshIndicator(
                 onRefresh: () =>
-                    Provider.of<MessageScreenController>(context, listen: false).fetchMessage(context),
+                    Provider.of<MessageScreenController>(context, listen: false)
+                        .fetchMessage(context),
                 child: ListView.separated(
                   itemCount: controller.messageSendersModel.data!.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -54,8 +57,13 @@ class _MessageScreenState extends State<MessageScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  ChatScreen(id: controller.messageSendersModel.data![index].id!),
+                              builder: (context) => ChatScreen(
+                                id: controller
+                                    .messageSendersModel.data![index].id!,
+                                name: controller.messageSendersModel
+                                        .data?[index].username ??
+                                    "",
+                              ),
                             ));
                       },
                       child: Padding(
@@ -63,18 +71,23 @@ class _MessageScreenState extends State<MessageScreen> {
                         child: ListTile(
                           leading: CircleAvatar(
                             radius: 28,
-                            backgroundImage: NetworkImage(
-                                controller.messageSendersModel.data?[index].image ?? AppConfig.noImage),
+                            backgroundImage: NetworkImage(controller
+                                    .messageSendersModel.data?[index].image ??
+                                AppConfig.noImage),
                           ),
                           title: Text(
-                            controller.messageSendersModel.data?[index].username ?? "",
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                            controller.messageSendersModel.data?[index]
+                                    .username ??
+                                "",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
                           ),
                         ),
                       ),
                     );
                   },
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+                  separatorBuilder: (BuildContext context, int index) =>
+                      const Divider(),
                 ),
               );
       }),

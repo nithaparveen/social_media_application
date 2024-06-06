@@ -13,9 +13,10 @@ import 'package:socialmedia/presentation/chat_screen/controller/chat_controller.
 import 'package:socialmedia/presentation/chat_screen/view/widgets/image_selected_screen.dart';
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key, required this.id});
+  const ChatScreen({super.key, required this.id, required this.name});
 
   final int id;
+  final String name;
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -80,7 +81,12 @@ class _ChatScreenState extends State<ChatScreen> {
             size: 20,
           ),
         ),
-        title: Text('Chat'),
+        title: Text(widget.name),
+        actions: [
+          IconButton(onPressed: (){
+            Provider.of<ChatController>(context, listen: false).fetchChat(context, widget.id);
+          }, icon: Icon(CupertinoIcons.refresh_circled,size: 30,))
+        ],
       ),
       body: Column(
         children: [
@@ -93,6 +99,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           Provider.of<ChatController>(context, listen: false).fetchChat(context, widget.id),
                       child: ListView.builder(
                         padding: EdgeInsets.all(8.0),
+                        reverse: true,
                         itemCount: controller.chatModel.data?.length,
                         controller: scrollController,
                         itemBuilder: (_, index) {

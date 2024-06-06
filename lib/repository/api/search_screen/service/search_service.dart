@@ -4,7 +4,7 @@ import '../../../../core/utils/app_utils.dart';
 import '../../../helper/api_helper.dart';
 
 class SearchService {
-  static Future<dynamic> fetchSearchData(username)async{
+  static Future<dynamic> fetchSearchData(username) async {
     log("SearchService -> fetchSearchData()");
     try {
       var decodedData = await ApiHelper.getDataWOStatus(

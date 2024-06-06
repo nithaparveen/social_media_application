@@ -1,12 +1,15 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:socialmedia/app_config/app_config.dart';
+import 'package:socialmedia/presentation/home_screen/widgets/likes_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
+import '../controller/home_controller.dart';
 import 'comment_screen.dart';
 
 class FeedWidget extends StatelessWidget {
@@ -95,32 +98,54 @@ class FeedWidget extends StatelessWidget {
                 height: size.width * .75,
                 child: Image.network(image, fit: BoxFit.contain),
               ),
+              Text(
+                caption,
+                style: GLTextStyles.kanitStyl(
+                    size: size.width * .04, weight: FontWeight.w400),
+              ),
               Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Wrap(
-                      children: [
-                        Container(
-                          width: size.width * .05,
-                          height: size.width * .05,
-                          decoration: BoxDecoration(
-                              color: ColorTheme.yellow, shape: BoxShape.circle),
-                          child: const Icon(Icons.thumb_up,
-                              color: Colors.white, size: 14),
-                        ),
-                        SizedBox(width: size.width * .02),
-                        displayText(label: "${like_count}"),
-                      ],
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LikeScreen(
+                              id: post_id,
+                            ),
+                          )),
+                      child: Wrap(
+                        children: [
+                          Container(
+                            width: size.width * .05,
+                            height: size.width * .05,
+                            decoration: BoxDecoration(
+                                color: ColorTheme.yellow,
+                                shape: BoxShape.circle),
+                            child: const Icon(Icons.thumb_up,
+                                color: Colors.white, size: 14),
+                          ),
+                          SizedBox(width: size.width * .02),
+                          displayText(label: "${like_count}"),
+                        ],
+                      ),
                     ),
-                    Wrap(
-                      children: [
-                        displayText(label: "${comments_count}"),
-                        SizedBox(width: size.width * .02),
-                        displayText(label: "Comments"),
-                      ],
+                    InkWell(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CommentScreen(id: post_id),
+                          )),
+                      child: Wrap(
+                        children: [
+                          displayText(label: "${comments_count}"),
+                          SizedBox(width: size.width * .02),
+                          displayText(label: "Comments"),
+                        ],
+                      ),
                     )
                   ],
                 ),
@@ -151,11 +176,14 @@ class FeedWidget extends StatelessWidget {
                       buttonText: "Share",
                       buttonIcon: Icons.share_outlined,
                       buttonAction: () {
-                        Share.share('Check out this awesome content!');
+                        String postToShare = "$author_name \n $image";
+                        Provider.of<HomeController>(context, listen: false)
+                            .share(toShare: postToShare);
+                        // Share.share('');
                       },
                       buttonColor: ColorTheme.yellow),
                 ],
-              )
+              ),
             ],
           ),
         ),

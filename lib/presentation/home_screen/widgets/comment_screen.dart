@@ -16,7 +16,8 @@ class CommentScreen extends StatefulWidget {
 
 class _CommentScreenState extends State<CommentScreen> {
   fetchData() {
-    Provider.of<HomeController>(context, listen: false).fetchComments(context, widget.id);
+    Provider.of<HomeController>(context, listen: false)
+        .fetchComments(context, widget.id);
   }
 
   @override
@@ -44,8 +45,8 @@ class _CommentScreenState extends State<CommentScreen> {
         ),
       ),
       body: RefreshIndicator(
-        onRefresh: () =>
-            Provider.of<HomeController>(context, listen: false).fetchComments(context, widget.id),
+        onRefresh: () => Provider.of<HomeController>(context, listen: false)
+            .fetchComments(context, widget.id),
         child: Consumer<HomeController>(builder: (context, controller, _) {
           return controller.isLoadingComments
               ? Center(child: CircularProgressIndicator())
@@ -68,8 +69,12 @@ class _CommentScreenState extends State<CommentScreen> {
                                         label: Text("Cancel")),
                                     ElevatedButton.icon(
                                         onPressed: () {
-                                          Provider.of<HomeController>(context, listen: false).deleteComment(
-                                              context, controller.commentsModel.data?[index].id);
+                                          Provider.of<HomeController>(context,
+                                                  listen: false)
+                                              .deleteComment(
+                                                  context,
+                                                  controller.commentsModel
+                                                      .data?[index].id);
                                         },
                                         icon: Icon(Icons.delete),
                                         label: Text("Delete"))
@@ -78,25 +83,31 @@ class _CommentScreenState extends State<CommentScreen> {
                               });
                         },
                         leading: CircleAvatar(
-                          backgroundImage: NetworkImage(controller
-                                      .commentsModel.data?[index].user?.profileImage ==
+                          backgroundImage: NetworkImage(controller.commentsModel
+                                      .data?[index].user?.profileImage ==
                                   null
                               ? AppConfig.noImage
                               : "${AppConfig.mediaUrl}${controller.commentsModel.data?[index].user?.profileImage}"),
                         ),
                         title: Text(
-                          controller.commentsModel.data?[index].user?.userName ?? "",
-                          style: TextStyle(color: ColorTheme.blue, fontWeight: FontWeight.w500),
+                          controller
+                                  .commentsModel.data?[index].user?.userName ??
+                              "",
+                          style: TextStyle(
+                              color: ColorTheme.blue,
+                              fontWeight: FontWeight.w500),
                         ),
                         subtitle: Text(
                           controller.commentsModel.data?[index].content ?? "",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.w300),
                         ));
                   });
         }),
       ),
       bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -112,7 +123,8 @@ class _CommentScreenState extends State<CommentScreen> {
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: const BorderSide(color: Colors.black, width: .5)),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: .5)),
                   ),
                 )),
             SizedBox(
@@ -120,7 +132,8 @@ class _CommentScreenState extends State<CommentScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   Provider.of<HomeController>(context, listen: false)
-                      .postComment(widget.id, commentController.text.trim(), context);
+                      .postComment(
+                          widget.id, commentController.text.trim(), context);
                   commentController.clear();
                 },
                 child: Center(

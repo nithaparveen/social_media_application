@@ -20,7 +20,7 @@ class ProfileController extends ChangeNotifier {
   bool isLoadingFollowing = false;
   bool isLoadingFollower = false;
 
-  Future<void> fetchData(BuildContext context) async {
+  fetchData(BuildContext context) async {
     isLoading = true;
     isPostLoading = true;
     notifyListeners();
@@ -47,7 +47,7 @@ class ProfileController extends ChangeNotifier {
     });
   }
 
-  Future<void> postDeleted(postId, context) async {
+  postDeleted(postId, context) async {
     log("ProfileController -> postDeleted()");
 
     ProfileService.deletePost(postId).then((value) {

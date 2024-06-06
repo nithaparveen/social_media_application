@@ -58,7 +58,7 @@ class _FollowingListScreenState extends State<FollowingListScreen> {
                       title: Text(
                           "${controller.followingModel.data?[index].username}"),
                       trailing: ElevatedButton(
-                          onPressed: () {}, child: Text("UnFollow")),
+                          onPressed: () {}, child: Text("Unfollow")),
                     );
                   },
                 );

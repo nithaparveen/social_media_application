@@ -4,7 +4,6 @@ import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/core/constants/text_styles.dart';
 import 'package:socialmedia/presentation/login_screen/controller/login_controller.dart';
 import 'package:socialmedia/presentation/registration_screen/view/registration_screen.dart';
-import '../../../global_widgets/title_and_textformfield.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -68,9 +67,21 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TitleAndTextFormField(
-                    textEditingController: emailController,
-                    text: 'Email',
+                  TextFormField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.alternate_email,
+                          size: 22,
+                        ),
+                        hintText: "Email",
+                        labelText: "Email",
+                        border: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: .1, color: Colors.white54))),
+                  ),
+                  SizedBox(
+                    height: size.height * .03,
                   ),
                   Consumer<loginController>(builder: (context, controller, _) {
                     return TextFormField(
@@ -96,22 +107,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height * .022,
                   ),
                   MaterialButton(
-                      color: ColorTheme.blue,
-                      minWidth: size.width * .5,
-                      height: size.height * .07,
-                      onPressed: () {
-                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
-                        Provider.of<loginController>(context, listen: false)
-                            .onLogin(emailController.text.trim(),
-                                passwordController.text.trim(), context);
-                        // emailController.clear();
-                        // passwordController.clear();
-                      },
-                      child: Text(
-                        "LogIn",
-                        style: GLTextStyles.leagueSpartan(
-                            size: 18, color: ColorTheme.yellow),
-                      )),
+                    color: ColorTheme.blue,
+                    minWidth: size.width * .5,
+                    height: size.height * .07,
+                    onPressed: () {
+                      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomNavBar(),));
+                      Provider.of<loginController>(context, listen: false)
+                          .onLogin(emailController.text.trim(),
+                              passwordController.text.trim(), context);
+                      emailController.clear();
+                      passwordController.clear();
+                    },
+                    child: Text(
+                      "LogIn",
+                      style: GLTextStyles.leagueSpartan(
+                          size: 18, color: ColorTheme.yellow),
+                    ),
+                  ),
                   TextButton(
                       onPressed: () {
                         Navigator.push(

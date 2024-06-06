@@ -6,15 +6,20 @@ import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
 
 class StoryView extends StatefulWidget {
-  const StoryView(
-      {super.key,
-      required this.authorName,
-      required this.image,
-      required this.time});
+  const StoryView({
+    super.key,
+    required this.authorName,
+    required this.image,
+    required this.time,
+    required this.isUserStory,
+    required this.storyId,  // Add storyId parameter
+  });
 
   final String authorName;
   final String image;
   final String time;
+  final bool isUserStory;
+  final int storyId;  // Add storyId parameter
 
   @override
   State<StoryView> createState() => _StoryViewState();
@@ -68,14 +73,32 @@ class _StoryViewState extends State<StoryView> {
                           ],
                         ),
                       ),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.close,
-                            color: ColorTheme.white,
-                          ))
+                      Row(
+                        children: [
+                          Visibility(
+                            visible: widget.isUserStory,
+                            child: IconButton(
+                              onPressed: () {
+                                Provider.of<HomeController>(context, listen: false)
+                                    .deleteStory(context, widget.storyId);  // Use storyId parameter
+                              },
+                              icon: Icon(
+                                Icons.delete_outline,
+                                color: ColorTheme.white,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.close,
+                              color: ColorTheme.white,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

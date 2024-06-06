@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/chat_screen/controller/chat_controller.dart';
+import 'package:socialmedia/presentation/chat_screen/view/widgets/image_selected_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key, required this.id});
@@ -30,6 +33,17 @@ class _ChatScreenState extends State<ChatScreen> {
       setState(() {
         image = File(pickedImage.path);
       });
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => ImageSelectedScreen(image: image!, id: widget.id)));
+    }
+  }
+
+  PlatformFile? file;
+  Future<void> pickSingleFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      file = result.files.first;
+      //file == null ? false : OpenAppFile.open(file!.path.toString());
     }
   }
 
@@ -139,6 +153,14 @@ class _ChatScreenState extends State<ChatScreen> {
                     ),
                   ),
                 ),
+                IconButton(
+                    onPressed: () {
+                      getImage(ImageSource.gallery);
+                    },
+                    icon: Icon(CupertinoIcons.paperclip)),
+                IconButton(
+                    onPressed: () =>pickSingleFile(),
+                    icon: Icon(CupertinoIcons.doc)),
                 IconButton(
                   icon: Icon(
                     Icons.send,

@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:socialmedia/repository/api/chat_screen/service/chat_service.dart';
 
@@ -34,15 +36,28 @@ class ChatController extends ChangeNotifier {
     ChatService.sendMessage(data, id);
   }
 
+  Future<String?> getAccessToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    String? tokenJsonString = sharedPreferences.getString(AppConfig.loginData);
+    if (tokenJsonString != null) {
+      Map<String, dynamic> tokenData = jsonDecode(tokenJsonString);
+      String? accessToken = tokenData['data']['access'];
+      return accessToken;
+    }
+    return null;
+  }
+
   Future<void> onSendMessage(BuildContext context, File? image, String? message, int id) async {
     try {
+      String? accessToken = await getAccessToken();
       var url = "${AppConfig.baseurl}messages/$id/";
       onUploadImage(
         url,
         image,
         message,
+        accessToken
       ).then((value) {
-        log("onCreateCustomer() -> status code -> ${value.statusCode}");
+        log("onSendMessage() -> status code -> ${value.statusCode}");
         if (value.statusCode == 200) {
           AppUtils.oneTimeSnackBar("Message Sent", context: context, bgColor: Colors.green, time: 2);
         } else {
@@ -58,9 +73,10 @@ class ChatController extends ChangeNotifier {
     String url,
     File? selectedImage,
     String? message,
+      String? accessToken
   ) async {
     var request = http.MultipartRequest('POST', Uri.parse(url));
-    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    Map<String, String> headers = {"Content-type": "multipart/form-data","Authorization": "Bearer $accessToken"};
     if (selectedImage != null) {
       log("image size -> ${selectedImage.lengthSync()} B");
       request.files.add(await http.MultipartFile.fromPath('image', selectedImage.path));

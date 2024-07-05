@@ -6,6 +6,7 @@ import 'package:socialmedia/presentation/search_screen/controller/search_control
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
+import '../../chat_screen/view/chat_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -101,6 +102,36 @@ class _SearchScreenState extends State<SearchScreen> {
                 itemCount: controller.searchModel?.data?.length,
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text("Message"),
+                              actions: [
+                                ElevatedButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    icon: Icon(Icons.cancel),
+                                    label: Text("Cancel")),
+                                ElevatedButton.icon(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ChatScreen(
+                                                id: controller.searchModel!.data![index].id!,
+                                                name: controller.searchModel?.data?[index].username ?? ""),
+                                          ));
+                                    },
+                                    icon: Icon(Icons.message),
+                                    label: Text("Message"))
+                              ],
+                            );
+                          });
+                    },
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(
                           "${controller.searchModel?.data?[index].image ?? "${AppConfig.noImage}"}"),

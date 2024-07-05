@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
-import 'package:socialmedia/presentation/home_screen/widgets/feed_widget.dart';
-import 'package:socialmedia/presentation/home_screen/widgets/stories_slider.dart';
+import 'package:socialmedia/presentation/home_screen/view/widgets/feed_widget.dart';
+import 'package:socialmedia/presentation/home_screen/view/widgets/stories_slider.dart';
 import 'package:socialmedia/presentation/message_screen/view/message_screen.dart';
-import 'package:socialmedia/presentation/profile_screen/controller/profile_controller.dart';
 import 'package:socialmedia/presentation/search_screen/view/search_screen.dart';
 
 import '../../../core/constants/text_styles.dart';

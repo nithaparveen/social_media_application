@@ -37,8 +37,7 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
             },
             icon: Icon(Icons.arrow_back_ios)),
         title: Text("Create Story"),
-        titleTextStyle: GLTextStyles.ralewayStyl(
-            weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
+        titleTextStyle: GLTextStyles.ralewayStyl(weight: FontWeight.w700, size: 22, color: ColorTheme.blue),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -49,45 +48,45 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MaterialButton(
-                      minWidth: size.width * .3,
-                      height: size.height * .07,
-                      onPressed: () {},
-                      child: TextButton.icon(
-                        onPressed: () => _getImage(ImageSource.camera),
-                        icon: Icon(
-                          Icons.camera_alt_outlined,
-                          color: ColorTheme.blue,
-                        ),
-                        label: Text(
-                          "Camera",
-                          style: GLTextStyles.leagueSpartan(
-                              size: 16, color: ColorTheme.yellow),
-                        ),
-                      )),
-                  MaterialButton(
-                      minWidth: size.width * .3,
-                      height: size.height * .07,
-                      onPressed: () {},
-                      child: TextButton.icon(
-                        onPressed: () => _getImage(ImageSource.gallery),
-                        icon: Icon(
-                          Icons.photo_library_outlined,
-                          color: ColorTheme.blue,
-                        ),
-                        label: Text(
-                          "Gallery",
-                          style: GLTextStyles.leagueSpartan(
-                              size: 16, color: ColorTheme.yellow),
-                        ),
-                      ))
+                    minWidth: size.width * .3,
+                    height: size.height * .07,
+                    onPressed: () {},
+                    child: TextButton.icon(
+                      onPressed: () => _getImage(ImageSource.camera),
+                      icon: Icon(
+                        Icons.camera_alt_outlined,
+                        color: ColorTheme.blue,
+                      ),
+                      label: Text(
+                        "Camera",
+                        style: GLTextStyles.leagueSpartan(size: 16, color: ColorTheme.yellow),
+                      ),
+                    ),
+                  ),
+                  // MaterialButton(
+                  //   minWidth: size.width * .3,
+                  //   height: size.height * .07,
+                  //   onPressed: () {},
+                  //   child: TextButton.icon(
+                  //     onPressed: () => _getImage(ImageSource.gallery),
+                  //     icon: Icon(
+                  //       Icons.photo_library_outlined,
+                  //       color: ColorTheme.blue,
+                  //     ),
+                  //     label: Text(
+                  //       "Gallery",
+                  //       style: GLTextStyles.leagueSpartan(size: 16, color: ColorTheme.yellow),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
               if (image != null)
                 Container(
                   decoration: BoxDecoration(border: Border.all()),
                   margin: EdgeInsets.symmetric(vertical: 20),
-                  height: 150,
-                  width: 200,
+                  height: size.height*.5,
+                  //width: 200,
                   child: Image.file(
                     image!,
                     fit: BoxFit.cover,
@@ -99,16 +98,14 @@ class _PostStoryScreenState extends State<PostStoryScreen> {
                   minWidth: size.width * .5,
                   height: size.height * .07,
                   onPressed: () {
-                    Provider.of<HomeController>(context, listen: false)
-                        .onCreateStory(
+                    Provider.of<HomeController>(context, listen: false).onCreateStory(
                       context,
                       image,
                     );
                   },
                   child: Text(
                     "Upload",
-                    style: GLTextStyles.leagueSpartan(
-                        size: 18, color: ColorTheme.yellow),
+                    style: GLTextStyles.leagueSpartan(size: 18, color: ColorTheme.yellow),
                   ))
             ],
           ),

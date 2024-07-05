@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
@@ -9,22 +12,27 @@ import 'package:socialmedia/presentation/home_screen/view/widgets/story_view_pag
 
 import '../../../../core/constants/text_styles.dart';
 
-
 class StorySlider extends StatefulWidget {
   const StorySlider({super.key});
-
-
 
   @override
   State<StorySlider> createState() => _StorySliderState();
 }
 
 class _StorySliderState extends State<StorySlider> {
+  File? image;
+
+  Future<void> _getImage(ImageSource source) async {
+    final pickedFile = await ImagePicker().pickImage(source: source);
+    if (pickedFile != null) {
+      setState(() {
+        image = File(pickedFile.path);
+      });
+    }
+  }
   fetchData() {
-    Provider.of<HomeController>(context, listen: false)
-        .fetchStories( context);
-    Provider.of<HomeController>(context, listen: false)
-        .fetchUserStories(context);
+    Provider.of<HomeController>(context, listen: false).fetchStories(context);
+    Provider.of<HomeController>(context, listen: false).fetchUserStories(context);
   }
 
   @override
@@ -46,8 +54,7 @@ class _StorySliderState extends State<StorySlider> {
             padding: const EdgeInsets.only(left: 10),
             child: Text(
               "Feed",
-              style: GLTextStyles.ralewayStyl(
-                  size: 24, weight: FontWeight.w700, color: ColorTheme.blue),
+              style: GLTextStyles.ralewayStyl(size: 24, weight: FontWeight.w700, color: ColorTheme.blue),
             ),
           ),
           SizedBox(height: 5),
@@ -65,6 +72,7 @@ class _StorySliderState extends State<StorySlider> {
                           builder: (context) => PostStoryScreen(),
                         ));
                   },
+
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -85,37 +93,31 @@ class _StorySliderState extends State<StorySlider> {
                   child: Consumer<HomeController>(
                     builder: (context, control, _) {
                       bool userHasStory =
-                          control.userStoryModel.story != null &&
-                              control.userStoryModel.story!.isNotEmpty;
+                          control.userStoryModel.story != null && control.userStoryModel.story!.isNotEmpty;
                       return ListView.builder(
                         shrinkWrap: true,
                         // physics: FixedExtentScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        itemCount: (userHasStory ? 1 : 0) +
-                            (control.storyModel.stories?.length ?? 0),
+                        itemCount: (userHasStory ? 1 : 0) + (control.storyModel.stories?.length ?? 0),
                         itemBuilder: (context, index) {
                           if (index == 0 && userHasStory) {
                             return buildUserStoryItem(
                               context,
                               control,
-                              control.userStoryModel.story?[0].author
-                                  ?.username ??
-                                  "",
+                              control.userStoryModel.story?[0].author?.username ?? "",
                               control.userStoryModel.story?[0].image,
                               control.userStoryModel.story?[0].updatedAt,
-                              control.userStoryModel.story?[0].id,  // Pass storyId
+                              control.userStoryModel.story?[0].id, // Pass storyId
                             );
                           } else {
                             int storyIndex = userHasStory ? index - 1 : index;
                             return buildStoryItem(
                               context,
                               control,
-                              control.storyModel.stories?[storyIndex].author
-                                  ?.username ??
-                                  "",
+                              control.storyModel.stories?[storyIndex].author?.username ?? "",
                               control.storyModel.stories?[storyIndex].image,
                               control.storyModel.stories?[storyIndex].updatedAt,
-                              control.storyModel.stories?[storyIndex].id,  // Pass storyId
+                              control.storyModel.stories?[storyIndex].id, // Pass storyId
                             );
                           }
                         },
@@ -131,8 +133,8 @@ class _StorySliderState extends State<StorySlider> {
     );
   }
 
-  Widget buildStoryItem(BuildContext context, HomeController control,
-      String authorName, String? imageUrl, DateTime? updatedAt, int? storyId) {
+  Widget buildStoryItem(BuildContext context, HomeController control, String authorName, String? imageUrl,
+      DateTime? updatedAt, int? storyId) {
     var size = MediaQuery.of(context).size;
     return Row(
       children: [
@@ -150,7 +152,7 @@ class _StorySliderState extends State<StorySlider> {
                     fit: BoxFit.cover,
                     image: imageUrl == null
                         ? NetworkImage(
-                        "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                            "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
                         : NetworkImage("${AppConfig.mediaUrl}$imageUrl"),
                   ),
                 ),
@@ -162,11 +164,10 @@ class _StorySliderState extends State<StorySlider> {
                     builder: (context) => StoryView(
                       authorName: authorName,
                       image: '${AppConfig.mediaUrl}$imageUrl',
-                      time: DateFormat('hh:mm a')
-                          .format(updatedAt ?? DateTime.now())
-                          .toString(),
-                      isUserStory: false,  // Not a user story
-                      storyId: storyId ?? 0,  // Pass storyId
+                      time: DateFormat('hh:mm a').format(updatedAt ?? DateTime.now()).toString(),
+                      isUserStory: false,
+                      // Not a user story
+                      storyId: storyId ?? 0, // Pass storyId
                     ),
                   ),
                 );
@@ -182,8 +183,8 @@ class _StorySliderState extends State<StorySlider> {
     );
   }
 
-  Widget buildUserStoryItem(BuildContext context, HomeController control,
-      String authorName, String? imageUrl, DateTime? updatedAt, int? storyId) {
+  Widget buildUserStoryItem(BuildContext context, HomeController control, String authorName, String? imageUrl,
+      DateTime? updatedAt, int? storyId) {
     var size = MediaQuery.of(context).size;
     return Row(
       children: [
@@ -201,7 +202,7 @@ class _StorySliderState extends State<StorySlider> {
                     fit: BoxFit.cover,
                     image: imageUrl == null
                         ? NetworkImage(
-                        "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
+                            "https://t3.ftcdn.net/jpg/04/34/72/82/360_F_434728286_OWQQvAFoXZLdGHlObozsolNeuSxhpr84.jpg")
                         : NetworkImage("$imageUrl"),
                   ),
                 ),
@@ -213,11 +214,10 @@ class _StorySliderState extends State<StorySlider> {
                     builder: (context) => StoryView(
                       authorName: authorName,
                       image: '$imageUrl',
-                      time: DateFormat('hh:mm a')
-                          .format(updatedAt ?? DateTime.now())
-                          .toString(),
-                      isUserStory: true,  // This is a user story
-                      storyId: storyId ?? 0,  // Pass storyId
+                      time: DateFormat('hh:mm a').format(updatedAt ?? DateTime.now()).toString(),
+                      isUserStory: true,
+                      // This is a user story
+                      storyId: storyId ?? 0, // Pass storyId
                     ),
                   ),
                 );

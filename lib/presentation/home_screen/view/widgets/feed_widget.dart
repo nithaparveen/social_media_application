@@ -77,22 +77,7 @@ class FeedWidget extends StatelessWidget {
                         size: size.width * .035, weight: FontWeight.w300),
                   ),
                 ),
-                trailing: InkWell(
-                  onTap: followPressed,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                        color: ColorTheme.blue,
-                        borderRadius: BorderRadius.circular(8)),
-                    child: Text(
-                      "Unfollow",
-                      style: TextStyle(color: ColorTheme.white, fontSize: 11),
-                    ),
-                  ),
-                ),
+
               ),
               Container(
                 height: size.width * .75,

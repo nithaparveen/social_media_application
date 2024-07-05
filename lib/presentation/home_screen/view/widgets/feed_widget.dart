@@ -2,15 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:socialmedia/app_config/app_config.dart';
-import 'package:socialmedia/presentation/home_screen/widgets/likes_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../core/constants/colors.dart';
-import '../../../core/constants/text_styles.dart';
-import '../controller/home_controller.dart';
+
+import '../../../../core/constants/colors.dart';
+import '../../../../core/constants/text_styles.dart';
+import '../../controller/home_controller.dart';
 import 'comment_screen.dart';
+import 'likes_screen.dart';
 
 class FeedWidget extends StatelessWidget {
   FeedWidget({
@@ -96,7 +96,8 @@ class FeedWidget extends StatelessWidget {
               ),
               Container(
                 height: size.width * .75,
-                child: Image.network(image, fit: BoxFit.contain),
+                width: size.width * .75,
+                child: Image.network(image, fit: BoxFit.cover),
               ),
               Text(
                 caption,

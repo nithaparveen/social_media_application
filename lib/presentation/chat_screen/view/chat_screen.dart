@@ -165,9 +165,9 @@ class _ChatScreenState extends State<ChatScreen> {
                       getImage(ImageSource.gallery);
                     },
                     icon: Icon(CupertinoIcons.paperclip)),
-                IconButton(
-                    onPressed: () =>pickSingleFile(),
-                    icon: Icon(CupertinoIcons.doc)),
+                // IconButton(
+                //     onPressed: () =>pickSingleFile(),
+                //     icon: Icon(CupertinoIcons.doc)),
                 IconButton(
                   icon: Icon(
                     Icons.send,

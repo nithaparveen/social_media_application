@@ -4,10 +4,11 @@ import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:socialmedia/core/constants/colors.dart';
 import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
-import 'package:socialmedia/presentation/home_screen/widgets/post_story_screen.dart';
-import 'package:socialmedia/presentation/home_screen/widgets/story_view_page.dart';
+import 'package:socialmedia/presentation/home_screen/view/widgets/post_story_screen.dart';
+import 'package:socialmedia/presentation/home_screen/view/widgets/story_view_page.dart';
 
-import '../../../core/constants/text_styles.dart';
+import '../../../../core/constants/text_styles.dart';
+
 
 class StorySlider extends StatefulWidget {
   const StorySlider({super.key});

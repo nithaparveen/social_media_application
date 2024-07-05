@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:socialmedia/app_config/app_config.dart';
 import 'package:socialmedia/presentation/home_screen/controller/home_controller.dart';
 
-import '../../../core/constants/colors.dart';
+import '../../../../core/constants/colors.dart';
+
 
 class CommentScreen extends StatefulWidget {
   const CommentScreen({super.key, required this.id});

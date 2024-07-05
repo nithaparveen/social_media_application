@@ -9,9 +9,10 @@ import 'package:socialmedia/presentation/profile_screen/view/widgets/following_l
 
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/text_styles.dart';
-import '../../home_screen/widgets/comment_screen.dart';
-import '../../home_screen/widgets/feed_widget.dart';
-import '../../home_screen/widgets/likes_screen.dart';
+import '../../home_screen/view/widgets/comment_screen.dart';
+import '../../home_screen/view/widgets/feed_widget.dart';
+import '../../home_screen/view/widgets/likes_screen.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
